@@ -10,3 +10,9 @@
 .imagenreg{
   background-image: url("https://i.pinimg.com/236x/d9/3b/20/d93b20ec01715b3d4abda2e9bfa312c2.jpg");
 }
+.bg-light-blue {
+  background-color: #baf1eb;
+}
+.logo-rut,.logo-rent {
+  width: 130px;
+}
