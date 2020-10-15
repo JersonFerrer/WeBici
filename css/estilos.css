@@ -1,6 +1,9 @@
 .bg-gradient-primary{
   background: #01c5c4;
 }
+.bg-light-blue {
+  background-color: #baf1eb;
+}
 .imagen{
   background-image: url("https://i.pinimg.com/originals/93/3c/d5/933cd5526dcf5fa4f3cf53397df53f26.jpg");
 }
@@ -13,12 +16,33 @@
 /*header.masthead {
   background-image: url("../assets/img/catalogo/imag1.jpg");
 }*/
-.bg-light-blue {
-  background-color: #baf1eb;
-}
+
 .logo-rut,.logo-rent {
   width: 130px;
 }
 .timeline > li .timeline-image {
   background-color: #26cce2;
+}
+
+/*Login page styles*/
+.btn-social {
+  display: inline-flex;
+  padding: 0;
+  border-radius: 100%;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #26cce2;
+  border-color: #26cce2;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #04afae;
+  border-color: #04afae;
+}
+.btn-primary:focus, .btn-primary.focus {
+  color: #fff;
+  background-color:#26cce2;
+  border-color:#26cce2;
+  box-shadow: 0 0 0 0.2rem rgba(1, 197, 196, 0.5);
 }
