@@ -29,7 +29,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="index.html">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -40,11 +40,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#services">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.html">Catálogo</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#routes">Rutas</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#team">Nuestros Guías</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="login.html">Iniciar Sesion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="login.php">Iniciar Sesion</a></li>
                     </li>
                 </ul>
             </div>
@@ -83,23 +83,23 @@
                                                 <label class="custom-control-label" for="customCheck">Recordarme</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="index.php" class="btn btn-primary btn-user btn-block">
                                             Iniciar
                                         </a>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <a href="index.php" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Iniciar sesion con Google
                                         </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                        <a href="index.php" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Iniciar sesion con Facebook
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Recuperar contraseña</a>
+                                        <a class="small" href="forgot-password.php">Recuperar contraseña</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Crear Cuenta!</a>
+                                        <a class="small" href="register.php">Crear Cuenta!</a>
                                     </div>
                                 </div>
                             </div>

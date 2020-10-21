@@ -34,7 +34,7 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#catalogue">Catálogo</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#routes">Rutas</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Nuestros Guías</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.html">Iniciar Sesion</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar Sesion</a></li>
                     </ul>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                     
                     <div class="row justify-content-center mx-auto mt-5">
                         <div class="col">
-                            <a href="catalogue.html" class="btn btn-primary btn-xl text-uppercase">Ver más</a>
+                            <a href="catalogue.php" class="btn btn-primary btn-xl text-uppercase">Ver más</a>
                         </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                     <li class="timeline-inverted">
                         <div class="timeline-image">
                             <h4>
-                                <a href="routes.html" class="text-white">
+                                <a href="routes.php" class="text-white">
                                     Encuentra
                                     <br/>
                                     Tu ruta
