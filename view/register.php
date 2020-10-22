@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
 
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -66,7 +69,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
                             </div>
-                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php">
+                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
@@ -78,7 +81,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="nputEmail"
+                                    <input type="text" class="form-control form-control-user" id="nroCedula"
+                                        placeholder="Cedula" name="nroCedula">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="InputEmail"
                                         placeholder="Email" name="email">
                                 </div>
                                 <div class="form-group row">
@@ -139,13 +146,15 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <!-- Contact form JS-->
-    <script src="assets/mail/jqBootstrapValidation.js"></script>
-    <script src="assets/mail/contact_me.js"></script>
+    
+    <!-- sweetalert2-->
+    <script src="js/sweetalert2.all.min.js"></script>
+
     <!-- Core theme JS-->
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/registry.js"></script>
 </body>
 
 </html>
