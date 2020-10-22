@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(isset($_SESSION['usuario'])){
+        header("location: bienvenido.php");
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +37,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="index.html">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -40,11 +48,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#services">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.html">Catálogo</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#routes">Rutas</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#team">Nuestros Guías</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="login.html">Iniciar Seccion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="login.php">Iniciar Sesion</a></li>
                     </li>
                 </ul>
             </div>
@@ -67,15 +75,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Inicia Sesion</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="php/login_usuario.php" method="POST">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Ingresa tu email">
+                                                placeholder="Ingresa tu email" name="correo">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña">
+                                                id="exampleInputPassword" placeholder="Contraseña" name="contrasena">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -83,9 +91,8 @@
                                                 <label class="custom-control-label" for="customCheck">Recordarme</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Iniciar
-                                        </a>
+                                        <button class="btn btn-primary btn-user btn-block">Iniciar sesion</button>
+                                        
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Iniciar sesion con Google
@@ -96,10 +103,10 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Recuperar contraseña</a>
+                                        <a class="small" href="forgot-password.php">Recuperar contraseña</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Crear Cuenta!</a>
+                                        <a class="small" href="register.php">Crear Cuenta!</a>
                                     </div>
                                 </div>
                             </div>

@@ -46,7 +46,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="routes.html">Rutas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#team">Nuestros Guías</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.html">Iniciar Seccion</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar Sesion</a>
                     </li>
                     </li>
                 </ul>
