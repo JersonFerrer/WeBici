@@ -29,7 +29,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="index.html">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -40,13 +40,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#services">Servicios</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.html">Catálogo</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#team">Nuestros Guías</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.html">Iniciar
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar
                             Sesion</a></li>
                     </li>
                 </ul>
@@ -66,56 +66,56 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Nombres">
+                                        <input type="text" class="form-control form-control-user" id="Names"
+                                            placeholder="Nombres" name="names">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Apellidos">
+                                        <input type="text" class="form-control form-control-user" id="LastNames"
+                                            placeholder="Apellidos" name="last_names">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email">
+                                    <input type="email" class="form-control form-control-user" id="nputEmail"
+                                        placeholder="Email" name="email">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Contraseña">
+                                            id="InputPassword" placeholder="Contraseña" name="password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repita la contraseña">
+                                            id="RepeatPassword" placeholder="Repita la contraseña" name="repeat_password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Crear cuenta
-                                </a>
+                                </button>
                                 <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
+                                <a href="index.php" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Registrarse con Google
                                 </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                <a href="index.php" class="btn btn-facebook btn-user btn-block">
                                     <i class="fab fa-facebook-f fa-fw"></i> Registrarse con Facebook
                                 </a>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Olvidate tu contraseña?</a>
+                                <a class="small" href="forgot-password.php">Olvidate tu contraseña?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Ya tienes una cuenta? Inicia sesion!</a>
+                                <a class="small" href="login.php">Ya tienes una cuenta? Inicia sesion!</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
     <!-- Footer-->
     <footer class="footer py-4 bg-light">
         <div class="container">
