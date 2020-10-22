@@ -1,6 +1,6 @@
 <?php
    
-    session_start();
+    //session_destroy();
     
     require_once (__DIR__."/../mdb/mdbUsuario.php");
     require_once (__DIR__."/../../model/entity/Usuario.php");
@@ -12,13 +12,14 @@
         $password = $_POST['password'];
         $repeatPassword = $_POST['repeat_password'];
         $direccion = " ";
-        $telefono = "";
+        $telefono = " ";
  
 
         if($password == $repeatPassword){
+            //$usuario = new Usuario(NULL, "nroCedula2", "nombres", "apellidos3", "correo3", "password3", "direccion3", "telefono3");
             $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono);
             registrarUsuario($usuario);
-            header("Location: ../../view/login.php");
+            //header("Location: ../../view/login.php");
         }else{
             echo "Contraseñas no coinciden";
         }
