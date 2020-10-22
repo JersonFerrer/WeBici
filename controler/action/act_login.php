@@ -8,7 +8,7 @@
         
         //Se obtiene el correo y password del formulario del login,
         //los datos son recibidos por el método POST
-        $email = $_POST['login_email'];
+        $correo = $_POST['login_email'];
         $password = $_POST['login_password'];
 
         //Se llama a la funcion autenticarUsuario() que esta en mdbUsuario.php
@@ -18,8 +18,9 @@
             //Si el usuario fue encontrado, se guarda su ID en una sesión con $_SESSION
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
+            $_SESSION['CORREO'] = $user->getCorreo();
             
-            header("Location: ../../view/index.php");
+            header("Location: ../../view/home-user.php");
            /* if($user->esAdministrador() == 1){
                 header("Location: ../../vista/administradorUsuarios.php");                
             }else{
