@@ -8,7 +8,8 @@
     if(mysqli_num_rows($validar_login)>0){
         $user = mysqli_query($conexion,"SELECT * FROM usuarios WHERE  correo = '$correo'");
         $fila = mysqli_fetch_array($user);
-        $_SESSION['usuario'] = $fila['usuario'];
+        $_SESSION['aux']=$fila['usuario'];
+        $_SESSION['usuario'] = $correo;
         header("location: ../bienvenido.php");
         exit();
     }else{
