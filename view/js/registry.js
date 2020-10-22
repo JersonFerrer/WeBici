@@ -1,4 +1,4 @@
-function ValidateForm(){
+function ValidateForm() {
     let password = $('#InputPassword').val();
     let repeat_password = $('#RepeatPassword').val();
 
