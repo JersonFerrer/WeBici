@@ -67,15 +67,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Inicia Sesion</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="../controler/action/act_login.php">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Ingresa tu email">
+                                                id="LoginEmail" aria-describedby="emailHelp"
+                                                placeholder="Ingresa tu email" name="login_email">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña">
+                                                id="LoginPassword" placeholder="Contraseña" name="login_password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -83,9 +83,9 @@
                                                 <label class="custom-control-label" for="customCheck">Recordarme</label>
                                             </div>
                                         </div>
-                                        <a href="index.php" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Iniciar
-                                        </a>
+                                        </button>
                                         <hr>
                                         <a href="index.php" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Iniciar sesion con Google

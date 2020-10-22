@@ -34,14 +34,13 @@ class UsuarioDAO {
                 //base de datos, por ejemplo: id, nombre, correo, password, etc.
                 $usuario = new Usuario(
                         $data_table[$indice]["id"],
-                        $data_table[$indice]["nombre"],
+                        $data_table[$indice]["nroCedula"],
+                        $data_table[$indice]["nombres"],
+                        $data_table[$indice]["apellidos"],
                         $data_table[$indice]["correo"],
                         $data_table[$indice]["password"],
-                        $data_table[$indice]["telefono"],
-                        $data_table[$indice]["fechanac"],
-                        $data_table[$indice]["sexo"],
-                        $data_table[$indice]["pesokg"],
-                        $data_table[$indice]["administrador"]
+                        $data_table[$indice]["direccion"],
+                        $data_table[$indice]["telefono"]
                         );
             }
         }
