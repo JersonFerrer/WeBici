@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WeBici Recuperar contraseña</title>
-
+    <title>WeBici Login</title>
+    
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet"
         type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-
+    
     <!-- Bootstrap-->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
@@ -29,7 +29,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="index.html">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -40,22 +40,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#services">Servicios</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.html">Catálogo</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#team">Nuestros Guías</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.html">Iniciar
-                            Seccion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="login.php">Iniciar Sesion</a></li>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container pt-5 pb-4">
-
+    <div class="container pt-5">
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -64,30 +60,46 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-image imagenreg"></div>
+                        <div class="row" id="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image imagen"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Olvidaste tu contraseña?</h1>
-                                        <p class="mb-4">Ingresa tu email y te enviaremos las intrucciones para tu cuenta</p>
+                                        <h1 class="h4 text-gray-900 mb-4">Inicia Sesion</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="../controler/action/act_login.php">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Ingresa tu email...">
+                                                id="LoginEmail" aria-describedby="emailHelp"
+                                                placeholder="Ingresa tu email" name="login_email">
                                         </div>
-                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                            Recuperar
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="LoginPassword" placeholder="Contraseña" name="login_password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Recordarme</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Iniciar
+                                        </button>
+                                        <hr>
+                                        <a href="index.php" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Iniciar sesion con Google
+                                        </a>
+                                        <a href="index.php" class="btn btn-facebook btn-user btn-block">
+                                            <i class="fab fa-facebook-f fa-fw"></i> Iniciar sesion con Facebook
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Crear una cuenta!</a>
+                                        <a class="small" href="forgot-password.php">Recuperar contraseña</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.html">Ya tienes una cuenta? Inicia sesion!</a>
+                                        <a class="small" href="register.php">Crear Cuenta!</a>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +112,6 @@
         </div>
 
     </div>
-
     <!-- Footer-->
     <footer class="footer py-4 bg-light">
         <div class="container">
@@ -120,8 +131,8 @@
     </footer>
 
     <!-- Bootstrap core JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <!-- Contact form JS-->

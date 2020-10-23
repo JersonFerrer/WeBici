@@ -29,7 +29,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top mb-5" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger ml-5" href="index.html">
+            <a class="navbar-brand js-scroll-trigger ml-5" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -40,13 +40,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#services">Servicios</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.html">Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="routes.html">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#team">Nuestros Guías</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.html">Iniciar Seccion</a>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar Sesion</a>
                     </li>
                     </li>
                 </ul>
@@ -157,7 +157,7 @@
     </footer>
 
     <!-- Bootstrap core JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
     <!-- Third party plugin JS-->
