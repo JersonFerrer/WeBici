@@ -56,7 +56,7 @@ session_start();
                 <?php 
                     if (isset($_SESSION['ID_USUARIO'])){
                 ?>
-                <ul class="navbar-nav ml-3">
+                <ul class="navbar-nav ml-auto">
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -65,11 +65,13 @@ session_start();
                             <?php 
                                 echo strtoupper($_SESSION['NOMBRES_USUARIO']);
                             ?>
+                            <img class="img-profile rounded-circle" src="assets/img/team/1.jpg" alt="">
                         </a>
+                        
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="index.php">
+                            <a class="dropdown-item" href="">
 
                                 <?php 
                                     echo $_SESSION['CORREO'];
