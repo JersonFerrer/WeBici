@@ -56,7 +56,7 @@ session_start();
                 <?php 
                     if (isset($_SESSION['ID_USUARIO'])){
                 ?>
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav">
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
