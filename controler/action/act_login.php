@@ -20,7 +20,7 @@
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
             $_SESSION['CORREO'] = $user->getCorreo();
             
-            header("Location: ../../view/home-user.php");
+            header("Location: ../../view/index.php");
            /* if($user->esAdministrador() == 1){
                 header("Location: ../../vista/administradorUsuarios.php");                
             }else{
