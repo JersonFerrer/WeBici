@@ -29,7 +29,7 @@
 
         }else{
             //Si el usuario no existe se vuelve a mostrar el login
-            header("Location: ../../vista/login.php");
+            header("Location: ../../view/login.php");
         }
 
 
