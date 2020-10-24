@@ -15,8 +15,9 @@ class Usuario
     public $password;
     public $telefono;
     public $direccion;
+    public $imagen;
     
-    public function __construct($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono){
+    public function __construct($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, $imagen){
 
         $this->idUsuario = $idUsuario;
         $this->nroCedula = $nroCedula;
@@ -26,6 +27,7 @@ class Usuario
 		$this->password = $password;
         $this->telefono = $telefono;
         $this->direccion = $direccion;
+        $this->imagen = $imagen;
     }
     
     public function getIdUsuario(){
@@ -58,5 +60,9 @@ class Usuario
 
     public function getDireccion(){
         return $this->direccion;
+    }
+
+    public function getImagen(){
+        return $this->imagen;
     }
 }

@@ -65,7 +65,17 @@ session_start();
                             <?php 
                                 echo strtoupper($_SESSION['NOMBRES_USUARIO']);
                             ?>
-                            <img class="img-profile rounded-circle" src="assets/img/team/1.jpg" alt="">
+                            <?php 
+                                if($_SESSION['IMAGEN'] != null){
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                            <?php 
+                                }else{
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/avatar.png" alt="">
+                            <?php 
+                                }
+                            ?>
                         </a>
                         
                         <!-- Dropdown - User Information -->

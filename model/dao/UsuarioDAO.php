@@ -40,7 +40,8 @@ class UsuarioDAO {
                         $data_table[$indice]["correo"],
                         $data_table[$indice]["password"],
                         $data_table[$indice]["direccion"],
-                        $data_table[$indice]["telefono"]
+                        $data_table[$indice]["telefono"],
+                        $data_table[$indice]["imagen"]
                         );
             }
         }
