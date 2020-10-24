@@ -21,11 +21,11 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
 
-    <!-- sweetaleert2 css-->
-    <link rel="stylesheet" href="css/sweetalert2.min.css">
-
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 </head>
 
 <body id="login" class="bg-dark">

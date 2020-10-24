@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/error-styles.css">
+</head>
+<body>
+    <!-- sweetalert2-->
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Por favor inicie sesion',
+            confirmButtonText: 'Ir a login',
+            footer: '<a href="register.php">Crear una cuenta</a>'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href="login.php";
+            }else{
+                location.href="login.php";
+            }
+        })
+    </script>
+</body>
+</html>

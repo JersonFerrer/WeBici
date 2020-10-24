@@ -22,7 +22,8 @@ function ValidateLogin() {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Hay campos vacíos'
+            text: 'Hay campos vacíos',
+            footer: '<a href="register.php">Crear una cuenta</a>'
         })
         return false;
     }else if(!EmailValidation(user)){

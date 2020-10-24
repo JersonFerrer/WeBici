@@ -1,17 +1,10 @@
 <?php
     session_start();
     if(!isset($_SESSION['ID_USUARIO'])){
-        echo '
-            <script>
-                alert("Por favor inicia sesion");
-                window.location = "login.php";          
-            </script>
-        ';
-        //header("location: index.php");
+        header("location: session-error.html");
         session_destroy();
         die();
     }
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WeBici</title>
+    <title>WeBici - Perfil</title>
+
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -31,16 +25,22 @@
         type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/estilos.css" rel="stylesheet" />
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sb-admin-2.min.css">
+
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
-<body id="page-top">
+<body id="profile" class="bg-dark">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -51,313 +51,128 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#catalogue">Catálogo</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Nuestros Guías</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
+                    </li>
+                    <!--Validacion para mostrar el boton de Iniciar Sesion-->
+                    <?php
+                        if (!isset($_SESSION['ID_USUARIO'])){
+                    ?>
+                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar Sesion</a></li>
+                    <?php
+                        }
+                    ?>
                 </ul>
-            </div>
-            <ul class="navbar-nav ml-auto">
-                <!-- Nav Item - User Information -->
-                <li class="nav-item dropdown no-arrow ml-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
 
-                        <?php 
-                                if (isset($_SESSION['ID_USUARIO'])){
-                                    echo strtoupper($_SESSION['NOMBRES_USUARIO']);
-                                }
-                        ?>
-                    </a>
-                    <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="home-user.php">
+                <!--Validacion para mostrar el usuario-->
+                <?php 
+                    if (isset($_SESSION['ID_USUARIO'])){
+                ?>
+                <ul class="navbar-nav">
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        <?php 
-                                if (isset($_SESSION['ID_USUARIO'])){
-                                    echo $_SESSION['CORREO'];
-                                }
-                        ?>
-                    </a>
-                        <a class="dropdown-item" href="../controler/action/act_logout.php">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                            <?php 
+                                echo strtoupper($_SESSION['NOMBRES_USUARIO']);
+                            ?>
+                            <img class="img-profile rounded-circle" src="assets/img/team/1.jpg" alt="">
                         </a>
-                    </div>
-                </li>
-            </ul>
+                        
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="">
+
+                                <?php 
+                                    echo $_SESSION['CORREO'];
+                                ?>
+                            </a>
+                            <a class="dropdown-item" href="../controler/action/act_logout.php">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <?php 
+                    }//fin de la validacion para mostrar usuario
+                ?>
+            </div>
         </div>
     </nav>
-    <!-- Masthead-->
-    <header class="masthead">
-        <div class="container">
-            <div class="masthead-subheading">Bienvenido a nuestra pagina web</div>
-            <div class="masthead-heading text-uppercase">El mejor sitio de alquiler de bicicletas</div>
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Dime más</a>
-        </div>
-    </header>
-    <!-- Services-->
-    <section class="page-section" id="services">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Servicios</h2>
-                <h3 class="section-subheading text-muted">Estos es lo que podemos ofrecerte</h3>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-6">
-                    <span class="fa-stack fa-4x">
-                        <img src="assets/img/services/logo-service1.jpg" alt="Servicio de Alquiler de Bicis"
-                            class="logo-rent">
-                    </span>
-                    <h4 class="my-3">Alquiler de Bicicleta</h4>
-                    <p class="text-muted">Tenemos diferentes modelos y diseños de bicicleta, elije la que mas te guste
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <span class="fa-stack fa-4x">
-                        <img src="assets/img/services/logo-service2.png" alt="Servicio de Rutas para Bicis"
-                            class="logo-rut">
-                    </span>
-                    <h4 class="my-3">Rutas</h4>
-                    <p class="text-muted">Ofrecemos diferentes rutas de las zonas urbanas y rurales</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Catálogo Grid-->
-    <section class="page-section bg-light-blue" id="catalogue">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Catálogo</h2>
-                <h3 class="section-subheading text-muted">Estas son las Bicis más populares</h3>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6 mb-4">
-                    <div class="catalogue-item">
-                        <a class="catalogue-link" data-toggle="modal" href="#catalogueModal1">
-                            <div class="catalogue-hover">
-                                <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/catalogo/ima1.jpg" alt="" />
-                        </a>
-                        <div class="catalogue-caption">
-                            <div class="catalogue-caption-heading">GW Bicicleta Summer</div>
-                            <div class="catalogue-caption-subheading text-muted">Urbana</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 mb-4">
-                    <div class="catalogue-item">
-                        <a class="catalogue-link" data-toggle="modal" href="#catalogueModal2">
-                            <div class="catalogue-hover">
-                                <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/catalogo/image4.jpg" alt="" />
-                        </a>
-                        <div class="catalogue-caption">
-                            <div class="catalogue-caption-heading">Rin 26 con cambios 3x6 Color Verde</div>
-                            <div class="catalogue-caption-subheading text-muted">Híbrida</div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                    <div class="catalogue-item">
-                        <a class="catalogue-link" data-toggle="modal" href="#catalogueModal5">
-                            <div class="catalogue-hover">
-                                <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+    <div class="container pt-5">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image passimagen"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
                             </div>
-                            <img class="img-fluid" src="assets/img/catalogo/imag5.jpg" alt="" />
-                        </a>
-                        <div class="catalogue-caption">
-                            <div class="catalogue-caption-heading">Giant Tcr Advanced 3 Disc 2021</div>
-                            <div class="catalogue-caption-subheading text-muted">Ruta</div>
+                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="Names"
+                                            placeholder="Nombres" name="names">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="LastNames"
+                                            placeholder="Apellidos" name="last_names">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="nroCedula"
+                                        placeholder="Cedula" name="nroCedula">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="InputEmail"
+                                        placeholder="Email" name="email">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="InputPassword" placeholder="Contraseña" name="password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="RepeatPassword" placeholder="Repita la contraseña" name="repeat_password">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Crear cuenta
+                                </button>
+                                <hr>
+                                <a href="index.php" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Registrarse con Google
+                                </a>
+                                <a href="index.php" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Registrarse con Facebook
+                                </a>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.php">Olvidate tu contraseña?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="login.php">Ya tienes una cuenta? Inicia sesion!</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="row justify-content-center mx-auto mt-5">
-                    <div class="col">
-                        <a href="catalogue.html" class="btn btn-primary btn-xl text-uppercase">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Routes-->
-    <section class="page-section" id="routes">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Rutas</h2>
-                <h3 class="section-subheading text-muted">Nuestras rutas más populares</h3>
-            </div>
-            <ul class="timeline">
-                <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg"
-                            alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Ziruma - Areopuerto</h4>
-                            <h4 class="subheading">34.84 kilómetros</h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">Tipo de Ruta: Carretera</p>
-                            <p class="text-muted">Tiempo: 2 horas 8 minutos</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg"
-                            alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Santa Marta - La Pedrera </h4>
-                            <h4 class="subheading">33.45 kilómetros</h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">Tipo de Ruta: Carretera</p>
-                            <p class="text-muted">Tiempo: 1 hora 52 minutos</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg"
-                            alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Santa Marta- Minca</h4>
-                            <h4 class="subheading">18.53 kilómetros</h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">Tipo de Ruta: Cicloturismo</p>
-                            <p class="text-muted">Tiempo: 57 minutos</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg"
-                            alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Santa Marta - Bonda</h4>
-                            <h4 class="subheading">13.41 kilómetros </h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">Tipo de Ruta: Mountain Bike</p>
-                            <p class="text-muted">Tiempo: 2 horas 40 minutos</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image">
-                        <h4>
-                            <a href="routes.html" class="text-white">
-                                Encuentra
-                                <br />
-                                Tu ruta
-                                <br />
-                                Ideal
-                            </a>
-                        </h4>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- Team-->
-    <section class="page-section bg-light-blue" id="team">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Nuestros Guías</h2>
-                <h3 class="section-subheading text-muted">Estas en buenas manos</h3>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="" />
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Mountain Bike</p>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="" />
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Cicloturismo</p>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="" />
-                        <h4>Diana Petersen</h4>
-                        <p class="text-muted">Ruta</p>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque,
-                        laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact-->
-    <section class="page-section" id="contact">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Contacto</h2>
-                <h3 class="section-subheading text-muted">Envianos tu mensaje</h3>
-            </div>
-            <form id="contactForm" name="sentMessage" novalidate="novalidate">
-                <div class="row align-items-stretch mb-5">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input class="form-control" id="name" type="text" placeholder="Nombre *" required="required"
-                                data-validation-required-message="Please enter your name." />
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="email" type="email" placeholder="Email *"
-                                required="required"
-                                data-validation-required-message="Please enter your email address." />
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="form-group mb-md-0">
-                            <input class="form-control" id="phone" type="tel" placeholder="Telefono *"
-                                required="required"
-                                data-validation-required-message="Please enter your phone number." />
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group form-group-textarea mb-md-0">
-                            <textarea class="form-control" id="message" placeholder="Escribe tu mensaje *"
-                                required="required"
-                                data-validation-required-message="Please enter a message."></textarea>
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div id="success"></div>
-                    <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton"
-                        type="submit">Enviar</button>
-                </div>
-            </form>
-        </div>
-    </section>
     <!-- Footer-->
-    <footer class="footer py-4">
+    <footer class="footer py-4 bg-light">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-left">Copyright © WeBici 2020</div>
@@ -373,127 +188,20 @@
             </div>
         </div>
     </footer>
-    <!-- catalogue Modals-->
-    <!-- Modal 1-->
-    <div class="catalogue-modal modal fade" id="catalogueModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                </div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here-->
-                                <h2 class="text-uppercase">GW BICICLETA SUMMER - BLANCA</h2>
-
-                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/ima1.jpg" alt="" />
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
-                                    repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
-                                    nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100024532</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fas fa-check mr-1"></i>
-                                    Alquilar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 2-->
-    <div class="catalogue-modal modal fade" id="catalogueModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                </div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here-->
-                                <h2 class="text-uppercase">Rin 26 con cambios 3x6 Color Verde</h2>
-
-                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/image4.jpg" alt="" />
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
-                                    repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
-                                    nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100024532</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fas fa-check mr-1"></i>
-                                    Alquilar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 3-->
-    <div class="catalogue-modal modal fade" id="catalogueModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                </div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here-->
-                                <h2 class="text-uppercase">Giant Tcr Advanced 3 Disc 2021</h2>
-
-                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/imag5.jpg" alt="" />
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
-                                    repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
-                                    nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Marca: Giant</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Material: Fibra de Carbono</li>
-                                    <li>ID: 100036576</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fas fa-check mr-1"></i>
-                                    Alquilar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JS-->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    
+    <!-- sweetalert2-->
+    <script src="js/sweetalert2.all.min.js"></script>
 
     <!-- Core theme JS-->
     <script src="js/bootstrap.js"></script>
-
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 </body>
 
 </html>
