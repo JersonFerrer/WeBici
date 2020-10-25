@@ -16,7 +16,7 @@
  
 
         if($password == $repeatPassword){
-            $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono);
+            $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, NULL);
             registrarUsuario($usuario);
             header("Location: ../../view/login.php");
         }else{

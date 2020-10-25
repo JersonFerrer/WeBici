@@ -77,10 +77,6 @@
                             ?>
                             <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
                             <?php 
-                                }else{
-                            ?>
-                            <img class="img-profile rounded-circle" src="/img/avatar.png" alt="">
-                            <?php 
                                 }
                             ?>
                         </a>
@@ -104,7 +100,7 @@
         </div>
     </nav>
 
-    <div class="container pt-5 mt-5">
+    <div class="container pt-3 mt-5">
     <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -146,11 +142,11 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="address"
-                                        placeholder="Dirección" name="address" value="<?php echo $_SESSION['DIRECCION'];?>">
+                                        placeholder="Dirección" name="address" value="<?php if($_SESSION['DIRECCION'] != ' ')echo $_SESSION['DIRECCION'];?>">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="cellphone"
-                                        placeholder="Celular" name="cellphone" value="<?php echo $_SESSION['CELULAR'];?>">
+                                        placeholder="Celular" name="cellphone" value="<?php if($_SESSION['CELULAR'] != ' ')echo $_SESSION['CELULAR'];?>">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Editar Datos

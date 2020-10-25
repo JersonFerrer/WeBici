@@ -70,10 +70,6 @@ session_start();
                             ?>
                             <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
                             <?php 
-                                }else{
-                            ?>
-                            <img class="img-profile rounded-circle" src="/img/avatar.png" alt="">
-                            <?php 
                                 }
                             ?>
                         </a>
