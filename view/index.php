@@ -81,11 +81,8 @@ session_start();
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="">
-
-                                <?php 
-                                    echo $_SESSION['CORREO'];
-                                ?>
+                            <a class="dropdown-item" href="user-profile.php">
+                                Perfil
                             </a>
                             <a class="dropdown-item" href="../controler/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion

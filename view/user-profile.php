@@ -34,9 +34,10 @@
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/profile-styles.css">
 </head>
 
-<body id="profile" class="bg-dark">
+<body id="user-profile" class="bg-dark">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
@@ -57,16 +58,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
                     </li>
-                    <!--Validacion para mostrar el boton de Iniciar Sesion-->
-                    <?php
-                        if (!isset($_SESSION['ID_USUARIO'])){
-                    ?>
-                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar Sesion</a></li>
-                    <?php
-                        }
-                    ?>
                 </ul>
-
                 <!--Validacion para mostrar el usuario-->
                 <?php 
                     if (isset($_SESSION['ID_USUARIO'])){
@@ -80,17 +72,24 @@
                             <?php 
                                 echo strtoupper($_SESSION['NOMBRES_USUARIO']);
                             ?>
-                            <img class="img-profile rounded-circle" src="assets/img/team/1.jpg" alt="">
+                            <?php 
+                                if($_SESSION['IMAGEN'] != null){
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                            <?php 
+                                }else{
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/avatar.png" alt="">
+                            <?php 
+                                }
+                            ?>
                         </a>
-                        
+
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="">
-
-                                <?php 
-                                    echo $_SESSION['CORREO'];
-                                ?>
+                            <a class="dropdown-item" href="user-profile.php">
+                                Perfil
                             </a>
                             <a class="dropdown-item" href="../controler/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
@@ -105,65 +104,57 @@
         </div>
     </nav>
 
-    <div class="container pt-5">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="container pt-5 mt-5">
+    <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image passimagen"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
+                    <div class="mx-auto pt-4">
+                        <img class="profile-img rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mx-auto">
+                        <input type="file" name="image" id="image">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="mx-auto col-lg-7">
+                        <div class="p-3">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Edita tus datos cuando quieras</h1>
                             </div>
                             <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
-                                            placeholder="Nombres" name="names">
+                                            placeholder="Nombres" name="names" value="<?php echo strtoupper($_SESSION['NOMBRES_USUARIO']);?>">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastNames"
-                                            placeholder="Apellidos" name="last_names">
+                                            placeholder="Apellidos" name="last_names" value="<?php echo strtoupper($_SESSION['APELLIDOS_USUARIO']);?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="nroCedula"
-                                        placeholder="Cedula" name="nroCedula">
+                                        placeholder="Cedula" name="nroCedula" value="<?php echo $_SESSION['CEDULA'];?>">
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="InputEmail"
-                                        placeholder="Email" name="email">
+                                        placeholder="Email" name="email" value="<?php echo $_SESSION['CORREO'];?>">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="InputPassword" placeholder="Contraseña" name="password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="RepeatPassword" placeholder="Repita la contraseña" name="repeat_password">
-                                    </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="address"
+                                        placeholder="Dirección" name="address" value="<?php echo $_SESSION['DIRECCION'];?>">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="cellphone"
+                                        placeholder="Celular" name="cellphone" value="<?php echo $_SESSION['CELULAR'];?>">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    Crear cuenta
+                                    Editar Datos
                                 </button>
-                                <hr>
-                                <a href="index.php" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Registrarse con Google
-                                </a>
-                                <a href="index.php" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Registrarse con Facebook
-                                </a>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.php">Olvidate tu contraseña?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.php">Ya tienes una cuenta? Inicia sesion!</a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,7 +185,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    
+
     <!-- sweetalert2-->
     <script src="js/sweetalert2.all.min.js"></script>
 
@@ -202,6 +193,7 @@
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/registry.js"></script>
 </body>
 
 </html>

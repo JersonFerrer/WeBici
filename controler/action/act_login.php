@@ -18,7 +18,11 @@
             //Si el usuario fue encontrado, se guarda su ID en una sesión con $_SESSION
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
+            $_SESSION['APELLIDOS_USUARIO'] = $user->getApellidos();
+            $_SESSION['CEDULA'] = $user->getNroCedula();
             $_SESSION['CORREO'] = $user->getCorreo();
+            $_SESSION['DIRECCION'] = $user->getDireccion();
+            $_SESSION['CELULAR'] = $user->getTelefono();
             $_SESSION['IMAGEN'] = $user->getImagen();
             
             header("Location: ../../view/index.php");
