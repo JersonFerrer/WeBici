@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <form class="user" method="POST" action="../controler/action/act_editarUsuario.php"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" onsubmit="return ValidateData();">
                     <div class="row">
                         <div class="mx-auto">
                             <input type="file" name="image" id="image">
@@ -127,34 +127,37 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
                                             placeholder="Nombres" name="names"
-                                            value="<?php echo strtoupper($_SESSION['NOMBRES_USUARIO']);?>">
+                                            value="<?php echo $_SESSION['NOMBRES_USUARIO'];?>" disabled>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastNames"
                                             placeholder="Apellidos" name="last_names"
-                                            value="<?php echo strtoupper($_SESSION['APELLIDOS_USUARIO']);?>">
+                                            value="<?php echo $_SESSION['APELLIDOS_USUARIO'];?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="nroCedula"
-                                        placeholder="Cedula" name="nroCedula" value="<?php echo $_SESSION['CEDULA'];?>">
+                                        placeholder="Cedula" name="nroCedula" value="<?php echo $_SESSION['CEDULA'];?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="InputEmail"
-                                        placeholder="Email" name="email" value="<?php echo $_SESSION['CORREO'];?>">
+                                        placeholder="Email" name="email" value="<?php echo $_SESSION['CORREO'];?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="address"
                                         placeholder="Dirección" name="address"
-                                        value="<?php if($_SESSION['DIRECCION'] != ' ')echo $_SESSION['DIRECCION'];?>">
+                                        value="<?php if($_SESSION['DIRECCION'] != ' ')echo $_SESSION['DIRECCION'];?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="cellphone"
                                         placeholder="Celular" name="cellphone"
-                                        value="<?php if($_SESSION['CELULAR'] != ' ')echo $_SESSION['CELULAR'];?>">
+                                        value="<?php if($_SESSION['CELULAR'] != ' ')echo $_SESSION['CELULAR'];?>" disabled>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                <button type="button" class="btn btn-primary btn-user btn-block" id="btn-edite">
                                     Editar Datos
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-update" style="display: none;">
+                                    Actualizar
                                 </button>
                             </div>
                         </div>
@@ -195,7 +198,7 @@
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <script src="js/registry.js"></script>
+    <script src="js/user-profile.js"></script>
 </body>
 
 </html>

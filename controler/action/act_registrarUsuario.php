@@ -6,8 +6,8 @@
     require_once (__DIR__."/../../model/entity/Usuario.php");
 
         $nroCedula = $_POST['nroCedula'];
-        $nombres = $_POST['names'];
-        $apellidos = $_POST['last_names'];
+        $nombres = strtoupper($_POST['names']);
+        $apellidos = strtoupper($_POST['last_names']);
         $correo = $_POST['email'];
         $password = $_POST['password'];
         $repeatPassword = $_POST['repeat_password'];
