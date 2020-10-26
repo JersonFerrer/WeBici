@@ -9,13 +9,13 @@ class DataSource {
 
         try{
             //Aquí se pasa el nombre del Host(localhost) y el nombre de la base de datos(tabatabd)
-            $this->cadenaConexion="mysql:host=sql203.tonohost.com; dbname=ottos_26977103_bikedb;charset=utf8";
+            $this->cadenaConexion="mysql:host=localhost; dbname=bikedb;charset=utf8";
 
             //Aquí se crea la conexion con PDO y se pasan 3 parametros, la cadenaConexion que
             //se habia definido anteriormente, el nombre del usuario que tiene definido MySql(root)
             //y el último parámetro es la contraseña del mysql (en este caso no tiene contraseña,
             //por eso se deja declarado así "")
-            $this->conexion = new PDO($this->cadenaConexion,"ottos_26977103","wmrf5vhp");
+            $this->conexion = new PDO($this->cadenaConexion,"root","");
 
         } catch (PDOException $ex) {
 
