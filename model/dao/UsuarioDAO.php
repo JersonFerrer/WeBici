@@ -137,16 +137,17 @@ class UsuarioDAO {
     public function editarUsuario($usuario){
         $data_source = new DataSource();
         
-        $stmt1 = "UPDATE usuario SET nombre = :nombre, correo = :correo, password = :password, telefono = :telefono, fechanac = :fechanac, sexo = :sexo, pesokg = :peso, administrador = :administrador  WHERE id = :idUsuario"; 
+        $stmt1 = "UPDATE usuario SET nroCedula = :nroCedula, nombres = :nombres, apellidos = :apellidos, correo = :correo, direccion = :direccion, telefono = :telefono, imagen = :imagen WHERE id = :idUsuario"; 
         
         $resultado = $data_source->ejecutarActualizacion($stmt1, array(
             ':nroCedula' => $usuario->getNroCedula(),
             ':nombres' => $usuario->getNombres(),
             ':apellidos' => $usuario->getApellidos(),
             ':correo' => $usuario->getCorreo(),
-            ':password' => $usuario->getPassword(),
             ':direccion'=>$usuario->getDireccion(),
-            ':telefono'=>$usuario->getTelefono()
+            ':telefono'=>$usuario->getTelefono(),
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':imagen' => $usuario->getImagen()
             )
         ); 
 

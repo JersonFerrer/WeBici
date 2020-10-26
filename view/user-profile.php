@@ -101,7 +101,7 @@
     </nav>
 
     <div class="container pt-3 mt-5">
-    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
@@ -109,27 +109,30 @@
                         <img class="profile-img rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="mx-auto">
-                        <input type="file" name="image" id="image">
+                <form class="user" method="POST" action="../controler/action/act_editarUsuario.php"
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="mx-auto">
+                            <input type="file" name="image" id="image">
+                        </div>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="mx-auto col-lg-7">
-                        <div class="p-3">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Edita tus datos cuando quieras</h1>
-                            </div>
-                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
+                    <hr>
+                    <div class="row">
+                        <div class="mx-auto col-lg-7">
+                            <div class="p-3">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Edita tus datos cuando quieras</h1>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
-                                            placeholder="Nombres" name="names" value="<?php echo strtoupper($_SESSION['NOMBRES_USUARIO']);?>">
+                                            placeholder="Nombres" name="names"
+                                            value="<?php echo strtoupper($_SESSION['NOMBRES_USUARIO']);?>">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastNames"
-                                            placeholder="Apellidos" name="last_names" value="<?php echo strtoupper($_SESSION['APELLIDOS_USUARIO']);?>">
+                                            placeholder="Apellidos" name="last_names"
+                                            value="<?php echo strtoupper($_SESSION['APELLIDOS_USUARIO']);?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -142,18 +145,21 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="address"
-                                        placeholder="Dirección" name="address" value="<?php if($_SESSION['DIRECCION'] != ' ')echo $_SESSION['DIRECCION'];?>">
+                                        placeholder="Dirección" name="address"
+                                        value="<?php if($_SESSION['DIRECCION'] != ' ')echo $_SESSION['DIRECCION'];?>">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="cellphone"
-                                        placeholder="Celular" name="cellphone" value="<?php if($_SESSION['CELULAR'] != ' ')echo $_SESSION['CELULAR'];?>">
+                                        placeholder="Celular" name="cellphone"
+                                        value="<?php if($_SESSION['CELULAR'] != ' ')echo $_SESSION['CELULAR'];?>">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Editar Datos
                                 </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
