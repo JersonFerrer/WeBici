@@ -40,7 +40,8 @@ class UsuarioDAO {
                         $data_table[$indice]["correo"],
                         $data_table[$indice]["password"],
                         $data_table[$indice]["direccion"],
-                        $data_table[$indice]["telefono"]
+                        $data_table[$indice]["telefono"],
+                        $data_table[$indice]["imagen"]
                         );
             }
         }
@@ -53,7 +54,7 @@ class UsuarioDAO {
     public function registrarUsuario(Usuario $usuario){
         $data_source = new DataSource();
         
-        $stmt1 = "INSERT INTO usuario VALUES (NULL, :nroCedula, :nombres, :apellidos, :correo, :password, :direccion, :telefono)"; 
+        $stmt1 = "INSERT INTO usuario (id, nroCedula, nombres, apellidos, correo, password, direccion, telefono) VALUES (NULL, :nroCedula, :nombres, :apellidos, :correo, :password, :direccion, :telefono)"; 
         
         $resultado = $data_source->ejecutarActualizacion($stmt1, array(
             ':nroCedula' => $usuario->getNroCedula(),
@@ -136,18 +137,17 @@ class UsuarioDAO {
     public function editarUsuario($usuario){
         $data_source = new DataSource();
         
-        $stmt1 = "UPDATE usuario SET nombre = :nombre, correo = :correo, password = :password, telefono = :telefono, fechanac = :fechanac, sexo = :sexo, pesokg = :peso, administrador = :administrador  WHERE id = :idUsuario"; 
+        $stmt1 = "UPDATE usuario SET nroCedula = :nroCedula, nombres = :nombres, apellidos = :apellidos, correo = :correo, direccion = :direccion, telefono = :telefono, imagen = :imagen WHERE id = :idUsuario"; 
         
         $resultado = $data_source->ejecutarActualizacion($stmt1, array(
-            ':nombre' => $usuario->getNombre(),
+            ':nroCedula' => $usuario->getNroCedula(),
+            ':nombres' => $usuario->getNombres(),
+            ':apellidos' => $usuario->getApellidos(),
             ':correo' => $usuario->getCorreo(),
-            ':password' => $usuario->getPassword(),
-            ':telefono' => $usuario->getTelefono(),
-            ':fechanac' => $usuario->getFechaNacimiento(),
-            ':sexo' => $usuario->getSexo(),
-            ':peso' => $usuario->getPeso(),
-            ':administrador' => $usuario->esAdministrador(),
-            ':idUsuario' => $usuario->getIdUsuario()
+            ':direccion'=>$usuario->getDireccion(),
+            ':telefono'=>$usuario->getTelefono(),
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':imagen' => $usuario->getImagen()
             )
         ); 
 

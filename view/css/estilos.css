@@ -46,3 +46,10 @@
 #mainNav .navbar-nav .nav-item .nav-link.active2 {
   color: #01c5c4;
 }
+.img-profile {
+    height: 2rem;
+    width: 2rem;
+}
+.dropdown-toggle::after {
+  display: none;
+}
