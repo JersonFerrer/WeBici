@@ -119,14 +119,14 @@ class UsuarioDAO {
         if(count($data_table)==1){
             $usuario = new Usuario(
                     $data_table[0]["id"],
-                    $data_table[0]["nombre"],
+                    $data_table[0]["nroCedula"],
+                    $data_table[0]["nombres"],
+                    $data_table[0]["apellidos"],
                     $data_table[0]["correo"],
                     $data_table[0]["password"],
+                    $data_table[0]["direccion"],
                     $data_table[0]["telefono"],
-                    $data_table[0]["fechanac"],
-                    $data_table[0]["sexo"],
-                    $data_table[0]["pesokg"],
-                    $data_table[0]["administrador"]
+                    $data_table[0]["imagen"]
                     );
         }
 
