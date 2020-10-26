@@ -18,9 +18,14 @@
             //Si el usuario fue encontrado, se guarda su ID en una sesión con $_SESSION
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
+            $_SESSION['APELLIDOS_USUARIO'] = $user->getApellidos();
+            $_SESSION['CEDULA'] = $user->getNroCedula();
             $_SESSION['CORREO'] = $user->getCorreo();
+            $_SESSION['DIRECCION'] = $user->getDireccion();
+            $_SESSION['CELULAR'] = $user->getTelefono();
+            $_SESSION['IMAGEN'] = $user->getImagen();
             
-            header("Location: ../../view/home-user.php");
+            header("Location: ../../view/index.php");
            /* if($user->esAdministrador() == 1){
                 header("Location: ../../vista/administradorUsuarios.php");                
             }else{
@@ -29,7 +34,7 @@
 
         }else{
             //Si el usuario no existe se vuelve a mostrar el login
-            header("Location: ../../vista/login.php");
+            header("Location: ../../view/login.php");
         }
 
 

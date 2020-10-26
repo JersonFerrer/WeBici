@@ -6,8 +6,8 @@
     require_once (__DIR__."/../../model/entity/Usuario.php");
 
         $nroCedula = $_POST['nroCedula'];
-        $nombres = $_POST['names'];
-        $apellidos = $_POST['last_names'];
+        $nombres = strtoupper($_POST['names']);
+        $apellidos = strtoupper($_POST['last_names']);
         $correo = $_POST['email'];
         $password = $_POST['password'];
         $repeatPassword = $_POST['repeat_password'];
@@ -16,7 +16,7 @@
  
 
         if($password == $repeatPassword){
-            $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono);
+            $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, NULL);
             registrarUsuario($usuario);
             header("Location: ../../view/login.php");
         }else{
