@@ -29,8 +29,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap-->
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <!-- sweetaleert2 css-->
     <link rel="stylesheet" href="css/sweetalert2.min.css">
