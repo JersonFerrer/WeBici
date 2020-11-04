@@ -29,5 +29,5 @@
 
         }else{
             //Si el usuario no existe se vuelve a mostrar el login
-            header("Location: ../../view/login.php");
+            header("Location: ../../view/login.php?flag=0");
         }

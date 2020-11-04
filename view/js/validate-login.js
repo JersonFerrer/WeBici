@@ -1,7 +1,8 @@
+$(document).ready(function (){
+    NoLogin();
+})
+
 //Regular Expresions
-var idNumber = /^[0-9]{0,10}$/;
-var latin_letters = /^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/;
-var phoneNumber = /^[0-9-()+]{3,20}/;
 var email =  /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
 
 function EmailValidation(input) {
@@ -37,5 +38,27 @@ function ValidateLogin() {
         return false;
     }else{
         return true;
+    }
+}
+
+function findParam(url, param){ 
+    var check = "" + param; 
+    if(url.find(check)>=0){ 
+        return url.substring(url.search(check)).split('&')[0].split('=')[1]; 
+    }
+}
+
+function NoLogin(){
+    //var url = "localhost/webici/view/login.php?flag=0";
+    var url = window.location;
+    console.log(url);
+    var params = findParam(url,"flag");
+    console.log(params);
+    if(params == '0'){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El Usuario o la contraseña son incorrectos'
+        })
     }
 }
