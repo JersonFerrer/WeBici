@@ -5,6 +5,9 @@
         session_destroy();
         die();
     }
+    require_once (__DIR__.'/../controller/mdb/mdbUsuario.php');
+    $usuario = json_encode(verUsuarioPorId($_SESSION['ID_USUARIO']));
+    $jsonUsuario = json_decode($usuario);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +29,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap-->
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <!-- sweetaleert2 css-->
     <link rel="stylesheet" href="css/sweetalert2.min.css">
@@ -70,15 +73,9 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                             <?php 
-                                echo strtoupper($_SESSION['NOMBRES_USUARIO']);
+                                echo $jsonUsuario->{'nombres'};
                             ?>
-                            <?php 
-                                if($_SESSION['IMAGEN'] != null){
-                            ?>
-                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
-                            <?php 
-                                }
-                            ?>
+                            <img class="img-profile rounded-circle" src="/img/<?php echo $jsonUsuario->{'imagen'};?>" alt="">
                         </a>
 
                         <!-- Dropdown - User Information -->
@@ -87,7 +84,7 @@
                             <a class="dropdown-item" href="user-profile.php">
                                 Perfil
                             </a>
-                            <a class="dropdown-item" href="../controler/action/act_logout.php">
+                            <a class="dropdown-item" href="../controller/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
                             </a>
                         </div>
@@ -106,10 +103,10 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="mx-auto pt-4">
-                        <img class="profile-img rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                        <img class="profile-img rounded-circle" src="/img/<?php echo $jsonUsuario->{'imagen'};?>" alt="">
                     </div>
                 </div>
-                <form class="user" method="POST" action="../controler/action/act_editarUsuario.php"
+                <form class="user" method="POST" action="../controller/action/act_editarUsuario.php"
                     enctype="multipart/form-data" onsubmit="return ValidateData();">
                     <div class="row">
                         <div class="mx-auto">
@@ -127,31 +124,31 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
                                             placeholder="Nombres" name="names"
-                                            value="<?php echo $_SESSION['NOMBRES_USUARIO'];?>" disabled>
+                                            value="<?php echo $jsonUsuario->{'nombres'};?>" disabled>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastNames"
                                             placeholder="Apellidos" name="last_names"
-                                            value="<?php echo $_SESSION['APELLIDOS_USUARIO'];?>" disabled>
+                                            value="<?php echo $jsonUsuario->{'apellidos'};?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="nroCedula"
-                                        placeholder="Cedula" name="nroCedula" value="<?php echo $_SESSION['CEDULA'];?>" disabled>
+                                        placeholder="Cedula" name="nroCedula" value="<?php echo $jsonUsuario->{'nroCedula'};?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="InputEmail"
-                                        placeholder="Email" name="email" value="<?php echo $_SESSION['CORREO'];?>" disabled>
+                                        placeholder="Email" name="email" value="<?php echo $jsonUsuario->{'correo'};?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="address"
                                         placeholder="Dirección" name="address"
-                                        value="<?php if($_SESSION['DIRECCION'] != ' ')echo $_SESSION['DIRECCION'];?>" disabled>
+                                        value="<?php if($jsonUsuario->{'direccion'} != ' ')echo $jsonUsuario->{'direccion'};?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="cellphone"
                                         placeholder="Celular" name="cellphone"
-                                        value="<?php if($_SESSION['CELULAR'] != ' ')echo $_SESSION['CELULAR'];?>" disabled>
+                                        value="<?php if($jsonUsuario->{'telefono'} != ' ')echo $jsonUsuario->{'telefono'};?>" disabled>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-user btn-block" id="btn-edite">
                                     Editar Datos

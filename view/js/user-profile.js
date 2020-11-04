@@ -1,3 +1,8 @@
+//Regular Expresions
+var idNumber = /^[0-9]{0,10}$/;
+var latin_letters = /^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/;
+var phoneNumber = /^[0-9-()+]{3,20}/;
+
 $('#btn-edite').click(function (){
     $('#Names').prop('disabled', false);
     $('#LastNames').prop('disabled', false);

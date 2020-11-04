@@ -70,7 +70,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Inicia Sesion</h1>
                                     </div>
-                                    <form class="user" method="POST" action="../controler/action/act_login.php" onsubmit="return ValidateLogin();">
+                                    <form class="user" method="POST" action="../controller/action/act_login.php" onsubmit="return ValidateLogin();">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="LoginEmail" aria-describedby="emailHelp"
