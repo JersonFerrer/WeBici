@@ -14,16 +14,11 @@
     
     if($nroCedula != '' && $nombres != '' && $apellidos != '' && $correo != '' && $direccion != '' && $direccion != ''){
         $idUsuario = $_SESSION['ID_USUARIO'];
-        $_SESSION['CEDULA'] = $nroCedula;
-        $_SESSION['NOMBRES_USUARIO'] = $nombres;
-        $_SESSION['APELLIDOS_USUARIO'] = $apellidos;
-        $_SESSION['CORREO'] = $correo;
-        $_SESSION['DIRECCION'] = $direccion;
-        $_SESSION['CELULAR'] = $telefono;
-    
+            
         if($_FILES['image']['name'] != ''){
-            $imagen = $_FILES['image']['name'];
-            $_SESSION['IMAGEN'] = $imagen;
+            $info = pathinfo($_FILES['image']['name']);
+            $ext = $info['extension']; // get the extension of the file
+            $imagen = $idUsuario. "." . $ext;
         }else{
             $imagen = $_SESSION['IMAGEN'];
         }

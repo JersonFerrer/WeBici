@@ -63,7 +63,7 @@ session_start();
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                             <?php 
-                                echo strtoupper($_SESSION['NOMBRES_USUARIO']);
+                                echo $_SESSION['NOMBRES_USUARIO'];
                             ?>
                             <?php 
                                 if($_SESSION['IMAGEN'] != null){
@@ -80,7 +80,7 @@ session_start();
                             <a class="dropdown-item" href="user-profile.php">
                                 Perfil
                             </a>
-                            <a class="dropdown-item" href="../controler/action/act_logout.php">
+                            <a class="dropdown-item" href="../controller/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
                             </a>
                         </div>

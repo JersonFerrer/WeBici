@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    require_once (__DIR__.'/../controller/mdb/mdbBicicleta.php');
+    $bicicletas = json_encode(verBicicletas());
+    $json_bicicletas = json_decode($bicicletas);
+
+    echo $json_bicicletas;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,25 +107,25 @@
                     </a>
                 </div>
 
-                <div id="ruta" class="row">
+                <div  class="row">
                     </br>
+                    <?php foreach($json_bicicletas as $valor){?>
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag1.jpg" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">S-Works Tarmac SL5 </a>
+                                    <a href="#"><?php echo $valor->{'modelo'}?></a>
                                 </h4>
-                                <h5>$55.000 /h</h5>
+                                <h5>$<?php echo $valor->{'precio'}?>/h</h5>
                                 <p class="card-text">
                                 <ul>
-                                    <li>Marca: Specialized</li>
-                                    <li>Talla: S/M</li>
-                                    <li>Talla CM: 54cm</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Material: Carbono</li>
-                                    <li>ID: 100124099</li>
+                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
+                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
+                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
+                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
+                                    <li>ID: <?php echo $valor->{'id'}?></li>
+                                    <li>Descripción: <?php echo $valor->{'descripcion'}?></li>
                                 </ul>
                                 </p>
                             </div>
@@ -126,6 +134,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php }?>
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
