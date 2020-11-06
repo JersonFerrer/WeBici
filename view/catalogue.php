@@ -3,8 +3,6 @@
     require_once (__DIR__.'/../controller/mdb/mdbBicicleta.php');
     $bicicletas = json_encode(verBicicletas());
     $json_bicicletas = json_decode($bicicletas);
-
-    echo $json_bicicletas;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +105,7 @@
                     </a>
                 </div>
 
-                <div  class="row">
+                <div id="container" class="row">
                     </br>
                     <?php foreach($json_bicicletas as $valor){?>
                     <div class="col-lg-4 col-md-6 mb-4">
@@ -598,7 +596,7 @@
     <!-- Core theme JS-->
     
     <script src="js/bootstrap.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/catalogue.js"></script>
 </body>
 
 </html>
