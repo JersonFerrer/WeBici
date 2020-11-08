@@ -75,7 +75,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
                             </div>
-                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
+                            <form class="user" method="POST" action="../controller/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
@@ -91,7 +91,7 @@
                                         placeholder="Cedula" name="nroCedula">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="InputEmail"
+                                    <input type="text" class="form-control form-control-user" id="InputEmail"
                                         placeholder="Email" name="email">
                                 </div>
                                 <div class="form-group row">
@@ -160,6 +160,7 @@
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/regular_expresions.js"></script>
     <script src="js/registry.js"></script>
 </body>
 
