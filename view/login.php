@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(isset($_SESSION['ID_USUARIO'])){
+        header('Location: index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +34,18 @@
     <link rel="stylesheet" href="css/sweetalert2.min.css">
 </head>
 
+<?php 
+    if(isset($_SESSION['ERROR_LOGIN'])){
+?>
+<body id="login" class="bg-dark" onload="MensajeError('<?php echo $_SESSION['ERROR_LOGIN']?>')">
+<?php 
+    $_SESSION['ERROR_LOGIN'] = null;
+?>
+<?php 
+    }else{
+?>
 <body id="login" class="bg-dark">
+<?php }?>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">

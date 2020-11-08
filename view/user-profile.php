@@ -36,8 +36,8 @@
     <link rel="stylesheet" href="css/sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/profile-styles.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body id="user-profile" class="bg-dark">
@@ -85,7 +85,7 @@
                                 Perfil
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
                             </a>
                         </div>
                     </li>

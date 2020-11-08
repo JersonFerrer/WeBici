@@ -19,6 +19,7 @@
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
             $_SESSION['IMAGEN'] = $user->getImagen();
+            $_SESSION['ERROR_LOGIN'] = null;
             
             header("Location: ../../view/index.php");
            /* if($user->esAdministrador() == 1){
@@ -28,6 +29,7 @@
             }*/
 
         }else{
+            $_SESSION['ERROR_LOGIN'] = "Usuario y/o contraseña invalidos";
             //Si el usuario no existe se vuelve a mostrar el login
-            header("Location: ../../view/login.php?flag=0");
+            header("Location: ../../view/login.php");
         }
