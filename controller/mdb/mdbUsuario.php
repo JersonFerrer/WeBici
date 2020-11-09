@@ -12,8 +12,27 @@ function autenticarUsuario($correo, $password){
 
         //Retorna el usuario si lo encontró, de lo contrario retorna null
         return $usuario;
-    }
+}
+function verificarUsuarioPorCedula($nrocedula){
+    $dao=new UsuarioDAO();
+        
+    //Se llama al método verificarUsuarioPorCedula que se encuentra en la clase
+    //UsuarioDAO
+    $usuario = $dao->verificarUsuarioPorCedula($nrocedula);
 
+    //Retorna el usuario si lo encontró, de lo contrario retorna null
+    return $usuario;
+}
+function verificarUsuarioPorCorreo($correo){
+    $dao=new UsuarioDAO();
+        
+    //Se llama al método verificarUsuarioPorCorreo que se encuentra en la clase
+    //UsuarioDAO
+    $usuario = $dao->verificarUsuarioPorCorreo($correo);
+
+    //Retorna el usuario si lo encontró, de lo contrario retorna null
+    return $usuario;
+}
 function registrarUsuario(Usuario $usuario){
     
     $dao=new UsuarioDAO();

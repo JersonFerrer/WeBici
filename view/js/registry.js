@@ -54,3 +54,10 @@ function ErrorRegistro(msg){
         text: msg
     })
 }
+function ExitoRegistro(msg){
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso!',
+        text: msg
+    })
+}

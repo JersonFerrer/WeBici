@@ -50,6 +50,41 @@ class UsuarioDAO {
         return $usuario;
     }    
 
+    public function verificarUsuarioPorCedula($nrocedula){
+        //Se crea la instancia de DataSource para hacer la conexión
+        $data_source = new DataSource();
+
+        //Se llama al metodo ejecutarConsulta para devolver el usuario
+        //que cumpla con la numero de cedula recibido del registro
+        $data_table= $data_source->ejecutarConsulta("SELECT * FROM usuario WHERE nroCedula = :nroCedula",array(':nroCedula'=>$nrocedula));
+
+        $usuario=null;
+        //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
+        if(count($data_table)==1){
+            $usuario = count($data_table);
+        }
+        //se retorna el objeto usuario, retorna null en el caso de que no encuentre el usuario
+        //en la base de datos 
+        return $usuario;
+    }
+
+    public function verificarUsuarioPorCorreo($correo){
+        //Se crea la instancia de DataSource para hacer la conexión
+        $data_source = new DataSource();
+
+        //Se llama al metodo ejecutarConsulta para devolver el usuario
+        //que cumpla con la numero de cedula recibido del registro
+        $data_table= $data_source->ejecutarConsulta("SELECT * FROM usuario WHERE correo = :correo",array(':correo'=>$correo));
+
+        $usuario=null;
+        //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
+        if(count($data_table)==1){
+            $usuario = count($data_table);
+        }
+        //se retorna el objeto usuario, retorna null en el caso de que no encuentre el usuario
+        //en la base de datos 
+        return $usuario;
+    }
 
     public function registrarUsuario(Usuario $usuario){
         $data_source = new DataSource();
