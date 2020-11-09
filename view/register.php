@@ -45,6 +45,9 @@
 ?>
 <body id="login" class="bg-dark" onload="ExitoRegistro('<?php echo $_SESSION['MENSAJE_REGISTRO']?>')">
 <?php 
+    unset($_SESSION['MENSAJE_REGISTRO']);
+?>
+<?php 
     }else{
 ?>
 <body id="register" class="bg-dark">
@@ -63,15 +66,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar
-                            Sesion</a></li>
-                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
+                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar Sesion</a></li>
                 </ul>
             </div>
         </div>
