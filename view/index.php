@@ -81,7 +81,7 @@ session_start();
                                 Perfil
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
                             </a>
                         </div>
                     </li>

@@ -16,9 +16,17 @@
  
 
         if($password == $repeatPassword){
-            $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, NULL);
-            registrarUsuario($usuario);
-            header("Location: ../../view/login.php");
+            $existeCedula = verificarUsuarioPorCedula($nroCedula);
+            $existeCorreo = verificarUsuarioPorCorreo($correo);
+            if($existeCedula != null || $existeCorreo != null){
+                $_SESSION['ERROR_REGISTRO'] = 'El usuario ya existe';
+                header("Location: ../../view/register.php");
+            }else{
+                $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, NULL);
+                registrarUsuario($usuario);
+                $_SESSION['MENSAJE_REGISTRO'] = 'Usted se ha registrado Exitosamente';
+                header("Location: ../../view/register.php");
+            }
         }else{
             echo "Contraseñas no coinciden";
         }

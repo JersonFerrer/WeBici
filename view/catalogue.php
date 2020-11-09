@@ -1,10 +1,17 @@
 <?php
     session_start();
     require_once (__DIR__.'/../controller/mdb/mdbBicicleta.php');
-    $bicicletas = json_encode(verBicicletas());
-    $json_bicicletas = json_decode($bicicletas);
+    $ruta = json_encode(verBicicletasPorTipo(1));
+    $json_ruta = json_decode($ruta);
 
-    echo $json_bicicletas;
+    $hibridas = json_encode(verBicicletasPorTipo(3));
+    $json_hibridas = json_decode($hibridas);
+
+    $urbanas = json_encode(verBicicletasPorTipo(4));
+    $json_urbanas = json_decode($urbanas);
+
+    $plegables = json_encode(verBicicletasPorTipo(5));
+    $json_plegables = json_decode($plegables);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,13 +55,62 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="catalogue.php">Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="catalogue.php">Catálogo</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar Sesion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
+                    </li>
+                    <!--Validacion para mostrar el boton de Iniciar Sesion-->
+                    <?php
+                        if (!isset($_SESSION['ID_USUARIO'])){
+                    ?>
+                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar
+                            Sesion</a></li>
+                    <?php
+                        }
+                    ?>
                     </li>
                 </ul>
+
+                <!--Validacion para mostrar el usuario-->
+                <?php 
+                    if (isset($_SESSION['ID_USUARIO'])){
+                ?>
+                <ul class="navbar-nav">
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <?php 
+                                echo $_SESSION['NOMBRES_USUARIO'];
+                            ?>
+                            <?php 
+                                if($_SESSION['IMAGEN'] != null){
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                            <?php 
+                                }
+                            ?>
+                        </a>
+
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="user-profile.php">
+                                Perfil
+                            </a>
+                            <a class="dropdown-item" href="../controller/action/act_logout.php">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <?php 
+                    }//fin de la validacion para mostrar usuario
+                ?>
             </div>
         </div>
     </nav>
@@ -107,457 +163,224 @@
                     </a>
                 </div>
 
-                <div  class="row">
+                <div id="ruta" class="row">
                     </br>
-                    <?php foreach($json_bicicletas as $valor){?>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag1.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#"><?php echo $valor->{'modelo'}?></a>
-                                </h4>
-                                <h5>$<?php echo $valor->{'precio'}?>/h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
-                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
-                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
-                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
-                                    <li>ID: <?php echo $valor->{'id'}?></li>
-                                    <li>Descripción: <?php echo $valor->{'descripcion'}?></li>
-                                </ul>
-                                </p>
+                    <?php foreach($json_ruta as $valor){?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="catalogue-item">
+                            <a class="catalogue-link" data-toggle="modal" href="#ruta<?php echo $valor->{'id'}?>">
+                                <div class="catalogue-hover">
+                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/catalogo/imag1.jpg" alt="" />
+                            </a>
+                            <div class="catalogue-caption">
+                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
+                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
                             </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        </div>
+                    </div>
+
+                    <!-- catalogue Modals-->
+                    <div class="catalogue-modal modal fade" id="ruta<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
+
+                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/imag1.jpg" alt="" />
+                                                
+                                                <ul class="list-inline">
+                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
+                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
+                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
+                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
+                                                    <li>ID: <?php echo $valor->{'id'}?></li>
+                                                </ul>
+                                                <p><?php echo $valor->{'descripcion'}?></p>
+                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                    Alquilar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <?php }?>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag2.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Cannondale SYSTEM SIX Hi-MOD DURA-ACE Di2 2019</a>
-                                </h4>
-                                <h5>$60.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Cannondale</li>
-                                    <li>Talla: XS/S</li>
-                                    <li> Color: Negro</li>
-                                    <li>Talla CM: 51cm</li>
-                                    <li>Género: Hombres</li>
-                                    <li>Tipo de Frenado: Freno de Disco</li>
-                                    <li>Material: Carbono</li>
-                                    <li>ID: 100063138</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag3.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Cannondale Superslice Ultegra 2019 </a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Cannondale</li>
-                                    <li>Talla: XS</li>
-                                    <li>Talla CM: 50cm</li>
-                                    <li>Género: Hombres</li>
-                                    <li>Tipo de Frenado: Freno de Disco</li>
-                                    <li>Material: Carbono</li>
-                                    <li>ID: 100063135</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag4.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">S-Works Tarmac Disc - Dura Ace Di2 Gris </a>
-                                </h4>
-                                <h5>$45.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Specialized</li>
-                                    <li>Género: Hombres</li>
-                                    <li>Tipo de Frenado: Freno de Disco</li>
-                                    <li>Material: Carbono</li>
-                                    <li>ID: 100070516</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag5.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Giant Tcr Advanced 3 Disc 2021 </a>
-                                </h4>
-                                <h5>$55.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Giant</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Material: Carbono</li>
-                                    <li>ID: 100112529</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/imag6.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Teammachine SLR Two 2021 </a>
-                                </h4>
-                                <h5>$50.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: BMC</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Disco</li>
-                                    <li>Material: Carbono</li>
-                                    <li>Grupo: Shimano Ultegra</li>
-                                    <li>ID: 100123922</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
                 <div id="hibrida" class="row">
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image1.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Negro </a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100098535</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </br>
+                    <?php foreach($json_hibridas as $valor){?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="catalogue-item">
+                            <a class="catalogue-link" data-toggle="modal" href="#hibrida<?php echo $valor->{'id'}?>">
+                                <div class="catalogue-hover">
+                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/catalogo/image1.jpg" alt="" />
+                            </a>
+                            <div class="catalogue-caption">
+                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
+                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image2.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Negro / Verde</a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100098538</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <!-- catalogue Modals-->
+                    <div class="catalogue-modal modal fade" id="hibrida<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
+
+                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/image1.jpg" alt="" />
+                                                
+                                                <ul class="list-inline">
+                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
+                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
+                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
+                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
+                                                    <li>ID: <?php echo $valor->{'id'}?></li>
+                                                </ul>
+                                                <p><?php echo $valor->{'descripcion'}?></p>
+                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                    Alquilar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image3.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Rojo </a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100034537</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image4.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Verde </a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100024532</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image5.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Azul </a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100047932</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php }?>
                 </div>
+
                 <div id="urbanas" class="row">
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/ima1.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">GW Bicicleta Summer Hombre - Blanco</a>
-                                </h4>
-                                <h5>$40.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: GW</li>
-                                    <li>Género: Hombres</li>
-                                    <li>Tipo de Piñón: Engranado</li>
-                                    <li>Racks: Sin Rack</li>
-                                    <li>ID: 100077525</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </br>
+                    <?php foreach($json_urbanas as $valor){?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="catalogue-item">
+                            <a class="catalogue-link" data-toggle="modal" href="#urbana<?php echo $valor->{'id'}?>">
+                                <div class="catalogue-hover">
+                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/catalogo/ima1.jpg" alt="" />
+                            </a>
+                            <div class="catalogue-caption">
+                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
+                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/ima2.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">GW Bicicleta Summer Mujer - Blanco / Naranja </a>
-                                </h4>
-                                <h5>$40.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: GW</li>
-                                    <li>Género: Mujeres</li>
-                                    <li>Tipo de Piñón: Engranado</li>
-                                    <li>Racks: Sin Rack</li>
-                                    <li>ID: 100077523</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <!-- catalogue Modals-->
+                    <div class="catalogue-modal modal fade" id="urbana<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
+
+                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/ima1.jpg" alt="" />
+                                                
+                                                <ul class="list-inline">
+                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
+                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
+                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
+                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
+                                                    <li>ID: <?php echo $valor->{'id'}?></li>
+                                                </ul>
+                                                <p><?php echo $valor->{'descripcion'}?></p>
+                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                    Alquilar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/ima3.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">GW Bicicleta Summer Hombre - Negro / Verde </a>
-                                </h4>
-                                <h5>$40.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: GW</li>
-                                    <li>Género: Hombres</li>
-                                    <li>Tipo de Piñón: Engranado</li>
-                                    <li>Racks: Sin Rack</li>
-                                    <li>ID: 100077526</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/ima4.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">BICICLETA PLAYERA 26" GW SUNDAY - Beige </a>
-                                </h4>
-                                <h5>$40.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: GW</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Piñón: Engranado</li>
-                                    <li>Racks: Racks Delanteras & Traseros</li>
-                                    <li>ID: 100036576</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/ima5.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Bicicleta Playera 7 V GW Summer Girl </a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: GW</li>
-                                    <li>Género: Mujeres</li>
-                                    <li>Tipo de Piñón: Engranado</li>
-                                    <li>Racks: Racks Delanteras & Traseros</li>
-                                    <li>ID: 100024076</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php }?>
                 </div>
+                
                 <div id="plegables" class="row">
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/im1.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Bicicleta Plegable onTRAIL Foldaway Aluminio Freno Disco 7v </a>
-                                </h4>
-                                <h5>$50.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: onTRAIL</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tamaño de Rueda: 20"</li>
-                                    <li>Tipo de Piñón: Manzana de Intervalo</li>
-                                    <li>ID: 100046004</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </br>
+                    <?php foreach($json_plegables as $valor){?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="catalogue-item">
+                            <a class="catalogue-link" data-toggle="modal" href="#plegable<?php echo $valor->{'id'}?>">
+                                <div class="catalogue-hover">
+                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/catalogo/im1.jpg" alt="" />
+                            </a>
+                            <div class="catalogue-caption">
+                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
+                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/im2.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Bicicleta Ple GA Ble GW Copenhague </a>
-                                </h4>
-                                <h5>$50.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: GW</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tamaño de Rueda: 20"</li>
-                                    <li>Tipo de Piñón: Engranado</li>
-                                    <li>ID: 100098905</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <!-- catalogue Modals-->
+                    <div class="catalogue-modal modal fade" id="plegable<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
+
+                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/im1.jpg" alt="" />
+                                                
+                                                <ul class="list-inline">
+                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
+                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
+                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
+                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
+                                                    <li>ID: <?php echo $valor->{'id'}?></li>
+                                                </ul>
+                                                <p><?php echo $valor->{'descripcion'}?></p>
+                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                    Alquilar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <?php }?>
                 </div>
                 <!-- /.row -->
 
@@ -569,7 +392,7 @@
 
     </div>
     <!-- /.container -->
-    
+
     <!-- Footer-->
     <footer class="footer py-5 mt-5 bg-light">
         <div class="container">
@@ -596,9 +419,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     <!-- Core theme JS-->
-    
+
     <script src="js/bootstrap.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/catalogue.js"></script>
 </body>
 
 </html>

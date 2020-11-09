@@ -30,14 +30,14 @@ class BicicletaDAO {
             ':tamRueda'=> $bicicleta->getTamRueda()
             )
         ); 
-
-      return $ultimoIdInsertado;
+        
+        return $ultimoIdInsertado;
     }
 
-    public function verBicicletas(){
+    public function verBicicletasPorTipo($Tipo){
         $data_source = new DataSource();
         
-        $data_table = $data_source->ejecutarConsulta("SELECT * FROM bicicleta");
+        $data_table = $data_source->ejecutarConsulta("SELECT t1.id, t1.modelo, t1.talla, t1.peso, t1.precio, t1.marca, t1.descripcion, t1.tamRueda, t2.nombre FROM bicicleta AS t1 INNER JOIN tipobicicleta AS t2 ON t1.tipoBicicleta=t2.id WHERE t1.tipoBicicleta=:tipoBicicleta", array(":tipoBicicleta"=>$Tipo));
 
         $bicicleta=null;
         $bicicletas=array();
@@ -45,7 +45,7 @@ class BicicletaDAO {
         foreach($data_table as $indice => $valor){
             $bicicleta = new Bicicleta(
                     $data_table[$indice]["id"],
-                    $data_table[$indice]["tipoBicicleta"], 
+                    $data_table[$indice]["nombre"], 
                     $data_table[$indice]["modelo"],
                     $data_table[$indice]["talla"],
                     $data_table[$indice]["peso"],
@@ -57,7 +57,7 @@ class BicicletaDAO {
             array_push($bicicletas,$bicicleta);
         }
         
-    return $bicicletas;
+        return $bicicletas;
     }
 }
 

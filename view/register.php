@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(isset($_SESSION['ID_USUARIO'])){
+        header("location: index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +33,25 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-
-<body id="login" class="bg-dark">
+<?php 
+    if(isset($_SESSION['ERROR_REGISTRO'])){
+?>
+<body id="login" class="bg-dark" onload="ErrorRegistro('<?php echo $_SESSION['ERROR_REGISTRO']?>')">
+<?php 
+    unset($_SESSION['ERROR_REGISTRO']);
+?>
+<?php 
+    }else if(isset($_SESSION['MENSAJE_REGISTRO'])){
+?>
+<body id="login" class="bg-dark" onload="ExitoRegistro('<?php echo $_SESSION['MENSAJE_REGISTRO']?>')">
+<?php 
+    unset($_SESSION['MENSAJE_REGISTRO']);
+?>
+<?php 
+    }else{
+?>
+<body id="register" class="bg-dark">
+<?php }?>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
@@ -43,15 +66,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar
-                            Sesion</a></li>
-                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
+                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar Sesion</a></li>
                 </ul>
             </div>
         </div>
@@ -69,7 +88,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
                             </div>
-                            <form class="user" method="POST" action="../controler/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
+                            <form class="user" method="POST" action="../controller/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
@@ -85,7 +104,7 @@
                                         placeholder="Cedula" name="nroCedula">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="InputEmail"
+                                    <input type="text" class="form-control form-control-user" id="InputEmail"
                                         placeholder="Email" name="email">
                                 </div>
                                 <div class="form-group row">
@@ -154,6 +173,7 @@
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/regular_expresions.js"></script>
     <script src="js/registry.js"></script>
 </body>
 
