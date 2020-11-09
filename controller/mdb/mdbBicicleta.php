@@ -1,11 +1,11 @@
 <?php
 require_once(__DIR__."/../../model/dao/BicicletaDAO.php");
 
-function verBicicletas($tipo){
+function verBicicletasPorTipo($tipo){
 
     $bicicleta = new BicicletaDAO();
 
-    $bicicletas = $bicicleta->verBicicletas($tipo);
+    $bicicletas = $bicicleta->verBicicletasPorTipo($tipo);
 
     return $bicicletas;
 }

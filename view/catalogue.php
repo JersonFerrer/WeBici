@@ -1,8 +1,11 @@
 <?php
     session_start();
     require_once (__DIR__.'/../controller/mdb/mdbBicicleta.php');
-    $ruta = json_encode(verBicicletas(1));
+    $ruta = json_encode(verBicicletasPorTipo(1));
     $json_ruta = json_decode($ruta);
+
+    $hibridas = json_encode(verBicicletasPorTipo(3));
+    $json_hibridas = json_decode($hibridas);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -208,130 +211,62 @@
                     </div>
                     <?php }?>
                 </div>
-                
+
                 <div id="hibrida" class="row">
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image1.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Negro </a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100098535</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </br>
+                    <?php foreach($json_hibridas as $valor){?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="catalogue-item">
+                            <a class="catalogue-link" data-toggle="modal" href="#hibrida<?php echo $valor->{'id'}?>">
+                                <div class="catalogue-hover">
+                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/catalogo/ima1.jpg" alt="" />
+                            </a>
+                            <div class="catalogue-caption">
+                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
+                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image2.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Negro / Verde</a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100098538</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <!-- catalogue Modals-->
+                    <div class="catalogue-modal modal fade" id="hibrida<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
+
+                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/imag1.jpg" alt="" />
+                                                
+                                                <ul class="list-inline">
+                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
+                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
+                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
+                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
+                                                    <li>ID: <?php echo $valor->{'id'}?></li>
+                                                </ul>
+                                                <p><?php echo $valor->{'descripcion'}?></p>
+                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                    Alquilar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image3.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Rojo </a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100034537</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image4.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Verde </a>
-                                </h4>
-                                <h5>$30.000 /h</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100024532</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="assets/img/catalogo/image5.jpg" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Rin 26 con cambios 3x6 Color Azul </a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">
-                                <ul>
-                                    <li>Marca: Dciclas</li>
-                                    <li>Género: Unisexo</li>
-                                    <li>Tipo de Frenado: Freno de Rin</li>
-                                    <li>Suspensión: No</li>
-                                    <li>ID: 100047932</li>
-                                </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php }?>
                 </div>
+                
                 <div id="urbanas" class="row">
 
                     <div class="col-lg-4 col-md-6 mb-4">

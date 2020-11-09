@@ -34,7 +34,7 @@ class BicicletaDAO {
         return $ultimoIdInsertado;
     }
 
-    public function verBicicletas($Tipo){
+    public function verBicicletasPorTipo($Tipo){
         $data_source = new DataSource();
         
         $data_table = $data_source->ejecutarConsulta("SELECT t1.id, t1.modelo, t1.talla, t1.peso, t1.precio, t1.marca, t1.descripcion, t1.tamRueda, t2.nombre FROM bicicleta AS t1 INNER JOIN tipobicicleta AS t2 ON t1.tipoBicicleta=t2.id WHERE t1.tipoBicicleta=:tipoBicicleta", array(":tipoBicicleta"=>$Tipo));
