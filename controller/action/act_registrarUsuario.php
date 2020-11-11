@@ -19,16 +19,14 @@
             $existeCedula = verificarUsuarioPorCedula($nroCedula);
             $existeCorreo = verificarUsuarioPorCorreo($correo);
             if($existeCedula != null || $existeCorreo != null){
-                $_SESSION['ERROR_REGISTRO'] = 'El usuario ya existe';
-                header("Location: ../../view/register.php");
+                echo json_encode(array('success'=>0, 'message'=>'El usuario ya existe'));
             }else{
                 $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, NULL);
                 registrarUsuario($usuario);
-                $_SESSION['MENSAJE_REGISTRO'] = 'Usted se ha registrado Exitosamente';
-                header("Location: ../../view/register.php");
+                echo json_encode(array('success'=>1, 'message'=>'Usted se ha registrado Exitosamente'));
             }
         }else{
-            echo "Contraseñas no coinciden";
+            echo json_encode(array('success'=>0, 'message'=>'Contraseñas no coinciden'));
         }
         /*if(isset($_POST['administrador'])) {
             $usuario = new Usuario(NULL, $nombre, $correo, $password, $telefono, $fechanac, $sexo, $peso, $administrador);
