@@ -19,6 +19,7 @@
             $info = pathinfo($_FILES['image']['name']);
             $ext = $info['extension']; // get the extension of the file
             $imagen = $idUsuario. "." . $ext;
+            $_SESSION['IMAGEN']= $imagen;
         }else{
             $imagen = $_SESSION['IMAGEN'];
         }
