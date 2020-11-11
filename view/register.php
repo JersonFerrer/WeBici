@@ -33,25 +33,8 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<?php 
-    if(isset($_SESSION['ERROR_REGISTRO'])){
-?>
-<body id="login" class="bg-dark" onload="ErrorRegistro('<?php echo $_SESSION['ERROR_REGISTRO']?>')">
-<?php 
-    unset($_SESSION['ERROR_REGISTRO']);
-?>
-<?php 
-    }else if(isset($_SESSION['MENSAJE_REGISTRO'])){
-?>
-<body id="login" class="bg-dark" onload="ExitoRegistro('<?php echo $_SESSION['MENSAJE_REGISTRO']?>')">
-<?php 
-    unset($_SESSION['MENSAJE_REGISTRO']);
-?>
-<?php 
-    }else{
-?>
+
 <body id="register" class="bg-dark">
-<?php }?>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
