@@ -189,6 +189,20 @@ class UsuarioDAO {
       return $resultado;
     }
 
+    public function ActualizarFoto($Usuario){
+        $data_source = new DataSource();
+        
+        $stmt1 = "UPDATE usuario SET imagen = :imagen WHERE id = :idUsuario"; 
+        
+        $resultado = $data_source->ejecutarActualizacion($stmt1, array(
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':imagen' => $usuario->getImagen()
+            )
+        ); 
+
+      return $resultado;
+    }
+
 }
 
 

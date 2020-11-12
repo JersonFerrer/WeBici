@@ -1,20 +1,42 @@
-//Regular Expresions
-var idNumber = /^[0-9]{0,10}$/;
-var latin_letters = /^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/;
-var phoneNumber = /^[0-9-()+]{3,20}/;
+$(document).ready(function () {
 
-$('#btn-edite').click(function (){
-    $('#Names').prop('disabled', false);
-    $('#LastNames').prop('disabled', false);
-    $('#nroCedula').prop('disabled', false);
-    $('#InputEmail').prop('disabled', false);
-    $('#address').prop('disabled', false);
-    $('#cellphone').prop('disabled', false);
-    $('#btn-update').attr('style', 'display:block');
-    $(this).attr('style', 'display:none');
-})
+    $('#btn-edite').click(function () {
+        $('#Names').prop('disabled', false);
+        $('#LastNames').prop('disabled', false);
+        $('#nroCedula').prop('disabled', false);
+        $('#InputEmail').prop('disabled', false);
+        $('#address').prop('disabled', false);
+        $('#cellphone').prop('disabled', false);
+        $('#btn-update').attr('style', 'display:block');
+        $(this).attr('style', 'display:none');
+    });
 
-function ValidateData(){
+    $('#btnImageUpdate').click(function(){
+        $('#image').click();
+    });
+
+    $('#image').change(function () {
+       
+        var formData = new FormData(document.getElementById("imageForm"));
+        
+        $.ajax({
+            url: "../controller/action/act_actualizarFoto.php",
+            type: "POST",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                let ruta = '/img/'+response+'?'+ new Date().getTime();
+                $('#profileImg').attr('src', ruta);
+                $('#profileImgNavbar').attr('src', ruta);
+            }
+        })
+    });
+});
+
+function ValidateData() {
     let names = $('#Names');
     let lastNames = $('#LastNames');
     let nroCedula = $('#nroCedula');
@@ -22,14 +44,14 @@ function ValidateData(){
     let address = $('#address');
     let cellphone = $('#cellphone');
 
-    if(names.val() =='' || lastNames.val() =='' || nroCedula.val() =='' || email.val() =='' || address.val() =='' || cellphone.val() ==''){
+    if (names.val() == '' || lastNames.val() == '' || nroCedula.val() == '' || email.val() == '' || address.val() == '' || cellphone.val() == '') {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Hay campos vacíos. Por favor diligencie todos los campos',
         })
         return false;
-    }else{
+    } else {
         return true;
     }
 }
