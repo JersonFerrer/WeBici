@@ -1,5 +1,30 @@
 $(document).ready(function (){
 
+    $('#registryform').submit(function(e) {
+        e.preventDefault();
+        if(ValidateForm()){
+            $.ajax({
+                type: "POST",
+                url: '../controller/action/act_registrarUsuario.php',
+                data: $(this).serialize(),
+                success: function(response)
+                {
+                    var jsonData = JSON.parse(response);
+     
+                    // user is successfully register in the back-end
+                    if (jsonData.success == "1")
+                    {
+                        ExitoRegistro(jsonData.message);
+                    }
+                    else
+                    {
+                        ErrorRegistro(jsonData.message);
+                    }
+               }
+            });
+        }
+    });
+
     $('#Names').keyup(function(){
         if(!LettersValidation($(this).val()) && $(this).val() != ''){
             ErrorRegistro('Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
@@ -58,6 +83,13 @@ function ExitoRegistro(msg){
     Swal.fire({
         icon: 'success',
         title: 'Registro exitoso!',
-        text: msg
-    })
+        text: msg,
+        confirmButtonText: 'Ir a login'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                location.href="login.php";
+            }else{
+                location.href="login.php";
+            }
+        })
 }

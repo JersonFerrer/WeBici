@@ -65,3 +65,8 @@ function editarUsuario($usuario){
     $dao=new UsuarioDAO();
     $dao->editarUsuario($usuario);
 }
+
+function editarImagen($usuario){
+    $dao=new UsuarioDAO();
+    $dao->editarImagen($usuario);
+}

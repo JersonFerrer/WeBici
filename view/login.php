@@ -34,18 +34,8 @@
     <link rel="stylesheet" href="css/sweetalert2.min.css">
 </head>
 
-<?php 
-    if(isset($_SESSION['ERROR_LOGIN'])){
-?>
-<body id="login" class="bg-dark" onload="MensajeError('<?php echo $_SESSION['ERROR_LOGIN']?>')">
-<?php 
-    $_SESSION['ERROR_LOGIN'] = null;
-?>
-<?php 
-    }else{
-?>
+
 <body id="login" class="bg-dark">
-<?php }?>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
@@ -87,7 +77,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Inicia Sesion</h1>
                                     </div>
-                                    <form class="user" method="POST" action="../controller/action/act_login.php" onsubmit="return ValidateLogin();">
+                                    <form id="loginform" class="user" method="POST">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="LoginEmail" aria-describedby="emailHelp"
@@ -103,7 +93,7 @@
                                                 <label class="custom-control-label" for="customCheck">Recordarme</label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button id="btnLogin" type="submit" class="btn btn-primary btn-user btn-block">
                                             Iniciar
                                         </button>
                                         <hr>

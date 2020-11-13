@@ -6,3 +6,6 @@
 .dropdown .dropdown-menu {
     font-size: 1rem;
 }
+.display-none {
+    display: none;
+}

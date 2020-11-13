@@ -1,13 +1,10 @@
 <?php
     session_start();
     if(!isset($_SESSION['ID_USUARIO'])){
-        header("location: session-error.html");
-        session_destroy();
-        die();
+        header("location: login.php");
     }
     require_once (__DIR__.'/../controller/mdb/mdbUsuario.php');
-    $usuario = json_encode(verUsuarioPorId($_SESSION['ID_USUARIO']));
-    $jsonUsuario = json_decode($usuario);
+    $usuario = verUsuarioPorId($_SESSION['ID_USUARIO']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,9 +70,10 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                             <?php 
-                                echo $jsonUsuario->{'nombres'};
+                                echo $usuario->getNombres();
                             ?>
-                            <img class="img-profile rounded-circle" src="/img/<?php echo $jsonUsuario->{'imagen'};?>" alt="">
+                            <img id="profileImgNavbar" class="img-profile rounded-circle" src="/img/<?php echo $usuario->getImagen();?>"
+                                alt="">
                         </a>
 
                         <!-- Dropdown - User Information -->
@@ -103,63 +101,72 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="mx-auto pt-4">
-                        <img class="profile-img rounded-circle" src="/img/<?php echo $jsonUsuario->{'imagen'};?>" alt="">
+                        <img id="profileImg" class="profile-img rounded-circle" src="/img/<?php echo $usuario->getImagen();?>"
+                            alt="">
                     </div>
                 </div>
-                <form class="user" method="POST" action="../controller/action/act_editarUsuario.php"
-                    enctype="multipart/form-data" onsubmit="return ValidateData();">
-                    <div class="row">
-                        <div class="mx-auto">
-                            <input type="file" name="image" id="image">
-                        </div>
+
+                <div class="row">
+                    <div class="mx-auto mt-3">
+                        <form id="imageForm" method="POST" enctype="multipart/form-data">
+                            <input type="file" name="image" id="image" class="display-none">
+                            <button type="button" id="btnImageUpdate" class="btn btn-primary">Cambiar</button>
+                        </form>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="mx-auto col-lg-7">
-                            <div class="p-3">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Edita tus datos cuando quieras</h1>
-                                </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="mx-auto col-lg-7">
+                        <div class="p-3">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Edita tus datos cuando quieras</h1>
+                            </div>
+                            <form class="user" id="userForm" method="POST">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
                                             placeholder="Nombres" name="names"
-                                            value="<?php echo $jsonUsuario->{'nombres'};?>" disabled>
+                                            value="<?php echo $usuario->getNombres();?>" disabled>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="LastNames"
                                             placeholder="Apellidos" name="last_names"
-                                            value="<?php echo $jsonUsuario->{'apellidos'};?>" disabled>
+                                            value="<?php echo $usuario->getApellidos();?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="nroCedula"
-                                        placeholder="Cedula" name="nroCedula" value="<?php echo $jsonUsuario->{'nroCedula'};?>" disabled>
+                                        placeholder="Cedula" name="nroCedula"
+                                        value="<?php echo $usuario->getNroCedula();?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="InputEmail"
-                                        placeholder="Email" name="email" value="<?php echo $jsonUsuario->{'correo'};?>" disabled>
+                                        placeholder="Email" name="email" value="<?php echo $usuario->getCorreo();?>"
+                                        disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="address"
                                         placeholder="Dirección" name="address"
-                                        value="<?php if($jsonUsuario->{'direccion'} != ' ')echo $jsonUsuario->{'direccion'};?>" disabled>
+                                        value="<?php if($usuario->getDireccion() != ' ')echo $usuario->getDireccion();?>"
+                                        disabled>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="cellphone"
                                         placeholder="Celular" name="cellphone"
-                                        value="<?php if($jsonUsuario->{'telefono'} != ' ')echo $jsonUsuario->{'telefono'};?>" disabled>
+                                        value="<?php if($usuario->getTelefono() != ' ')echo $usuario->getTelefono();?>"
+                                        disabled>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-user btn-block" id="btn-edite">
                                     Editar Datos
                                 </button>
-                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-update" style="display: none;">
+                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-update"
+                                    style="display: none;">
                                     Actualizar
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -195,6 +202,7 @@
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/regular_expresions.js"></script>
     <script src="js/user-profile.js"></script>
 </body>
 

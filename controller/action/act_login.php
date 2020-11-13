@@ -19,9 +19,11 @@
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
             $_SESSION['IMAGEN'] = $user->getImagen();
-            $_SESSION['ERROR_LOGIN'] = null;
             
-            header("Location: ../../view/index.php");
+
+            echo json_encode(array('success' => 1));
+
+            //header("Location: ../../view/index.php");
            /* if($user->esAdministrador() == 1){
                 header("Location: ../../vista/administradorUsuarios.php");                
             }else{
@@ -29,7 +31,10 @@
             }*/
 
         }else{
-            $_SESSION['ERROR_LOGIN'] = "Usuario y/o contraseña invalidos";
+            echo json_encode(array('success' => 0, 'message'=> 'Usuario y/o contraseña invalidos'));
+
+            //echo "Usuario y/o contraseña invalidos";
+            //$_SESSION['ERROR_LOGIN'] = "Usuario y/o contraseña invalidos";
             //Si el usuario no existe se vuelve a mostrar el login
-            header("Location: ../../view/login.php");
+            //header("Location: ../../view/login.php");
         }

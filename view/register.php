@@ -33,25 +33,8 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<?php 
-    if(isset($_SESSION['ERROR_REGISTRO'])){
-?>
-<body id="login" class="bg-dark" onload="ErrorRegistro('<?php echo $_SESSION['ERROR_REGISTRO']?>')">
-<?php 
-    unset($_SESSION['ERROR_REGISTRO']);
-?>
-<?php 
-    }else if(isset($_SESSION['MENSAJE_REGISTRO'])){
-?>
-<body id="login" class="bg-dark" onload="ExitoRegistro('<?php echo $_SESSION['MENSAJE_REGISTRO']?>')">
-<?php 
-    unset($_SESSION['MENSAJE_REGISTRO']);
-?>
-<?php 
-    }else{
-?>
+
 <body id="register" class="bg-dark">
-<?php }?>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
@@ -88,7 +71,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crea una cuenta!</h1>
                             </div>
-                            <form class="user" method="POST" action="../controller/action/act_registrarUsuario.php" onsubmit="return ValidateForm();">
+                            <form id="registryform" class="user" method="POST">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="Names"
