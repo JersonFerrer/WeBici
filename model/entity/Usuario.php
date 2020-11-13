@@ -17,7 +17,7 @@ class Usuario
     public $direccion;
     public $imagen;
     
-    public function __construct($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, $imagen){
+    public function __construct($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono){
 
         $this->idUsuario = $idUsuario;
         $this->nroCedula = $nroCedula;
@@ -27,7 +27,6 @@ class Usuario
 		$this->password = $password;
         $this->telefono = $telefono;
         $this->direccion = $direccion;
-        $this->imagen = $imagen;
     }
     
     public function getIdUsuario(){

@@ -7,8 +7,8 @@ $(document).ready(function () {
         $('#InputEmail').prop('disabled', false);
         $('#address').prop('disabled', false);
         $('#cellphone').prop('disabled', false);
-        $('#btn-update').attr('style', 'display:block');
-        $(this).attr('style', 'display:none');
+        $('#btn-update').show();
+        $(this).hide();
     });
 
     $('#btnImageUpdate').click(function(){

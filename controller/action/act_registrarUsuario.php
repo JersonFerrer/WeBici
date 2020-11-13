@@ -21,7 +21,7 @@
             if($existeCedula != null || $existeCorreo != null){
                 echo json_encode(array('success'=>0, 'message'=>'El usuario ya existe'));
             }else{
-                $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, NULL);
+                $usuario = new Usuario(NULL, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono);
                 registrarUsuario($usuario);
                 echo json_encode(array('success'=>1, 'message'=>'Usted se ha registrado Exitosamente'));
             }

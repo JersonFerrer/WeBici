@@ -40,9 +40,9 @@ class UsuarioDAO {
                         $data_table[$indice]["correo"],
                         $data_table[$indice]["password"],
                         $data_table[$indice]["direccion"],
-                        $data_table[$indice]["telefono"],
-                        $data_table[$indice]["imagen"]
+                        $data_table[$indice]["telefono"]
                         );
+                        $usuario->setImagen($data_table[0]["imagen"]);
             }
         }
         //se retorna el objeto usuario, retorna null en el caso de que no encuentre el usuario
@@ -160,9 +160,9 @@ class UsuarioDAO {
                     $data_table[0]["correo"],
                     $data_table[0]["password"],
                     $data_table[0]["direccion"],
-                    $data_table[0]["telefono"],
-                    $data_table[0]["imagen"]
+                    $data_table[0]["telefono"]
                     );
+                    $usuario->setImagen($data_table[0]["imagen"]);
         }
 
         
@@ -172,7 +172,7 @@ class UsuarioDAO {
     public function editarUsuario($usuario){
         $data_source = new DataSource();
         
-        $stmt1 = "UPDATE usuario SET nroCedula = :nroCedula, nombres = :nombres, apellidos = :apellidos, correo = :correo, direccion = :direccion, telefono = :telefono, imagen = :imagen WHERE id = :idUsuario"; 
+        $stmt1 = "UPDATE usuario SET nroCedula = :nroCedula, nombres = :nombres, apellidos = :apellidos, correo = :correo, direccion = :direccion, telefono = :telefono WHERE id = :idUsuario"; 
         
         $resultado = $data_source->ejecutarActualizacion($stmt1, array(
             ':nroCedula' => $usuario->getNroCedula(),
@@ -181,15 +181,14 @@ class UsuarioDAO {
             ':correo' => $usuario->getCorreo(),
             ':direccion'=>$usuario->getDireccion(),
             ':telefono'=>$usuario->getTelefono(),
-            ':idUsuario' => $usuario->getIdUsuario(),
-            ':imagen' => $usuario->getImagen()
+            ':idUsuario' => $usuario->getIdUsuario()
             )
         ); 
 
       return $resultado;
     }
 
-    public function ActualizarFoto($Usuario){
+    public function editarImagen($usuario){
         $data_source = new DataSource();
         
         $stmt1 = "UPDATE usuario SET imagen = :imagen WHERE id = :idUsuario"; 
@@ -202,7 +201,6 @@ class UsuarioDAO {
 
       return $resultado;
     }
-
 }
 
 

@@ -23,6 +23,6 @@
 
     $usuario->setImagen($imagen);
 
-    editarUsuario($usuario);
+    editarImagen($usuario);
 
     echo $imagen;
