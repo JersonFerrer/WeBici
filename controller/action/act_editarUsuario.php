@@ -19,6 +19,7 @@
         $usuario = new Usuario($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono);
     
         editarUsuario($usuario);
-        header("Location: ../../view/user-profile.php");
+        echo json_encode(array('success'=>1, 'userData'=>$usuario));
+        //header("Location: ../../view/user-profile.php");
         //header("Location: ../../vista/administradorUsuarios.php");
     }

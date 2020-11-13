@@ -1,14 +1,46 @@
 $(document).ready(function () {
 
     $('#btn-edite').click(function () {
-        $('#Names').prop('disabled', false);
-        $('#LastNames').prop('disabled', false);
-        $('#nroCedula').prop('disabled', false);
-        $('#InputEmail').prop('disabled', false);
-        $('#address').prop('disabled', false);
-        $('#cellphone').prop('disabled', false);
+        DisabledInput(false);
         $('#btn-update').show();
         $(this).hide();
+    });
+
+    $('#userForm').submit(function (e) {
+        e.preventDefault();
+       
+        var formData = new FormData(document.getElementById("userForm"));
+        
+        if(ValidateData()){
+            $.ajax({
+                url: "../controller/action/act_editarUsuario.php",
+                type: "POST",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+    
+                    let JsonData = JSON.parse(response);
+    
+                    if(JsonData.success == 1){
+                        $('#Names').val(JsonData.userData.nombres);
+                        $('#LastNames').val(JsonData.userData.apellidos);
+                        $('#nroCedula').val(JsonData.userData.nroCedula);
+                        $('#InputEmail').val(JsonData.userData.correo);
+                        $('#address').val(JsonData.userData.direccion);
+                        $('#cellphone').val(JsonData.userData.telefono);
+                        DisabledInput(true);
+                        $('#btn-update').hide();
+                        $('#btn-edite').show();
+                        
+                    }else{
+                        alert('error');
+                    }
+                }
+            });
+        }
     });
 
     $('#btnImageUpdate').click(function(){
@@ -36,6 +68,14 @@ $(document).ready(function () {
     });
 });
 
+function DisabledInput(flag){
+    $('#Names').prop('disabled', flag);
+    $('#LastNames').prop('disabled', flag);
+    $('#nroCedula').prop('disabled', flag);
+    $('#InputEmail').prop('disabled', flag);
+    $('#address').prop('disabled', flag);
+    $('#cellphone').prop('disabled', flag);
+}
 function ValidateData() {
     let names = $('#Names');
     let lastNames = $('#LastNames');
