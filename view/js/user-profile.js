@@ -6,6 +6,27 @@ $(document).ready(function () {
         $(this).hide();
     });
 
+    $('#Names').keyup(function(){
+        if(!LettersValidation($(this).val()) && $(this).val() != ''){
+            Mensaje('error', 'Oops...', 'Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
+            $(this).val('');
+        }
+    });
+
+    $('#LastNames').keyup(function(){
+        if(!LettersValidation($(this).val()) && $(this).val() != ''){
+            Mensaje('error', 'Oops...', 'Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
+            $(this).val('');
+        }
+    });
+
+    $('#nroCedula').keyup(function(){
+        if(!CedulaValidation($(this).val()) && $(this).val() != ''){
+            Mensaje('error', 'Oops...', 'Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
+            $(this).val('');
+        }
+    });
+
     $('#userForm').submit(function (e) {
         e.preventDefault();
        
@@ -85,13 +106,20 @@ function ValidateData() {
     let cellphone = $('#cellphone');
 
     if (names.val() == '' || lastNames.val() == '' || nroCedula.val() == '' || email.val() == '' || address.val() == '' || cellphone.val() == '') {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Hay campos vacíos. Por favor diligencie todos los campos',
-        })
+        Mensaje('error', 'Oops...', 'Hay campos vacíos. Por favor diligencie todos los campos');
         return false;
-    } else {
+    }else if(!EmailValidation(email.val())){
+        Mensaje('error', 'Oops...', 'El email no cumple con la estructura');
+        return false;
+    }else {
         return true;
     }
+}
+
+function Mensaje(icon, title, text){
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: text
+    });
 }
