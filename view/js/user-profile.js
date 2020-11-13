@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('#btn-edite').click(function () {
-        DisabledInput(false);
+        DisabledInputs(false);
         $('#btn-update').show();
         $(this).hide();
     });
@@ -31,7 +31,7 @@ $(document).ready(function () {
                         $('#InputEmail').val(JsonData.userData.correo);
                         $('#address').val(JsonData.userData.direccion);
                         $('#cellphone').val(JsonData.userData.telefono);
-                        DisabledInput(true);
+                        DisabledInputs(true);
                         $('#btn-update').hide();
                         $('#btn-edite').show();
                         
@@ -68,7 +68,7 @@ $(document).ready(function () {
     });
 });
 
-function DisabledInput(flag){
+function DisabledInputs(flag){
     $('#Names').prop('disabled', flag);
     $('#LastNames').prop('disabled', flag);
     $('#nroCedula').prop('disabled', flag);
