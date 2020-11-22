@@ -1,0 +1,76 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/templates/shop-homepage)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+ html{
+  min-height: 100%;
+  position: relative;
+ }
+
+body {
+  padding-top: 56px;
+  background-image: url("https://staticuestudio.blob.core.windows.net/buhomag/2017/03/24133504/rutas-bicicleta-montan%CC%83a.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
+
+#carouselExampleIndicators .carousel-inner img{
+  width: 900px;
+  height: 350px;
+}
+ .container .row .col-lg-9 #ruta , .container .row .col-lg-9 #hibrida, .container .row .col-lg-9 #urbanas, .container .row .col-lg-9 #plegables {
+  display: none; 
+} 
+.container .row .col-lg-3 .list-group a{
+  background-color: black;
+  color: #00e5fc;
+}
+
+.container .row .col-lg-3 .list-group a:hover{
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  background-color: #8dfc00;
+}
+footer {
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  color: white;
+}
+
+
+.container .row .col-lg-3{
+  background: black;
+}
+.container .row .col-lg-3 .list-group h1{
+  text-align: center;
+  color: white;
+}
+
+
+
+
+
+
+
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
