@@ -2,6 +2,7 @@
 
     require_once(__DIR__."/../mdb/mdbUsuario.php");
     require_once(__DIR__."/../funciones/funciones.php");
+    require_once(__DIR__.'/../lib/PHPMailer/PHPMailerAutoload.php');
     
 
     $errors = array();
@@ -24,8 +25,8 @@
             $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/cambiarPassword.php?user_id='.$idUsuario;
 
             $asunto = 'Recuperar Password - WeBici';
-            $cuerpo = "Hola $nombres $apellidos: <br /><br />Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
-            Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url'>cambiar contrase&ntilde;a</a>";
+            $cuerpo = "Hola $nombres $apellidos: Se ha solicitado un reinicio de contraseña. <br/><br/>
+            Para restaurar la contraseña, visita la siguiente direccicion: <a href='$url'>cambiar contrase&ntilde;a</a>";
             
             if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo)){
                 
@@ -46,7 +47,7 @@
         //SMTP needs accurate times, and the PHP time zone MUST be set
         //This should be done in your php.ini, but this is how to do it if you don't have access to that
         date_default_timezone_set('Etc/UTC');
-        require_once(__DIR__.'/../lib/PHPMailer/PHPMailerAutoload.php');
+        
         //Create a new PHPMailer instance
         $mail = new PHPMailer();
         //Tell PHPMailer to use SMTP

@@ -17,7 +17,7 @@ $mail->isSMTP();
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 2;
+$mail->SMTPDebug = 1;
 //Ask for HTML-friendly debug output
 $mail->Debugoutput = 'html';
 //Set the hostname of the mail server
@@ -36,7 +36,7 @@ $mail->setFrom('webicicleta2020@gmail.com', 'First Last');
 //Set an alternative reply-to address
 //$mail->addReplyTo('fimimat550@ffeast.com', 'Nuevo');
 //Set who the message is to be sent to
-$mail->addAddress('fimimat550@ffeast.com', 'John Doe');
+$mail->addAddress('rangel.rionto.99@gmail.com', 'John Doe');
 //Set the subject line
 $mail->Subject = 'Funciona';
 //Read an HTML message body from an external file, convert referenced images to embedded,
