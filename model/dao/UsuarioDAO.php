@@ -85,6 +85,30 @@ class UsuarioDAO {
         //en la base de datos 
         return $usuario;
     }
+    public function verUsuarioPorCorreo($correo){
+        $data_source = new DataSource();
+        
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM usuario WHERE correo = :correo", array(':correo'=>$correo));
+
+        $usuario=null;
+        //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
+        if(count($data_table)==1){
+            $usuario = new Usuario(
+                    $data_table[0]["id"],
+                    $data_table[0]["nroCedula"],
+                    $data_table[0]["nombres"],
+                    $data_table[0]["apellidos"],
+                    $data_table[0]["correo"],
+                    $data_table[0]["password"],
+                    $data_table[0]["direccion"],
+                    $data_table[0]["telefono"]
+                    );
+                    $usuario->setImagen("");
+        }
+
+        
+        return $usuario;
+    }
 
     public function registrarUsuario(Usuario $usuario){
         $data_source = new DataSource();
@@ -131,6 +155,21 @@ class UsuarioDAO {
     return $usuarios;
     }
 
+    function emailExiste($email){
+
+        include '../modelo/conexion.php';
+            
+        $sentencia = "SELECT id_usuario FROM usuarios WHERE correo = '$email' LIMIT 1";
+        $resultado = $conexion->query($sentencia) or die ("Error al buscar email: ".mysqli_error($conexion));
+        $num = mysqli_num_rows($resultado);
+            
+        if ($num > 0){
+            return true;
+        }else{
+            return false;	
+        }
+    }
+
     public function eliminarUsuario($idUsuario){
         $data_source = new DataSource();
         
@@ -166,7 +205,7 @@ class UsuarioDAO {
         }
 
         
-    return $usuario;
+        return $usuario;
     }
 
     public function editarUsuario($usuario){
@@ -200,6 +239,16 @@ class UsuarioDAO {
         ); 
 
       return $resultado;
+    }
+    function generaTokenPass($idUsuario){
+        $data_source = new DataSource();
+    
+        $token = generateToken();
+            
+        $sentencia = "UPDATE usuario SET token_password = '$token', password_request = 1 WHERE id_usuario = '$idUsuario' ";
+        $conexion->query($sentencia) or die ("Error al actualizar datos de usuario: ".mysqli_error($conexion));
+            
+        return $token;
     }
 }
 
