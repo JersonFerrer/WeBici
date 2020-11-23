@@ -4,9 +4,9 @@
     
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    require __DIR__.'/../lib/PHPMailer/src/Exception.php';
-    require __DIR__.'/../lib/PHPMailer/src/PHPMailer.php';
-    require __DIR__.'/../lib/PHPMailer/src/SMTP.php';
+    require __DIR__.'/../../lib/PHPMailer/src/Exception.php';
+    require __DIR__.'/../../lib/PHPMailer/src/PHPMailer.php';
+    require __DIR__.'/../../lib/PHPMailer/src/SMTP.php';
 
     $errors = array();
 
