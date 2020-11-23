@@ -201,7 +201,18 @@ class UsuarioDAO {
 
       return $resultado;
     }
+
+    public function cambiarPassword($usuario){
+        $data_source = new DataSource();
+        
+        $stmt1 = "UPDATE usuario SET password = :password WHERE id = :idUsuario"; 
+        
+        $resultado = $data_source->ejecutarActualizacion($stmt1, array(
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':password' => $usuario->getPassword()
+            )
+        ); 
+
+      return $resultado;
+    }
 }
-
-
-

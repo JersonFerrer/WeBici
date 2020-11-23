@@ -70,3 +70,8 @@ function editarImagen($usuario){
     $dao=new UsuarioDAO();
     $dao->editarImagen($usuario);
 }
+
+function cambiarPassword($usuario){
+    $dao=new UsuarioDAO();
+    $dao->cambiarPassword($usuario);
+}

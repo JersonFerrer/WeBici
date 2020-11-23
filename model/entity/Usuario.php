@@ -65,6 +65,10 @@ class Usuario
         return $this->imagen;
     }
 
+    public function setPassword($password){
+        $this->password = $password;
+    }
+
     public function setImagen($imagen){
         $this->imagen = $imagen;
     }
