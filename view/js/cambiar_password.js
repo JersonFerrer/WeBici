@@ -6,6 +6,8 @@ $(document).ready(
         var confirmNewPassword = $('#confirmNewPassword');
 
         var formData = new FormData(document.getElementById("changePasswordForm"));
+        var id = getParameterByName('user_id');
+        formData.append("user_id", id);
 
         if(newPassword.val() != '' && confirmNewPassword.val() != ''){
             if(newPassword.val() == confirmNewPassword.val()){
@@ -36,6 +38,13 @@ $(document).ready(
         }
     })
 );
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 function Mensaje(icon, title, text){
     Swal.fire({

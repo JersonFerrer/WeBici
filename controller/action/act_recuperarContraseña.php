@@ -1,7 +1,7 @@
 <?php
 
     require_once(__DIR__."/../mdb/mdbUsuario.php");
-    require_once(__DIR__."/../funciones/funciones.php");
+    
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     require __DIR__.'/../lib/PHPMailer/src/Exception.php';
@@ -25,16 +25,16 @@
 
             //$token = generaTokenPass($idUsuario);
 
-            $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/cambiarPassword.php?user_id='.$idUsuario;
+            $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/cambiar_password.php?user_id='.$idUsuario;
 
             $asunto = 'Recuperar Password - WeBici';
-            $cuerpo = "Hola $nombres $apellidos: <br /><br />Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
-            Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url'>cambiar contrase&ntilde;a</a>";
+            $cuerpo = "Hola $nombres $apellidos: <br/><br/>Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
+            Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url' target='_blank'>cambiar contrase&ntilde;a</a>";
             
             if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo)){
                 
-                echo "Hemos enviado un correo electronico a las direcion $email para restablecer tu password.<br />";
-                echo "<a href='login.php' >Iniciar Sesion</a>";
+                echo "Hemos enviado un correo electronico a $email para restablecer tu password.<br />";
+                echo "<a href='../../view/login.php' >Iniciar Sesion</a>";
                 exit;
             }
         }else{
@@ -84,8 +84,10 @@
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
         $mail->Body = $cuerpo;
+
         //Replace the plain text body with one created manually
-        
+        $mail->AltBody = 'Prueba de mensaje enviado por correo';
+
         //Attach an image file
         //$mail->addAttachment('images/phpmailer_mini.png');
 
@@ -94,7 +96,41 @@
             return true;
         } else {
             return false;
-        }
-                
+        }      
     }
+
+    function isEmail($email){
+		if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+
+	function validaPassword($var1, $var2){
+		if (strcmp($var1, $var2) !== 0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	function generateToken(){
+		$gen = md5(uniqid(mt_rand(), false));	
+		return $gen;
+	}
+	
+	function resultBlock($errors){
+		if(count($errors) > 0){
+			echo "<div id='error' class='alert alert-danger' role='alert'>
+			<a href='#' onclick=\"showHide('error');\">[X]</a>
+			<ul>";
+			foreach($errors as $error){
+				echo "<li>".$error."</li>";
+			}
+			echo "</ul>";
+			echo "</div>";
+		}
+	}
 ?>
