@@ -31,7 +31,7 @@
             if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo)){
                 
                 echo "Hemos enviado un correo electronico a las direcion $email para restablecer tu password.<br />";
-                echo "<a href='login.php' >Iniciar Sesion</a>";
+                echo "<a href='../../view/login.php' >Iniciar Sesion</a>";
                 exit;
             }
         }else{
