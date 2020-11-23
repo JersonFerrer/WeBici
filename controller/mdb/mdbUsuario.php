@@ -42,6 +42,14 @@ function registrarUsuario(Usuario $usuario){
     return $usuario;
 }
 
+function verUsuarioPorCorreo($correo){
+    $dao = new UsuarioDAO();
+
+    $usuario = $dao->verUsuarioPorCorreo($correo);
+    
+    return $usuario;
+    
+}
 function verUsuarios(){
     $dao=new UsuarioDAO();
 

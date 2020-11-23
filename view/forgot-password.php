@@ -72,15 +72,15 @@
                                         <h1 class="h4 text-gray-900 mb-2">Olvidaste tu contraseña?</h1>
                                         <p class="mb-4">Ingresa tu email y te enviaremos las intrucciones para tu cuenta</p>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="../controller/action/act_recuperarContraseña.php" method="POST" autocomplete="off">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Ingresa tu email...">
+                                                id="email" aria-describedby="emailHelp"
+                                                placeholder="Ingresa tu email..." name="email">
                                         </div>
-                                        <a href="login.php" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Recuperar
-                                        </a>
+                                        </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
