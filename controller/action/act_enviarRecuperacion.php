@@ -23,9 +23,11 @@
             $nombres = $Usuario->getNombres();
             $apellidos = $Usuario->getApellidos();
 
-            //$token = generaTokenPass($idUsuario);
+            $token = generateToken().time();
+            $Usuario->setToken($token);
+            guardarToken($Usuario);
 
-            $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/cambiar_password.php?user_id='.$idUsuario;
+            $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/recuperar_password.php?token='.$token;
 
             $asunto = 'Recuperar Password - WeBici';
             $cuerpo = "Hola $nombres $apellidos: <br/><br/>Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
@@ -74,7 +76,7 @@
         //Password to use for SMTP authentication
         $mail->Password = "Payaso2020";
         //Set who the message is to be sent from
-        $mail->setFrom('webicicleta2020@gmail.com', utf8_decode('Codigo de Verificación'));
+        $mail->setFrom('webicicleta2020@gmail.com', utf8_decode('Correo de Recuperación'));
         //Set an alternative reply-to address
         //$mail->addReplyTo('fimimat550@ffeast.com', 'Nuevo');
         //Set who the message is to be sent to
@@ -117,7 +119,7 @@
 	}
 	
 	function generateToken(){
-		$gen = md5(uniqid(mt_rand(), false));	
+		$gen = uniqid(mt_rand(), false);
 		return $gen;
 	}
 	

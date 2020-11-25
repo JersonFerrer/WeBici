@@ -69,6 +69,12 @@ function verUsuarioPorId($idUsuario){
     return $usuario;
 }
 
+function guardarToken($usuario){
+    $dao=new UsuarioDAO();
+    $usuario = $dao->guardarToken($usuario);
+    return $usuario;
+}
+
 function editarUsuario($usuario){
     $dao=new UsuarioDAO();
     $dao->editarUsuario($usuario);

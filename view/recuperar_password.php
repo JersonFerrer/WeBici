@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['ID_USUARIO']) && !isset($_GET['user_id'])){
+        header("location: login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WeBici Recuperar contraseña</title>
+    <title>WeBici - Recuperar Contraseña</title>
 
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -21,6 +28,9 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sb-admin-2.min.css">
 
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -40,15 +50,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar
-                            Sesion</a></li>
-                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
                 </ul>
             </div>
         </div>
@@ -69,26 +74,24 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Olvidaste tu contraseña?</h1>
-                                        <p class="mb-4">Ingresa tu email y te enviaremos las intrucciones para tu cuenta</p>
+                                        <h1 class="h4 text-gray-900 mb-2">Quieres cambiar tu contraseña?</h1>
+                                        <p class="mb-4">Ingresa la nueva contraseña y confirmala para cambiarla</p>
                                     </div>
-                                    <form class="user" action="../controller/action/act_enviarRecuperacion.php" method="POST" autocomplete="off">
+                                    <form id="changePasswordForm" class="user" method="POST">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="email" aria-describedby="emailHelp"
-                                                placeholder="Ingresa tu email..." name="email">
+                                            <input type="password" class="form-control form-control-user"
+                                                name="newPassword" id="newPassword" aria-describedby="newPassword"
+                                                placeholder="Ingresa la nueva contraseña">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                name="confirmNewPassword" id="confirmNewPassword" aria-describedby="ConfirmNewPassword"
+                                                placeholder="Confirma la nueva contraseña">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Recuperar
+                                            Cambiar
                                         </button>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="register.php">Crear una cuenta!</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="login.php">Ya tienes una cuenta? Inicia sesion!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -124,13 +127,16 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <!-- Contact form JS-->
-    <script src="assets/mail/jqBootstrapValidation.js"></script>
-    <script src="assets/mail/contact_me.js"></script>
+
     <!-- Core theme JS-->
     <script src="js/bootstrap.js"></script>
+
+    <!-- sweetalert2-->
+    <script src="js/sweetalert2.all.min.js"></script>
+    
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/cambiar_password.js"></script>
 </body>
 
 </html>
