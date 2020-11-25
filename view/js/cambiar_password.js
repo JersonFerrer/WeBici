@@ -24,7 +24,7 @@ $(document).ready(
                         var JsonData = JSON.parse(response);
         
                         if(JsonData.success == 1){
-                            MensajeConfirm('success', 'Contraseña Actualizada', JsonData.message);                          
+                            MensajeConfirm('success', 'Contraseña Actualizada', JsonData.message, 'user-profile.php');                          
                         }else{
                             Mensaje('error', 'Contraseña No Actualizada', JsonData.message);
                         }
@@ -44,25 +44,4 @@ function getParameterByName(name) {
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
     results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-function Mensaje(icon, title, text){
-    Swal.fire({
-        icon: icon,
-        title: title,
-        text: text
-    });
-}
-function MensajeConfirm(icon, title, text){
-    Swal.fire({
-        icon: icon,
-        title: title,
-        text: text
-    }).then((result) => {
-        if (result.isConfirmed) {
-            location.href="user-profile.php";
-        }else{
-            location.href="user-profile.php";
-        }
-    });
 }

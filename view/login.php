@@ -154,6 +154,7 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <script src="js/regular_expresions.js"></script>
+    <script src="js/alert_messages.js"></script>
     <script src="js/validate-login.js"></script>
 </body>
 

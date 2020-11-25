@@ -115,11 +115,3 @@ function ValidateData() {
         return true;
     }
 }
-
-function Mensaje(icon, title, text){
-    Swal.fire({
-        icon: icon,
-        title: title,
-        text: text
-    });
-}
