@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WeBici Recuperar contraseña</title>
+    <title>WeBici - Recuperar contraseña</title>
 
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -23,6 +23,9 @@
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 </head>
 
 <body id="login" class="bg-dark">
@@ -72,9 +75,9 @@
                                         <h1 class="h4 text-gray-900 mb-2">Olvidaste tu contraseña?</h1>
                                         <p class="mb-4">Ingresa tu email y te enviaremos las intrucciones para tu cuenta</p>
                                     </div>
-                                    <form class="user" action="../controller/action/act_enviarRecuperacion.php" method="POST" autocomplete="off">
+                                    <form class="user" id="sendRecoveryForm" method="POST" autocomplete="off">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" class="form-control form-control-user"
                                                 id="email" aria-describedby="emailHelp"
                                                 placeholder="Ingresa tu email..." name="email">
                                         </div>
@@ -124,13 +127,17 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <!-- Contact form JS-->
-    <script src="assets/mail/jqBootstrapValidation.js"></script>
-    <script src="assets/mail/contact_me.js"></script>
+
+    <!-- sweetalert2-->
+    <script src="js/sweetalert2.all.min.js"></script>
+
     <!-- Core theme JS-->
     <script src="js/bootstrap.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/regular_expresions.js"></script>
+    <script src="js/alert_messages.js"></script>
+    <script src="js/forgot_password.js"></script>
 </body>
 
 </html>

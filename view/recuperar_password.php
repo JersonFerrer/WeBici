@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['ID_USUARIO']) && !isset($_GET['user_id'])){
+    if(!isset($_GET['token'])){
         header("location: login.php");
     }
 ?>
@@ -35,27 +34,13 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
-<body id="login" class="bg-dark">
+<body class="bg-dark">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars ml-1"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
 
@@ -74,10 +59,10 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Quieres cambiar tu contraseña?</h1>
+                                        <h1 class="h4 text-gray-900 mb-2">Quieres recuperar tu contraseña?</h1>
                                         <p class="mb-4">Ingresa la nueva contraseña y confirmala para cambiarla</p>
                                     </div>
-                                    <form id="changePasswordForm" class="user" method="POST">
+                                    <form id="recoveryPasswordForm" class="user" method="POST">
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 name="newPassword" id="newPassword" aria-describedby="newPassword"

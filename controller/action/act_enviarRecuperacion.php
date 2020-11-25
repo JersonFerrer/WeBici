@@ -8,40 +8,39 @@
     require __DIR__.'/../../lib/PHPMailer/src/PHPMailer.php';
     require __DIR__.'/../../lib/PHPMailer/src/SMTP.php';
 
-    $errors = array();
 
     if(!empty($_POST)){
         $Usuario = verUsuarioPorCorreo($_POST['email']);
-
-        $email = $Usuario->getCorreo();
+        $email = $_POST['email'];
 
         if(!isEmail($email)){
-            $errors[] = "Debe ingresar un correo electronico valido";
-        }
-        if(verificarUsuarioPorCorreo($email)){
-            $idUsuario = $Usuario->getIdUsuario();
-            $nombres = $Usuario->getNombres();
-            $apellidos = $Usuario->getApellidos();
-
-            $token = generateToken().time();
-            $Usuario->setToken($token);
-            guardarToken($Usuario);
-
-            $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/recuperar_password.php?token='.$token;
-
-            $asunto = 'Recuperar Password - WeBici';
-            $cuerpo = "Hola $nombres $apellidos: <br/><br/>Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
-            Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url' target='_blank'>cambiar contrase&ntilde;a</a>";
-            
-            if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo)){
-                
-                echo "Hemos enviado un correo electronico a $email para restablecer tu password.<br />";
-                echo "<a href='../../view/login.php' >Iniciar Sesion</a>";
-                exit;
-            }
+            echo json_encode(array('success'=>0, 'message'=>'Debe ingresar un correo electronico valido'));
         }else{
-            $errors[] = "La direccion de correo electronico no existe";
+            if(verificarUsuarioPorCorreo($email)){
+                $idUsuario = $Usuario->getIdUsuario();
+                $nombres = $Usuario->getNombres();
+                $apellidos = $Usuario->getApellidos();
+    
+                $token = generateToken();
+                $Usuario->setToken($token);
+                guardarToken($Usuario);
+    
+                $url = 'http://'.$_SERVER["SERVER_NAME"].'/WeBici/view/recuperar_password.php?token='.$token;
+                
+    
+                $asunto = 'Recuperar Password - WeBici';
+                $cuerpo = "Hola $nombres $apellidos: <br/><br/>Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
+                Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url' target='_blank'>cambiar contrase&ntilde;a</a>";
+                
+                if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo)){ 
+                    echo json_encode(array('success'=>1, 'message'=>"Hemos enviado un correo electronico a $email para restablecer tu password."));
+                }
+            }else{
+                echo json_encode(array('success'=>0, 'message'=>'La direccion de correo electronico no existe'));
+            }
         }
+    }else{
+        echo json_encode(array('success'=>0, 'message'=>'error en el POST'));
     }
 
     function enviarEmail($email, $nombre, $apellidos, $asunto, $cuerpo){
@@ -61,7 +60,7 @@
         // 0 = off (for production use)
         // 1 = client messages
         // 2 = client and server messages
-        $mail->SMTPDebug = 1;
+        $mail->SMTPDebug = 0;
         //Ask for HTML-friendly debug output
         $mail->Debugoutput = 'html';
         //Set the hostname of the mail server
@@ -119,7 +118,7 @@
 	}
 	
 	function generateToken(){
-		$gen = uniqid(mt_rand(), false);
+		$gen = uniqid(mt_rand(), false).time();
 		return $gen;
 	}
 	

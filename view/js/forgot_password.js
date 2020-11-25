@@ -1,12 +1,19 @@
 $(document).ready(function(){
+    
     $('#sendRecoveryForm').submit(function(e){
         e.preventDefault();
         var email = $('#email');
-
         var formData = new FormData(document.getElementById("sendRecoveryForm"));
 
         if(email.val() != ''){
             if(EmailValidation(email.val())){
+                Swal.fire({
+                    title: 'Espere un momento...',
+                    text:'Estamos enviandole un correo de recuperacion',
+                    willOpen: () => {
+                        Swal.showLoading();
+                      }
+                });
                 $.ajax({
                     url: "../controller/action/act_enviarRecuperacion.php",
                     type: "POST",
@@ -20,9 +27,9 @@ $(document).ready(function(){
                         var JsonData = JSON.parse(response);
         
                         if(JsonData.success == 1){
-                            MensajeConfirm('success', 'Contraseña Actualizada', JsonData.message);                          
+                            MensajeConfirm('info', 'Revisa tu correo', JsonData.message, 'login.php');                          
                         }else{
-                            Mensaje('error', 'Contraseña No Actualizada', JsonData.message);
+                            Mensaje('error', 'Oops...', JsonData.message);
                         }
                     }
                 });
@@ -34,11 +41,3 @@ $(document).ready(function(){
         }
     })
 });
-
-function Mensaje(icon, title, text){
-    Swal.fire({
-        icon: icon,
-        title: title,
-        text: text
-    });
-}
