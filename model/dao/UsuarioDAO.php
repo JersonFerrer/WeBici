@@ -210,7 +210,8 @@ class UsuarioDAO {
                     $data_table[0]["direccion"],
                     $data_table[0]["telefono"]
                     );
-                    $usuario->setImagen($data_table[0]["imagen"]);
+                    $usuario->setToken($data_table[0]["token"]);
+                    
         }
         
         return $usuario;

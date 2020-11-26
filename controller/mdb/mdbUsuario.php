@@ -50,6 +50,15 @@ function verUsuarioPorCorreo($correo){
     return $usuario;
     
 }
+function verUsuarioPorToken($token){
+    $dao = new UsuarioDAO();
+
+    $usuario = $dao->verUsuarioPorToken($token);
+    
+    return $usuario;
+    
+}
+
 function verUsuarios(){
     $dao=new UsuarioDAO();
 

@@ -3,22 +3,38 @@
     require_once (__DIR__.'/../mdb/mdbUsuario.php');
 
     if(!isset($_SESSION['ID_USUARIO'])){
-        header("location: ../../view/login.php");
+        $flag = false;
+    }else{
+        $idUsuario = $_SESSION['ID_USUARIO'];
+        $usuario = verUsuarioPorId($idUsuario);
     }
 
-    
-    $idUsuario = $_SESSION['ID_USUARIO'];
-    $newPassword = $_POST['newPassword'];
-    $confirmNewPassword = $_POST['confirmNewPassword'];
-
-    if($newPassword == $confirmNewPassword){
-        
-        $usuario = verUsuarioPorId($idUsuario);
-
-        $usuario->setPassword($newPassword);
-        cambiarPassword($usuario);
-        
-        echo json_encode(array('success'=>1, 'message'=>'Contraseña actualizada con exito'));
+    if(!isset($_POST['token'])){
+        $flag = false;
     }else{
-        echo json_encode(array('success'=>0, 'message'=>'Las contraseñas no coinciden'));
+        $token = $_POST['token'];
+        $usuario = verUsuarioPorToken($token);        
+    }
+    
+    if(!$flag){
+        $newPassword = $_POST['newPassword'];
+        $confirmNewPassword = $_POST['confirmNewPassword'];
+
+        if($newPassword == $confirmNewPassword){
+
+            if($usuario != null){
+                $usuario->setPassword($newPassword);
+                $usuario->setToken(null);
+                guardarToken($usuario);
+                cambiarPassword($usuario);
+            
+                echo json_encode(array('success'=>1, 'message'=>'Contraseña actualizada con exito'));
+            }else{
+                echo json_encode(array('success'=>0, 'message'=>"Verificación inválida"));
+            }
+        }else{
+            echo json_encode(array('success'=>0, 'message'=>'Las contraseñas no coinciden'));
+        }
+    }else{
+        header("location: ../../view/login.php");
     }

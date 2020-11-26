@@ -1,4 +1,4 @@
-$(document).ready(
+$(document).ready(function(){
 
     $('#changePasswordForm').submit(function(e){
         e.preventDefault();
@@ -6,8 +6,8 @@ $(document).ready(
         var confirmNewPassword = $('#confirmNewPassword');
 
         var formData = new FormData(document.getElementById("changePasswordForm"));
-        var id = getParameterByName('user_id');
-        formData.append("user_id", id);
+        var id = getParameterByName('token');
+        formData.append("token", id);
 
         if(newPassword.val() != '' && confirmNewPassword.val() != ''){
             if(newPassword.val() == confirmNewPassword.val()){
@@ -20,13 +20,14 @@ $(document).ready(
                     contentType: false,
                     processData: false,
                     success: function (response) {
-        
+
+                        console.log(response);
                         var JsonData = JSON.parse(response);
         
                         if(JsonData.success == 1){
                             MensajeConfirm('success', 'Contraseña Actualizada', JsonData.message, 'user-profile.php');                          
                         }else{
-                            Mensaje('error', 'Contraseña No Actualizada', JsonData.message);
+                            MensajeConfirm('error', 'Contraseña No Actualizada', JsonData.message, 'forgot-password.php');
                         }
                     }
                 });
@@ -37,7 +38,7 @@ $(document).ready(
             Mensaje('error', 'Oops...', 'Hay campos vacíos, por favor llene todos los campos');
         }
     })
-);
+});
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

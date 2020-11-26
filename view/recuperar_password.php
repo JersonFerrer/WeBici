@@ -62,7 +62,7 @@
                                         <h1 class="h4 text-gray-900 mb-2">Quieres recuperar tu contraseña?</h1>
                                         <p class="mb-4">Ingresa la nueva contraseña y confirmala para cambiarla</p>
                                     </div>
-                                    <form id="recoveryPasswordForm" class="user" method="POST">
+                                    <form id="changePasswordForm" class="user" method="POST">
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 name="newPassword" id="newPassword" aria-describedby="newPassword"
@@ -74,7 +74,7 @@
                                                 placeholder="Confirma la nueva contraseña">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Cambiar
+                                            Cambiar Contraseña
                                         </button>
                                     </form>
                                 </div>
@@ -121,6 +121,7 @@
     
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/alert_messages.js"></script>
     <script src="js/cambiar_password.js"></script>
 </body>
 
