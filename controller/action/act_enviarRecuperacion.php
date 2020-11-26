@@ -32,7 +32,7 @@
                 $cuerpo = "Hola $nombres $apellidos: <br/><br/>Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>
                 Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url' target='_blank'>cambiar contrase&ntilde;a</a>";
                 
-                if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo)){ 
+                if(enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo, $url)){ 
                     echo json_encode(array('success'=>1, 'message'=>"Hemos enviado un correo electronico a $email para restablecer tu password."));
                 }
             }else{
@@ -43,7 +43,7 @@
         echo json_encode(array('success'=>0, 'message'=>'error en el POST'));
     }
 
-    function enviarEmail($email, $nombre, $apellidos, $asunto, $cuerpo){
+    function enviarEmail($email, $nombres, $apellidos, $asunto, $cuerpo, $url){
         /**
          * This example shows making an SMTP connection with authentication.
          */
@@ -54,6 +54,7 @@
 
         //Create a new PHPMailer instance
         $mail = new PHPMailer();
+        $mail -> charSet = "UTF-8";
         //Tell PHPMailer to use SMTP
         $mail->isSMTP();
         //Enable SMTP debugging
@@ -79,13 +80,19 @@
         //Set an alternative reply-to address
         //$mail->addReplyTo('fimimat550@ffeast.com', 'Nuevo');
         //Set who the message is to be sent to
-        $mail->addAddress($email, $nombre.$apellidos);
+        $mail->addAddress($email, $nombres.$apellidos);
         //Set the subject line
         $mail->Subject = $asunto;
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
-        $mail->Body = $cuerpo;
+        //$mail->Body = ;
+        $body = file_get_contents('../../view/template_invoice.html');
+        $body = str_replace("Company Name", "WeBici", $body);
+        $body = str_replace("Usuario", "$nombres $apellidos", $body);
+        $body = str_replace('href="#url"', 'href="'.$url.'"', $body);
+        $body = str_replace('URL', $url, $body);
 
+        $mail->msgHTML($body);
         //Replace the plain text body with one created manually
         $mail->AltBody = 'Prueba de mensaje enviado por correo';
 
