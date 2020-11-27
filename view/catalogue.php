@@ -1,18 +1,3 @@
-<?php
-    session_start();
-    require_once (__DIR__.'/../controller/mdb/mdbBicicleta.php');
-    $ruta = json_encode(verBicicletasPorTipo(1));
-    $json_ruta = json_decode($ruta);
-
-    $hibridas = json_encode(verBicicletasPorTipo(3));
-    $json_hibridas = json_decode($hibridas);
-
-    $urbanas = json_encode(verBicicletasPorTipo(4));
-    $json_urbanas = json_decode($urbanas);
-
-    $plegables = json_encode(verBicicletasPorTipo(5));
-    $json_plegables = json_decode($plegables);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,225 +147,22 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
+                
+                
                 <div id="ruta" class="row">
                     </br>
-                    <?php foreach($json_ruta as $valor){?>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="catalogue-item">
-                            <a class="catalogue-link" data-toggle="modal" href="#ruta<?php echo $valor->{'id'}?>">
-                                <div class="catalogue-hover">
-                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/catalogo/imag1.jpg" alt="" />
-                            </a>
-                            <div class="catalogue-caption">
-                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
-                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- catalogue Modals-->
-                    <div class="catalogue-modal modal fade" id="ruta<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                                </div>
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="modal-body">
-                                                <!-- Project Details Go Here-->
-                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
-
-                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/imag1.jpg" alt="" />
-                                                
-                                                <ul class="list-inline">
-                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
-                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
-                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
-                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
-                                                    <li>ID: <?php echo $valor->{'id'}?></li>
-                                                </ul>
-                                                <p><?php echo $valor->{'descripcion'}?></p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                                    <i class="fas fa-check mr-1"></i>
-                                                    Alquilar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php }?>
                 </div>
 
                 <div id="hibrida" class="row">
                     </br>
-                    <?php foreach($json_hibridas as $valor){?>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="catalogue-item">
-                            <a class="catalogue-link" data-toggle="modal" href="#hibrida<?php echo $valor->{'id'}?>">
-                                <div class="catalogue-hover">
-                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/catalogo/image1.jpg" alt="" />
-                            </a>
-                            <div class="catalogue-caption">
-                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
-                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- catalogue Modals-->
-                    <div class="catalogue-modal modal fade" id="hibrida<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                                </div>
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="modal-body">
-                                                <!-- Project Details Go Here-->
-                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
-
-                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/image1.jpg" alt="" />
-                                                
-                                                <ul class="list-inline">
-                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
-                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
-                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
-                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
-                                                    <li>ID: <?php echo $valor->{'id'}?></li>
-                                                </ul>
-                                                <p><?php echo $valor->{'descripcion'}?></p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                                    <i class="fas fa-check mr-1"></i>
-                                                    Alquilar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php }?>
                 </div>
 
                 <div id="urbanas" class="row">
                     </br>
-                    <?php foreach($json_urbanas as $valor){?>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="catalogue-item">
-                            <a class="catalogue-link" data-toggle="modal" href="#urbana<?php echo $valor->{'id'}?>">
-                                <div class="catalogue-hover">
-                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/catalogo/ima1.jpg" alt="" />
-                            </a>
-                            <div class="catalogue-caption">
-                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
-                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- catalogue Modals-->
-                    <div class="catalogue-modal modal fade" id="urbana<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                                </div>
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="modal-body">
-                                                <!-- Project Details Go Here-->
-                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
-
-                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/ima1.jpg" alt="" />
-                                                
-                                                <ul class="list-inline">
-                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
-                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
-                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
-                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
-                                                    <li>ID: <?php echo $valor->{'id'}?></li>
-                                                </ul>
-                                                <p><?php echo $valor->{'descripcion'}?></p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                                    <i class="fas fa-check mr-1"></i>
-                                                    Alquilar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php }?>
                 </div>
                 
                 <div id="plegables" class="row">
                     </br>
-                    <?php foreach($json_plegables as $valor){?>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="catalogue-item">
-                            <a class="catalogue-link" data-toggle="modal" href="#plegable<?php echo $valor->{'id'}?>">
-                                <div class="catalogue-hover">
-                                    <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/catalogo/im1.jpg" alt="" />
-                            </a>
-                            <div class="catalogue-caption">
-                                <div class="catalogue-caption-heading"><?php echo $valor->{'modelo'}?></div>
-                                <div class="catalogue-caption-subheading text-muted">$<?php echo $valor->{'precio'}?>/h</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- catalogue Modals-->
-                    <div class="catalogue-modal modal fade" id="plegable<?php echo $valor->{'id'}?>" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
-                                </div>
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="modal-body">
-                                                <!-- Project Details Go Here-->
-                                                <h2 class="text-uppercase"><?php echo $valor->{'modelo'}?></h2>
-
-                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/im1.jpg" alt="" />
-                                                
-                                                <ul class="list-inline">
-                                                    <li>Marca: <?php echo $valor->{'marca'}?></li>
-                                                    <li>Talla: <?php echo $valor->{'talla'}?></li>
-                                                    <li>Peso: <?php echo $valor->{'peso'}?></li>
-                                                    <li>Tamaño Rueda: <?php echo $valor->{'tamRueda'}?></li>
-                                                    <li>ID: <?php echo $valor->{'id'}?></li>
-                                                </ul>
-                                                <p><?php echo $valor->{'descripcion'}?></p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                                    <i class="fas fa-check mr-1"></i>
-                                                    Alquilar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php }?>
                 </div>
                 <!-- /.row -->
 
@@ -393,6 +175,8 @@
     </div>
     <!-- /.container -->
 
+    <div id="modals">
+    </div>
     <!-- Footer-->
     <footer class="footer py-5 mt-5 bg-light">
         <div class="container">
