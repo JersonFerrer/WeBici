@@ -68,7 +68,7 @@ session_start();
                             <?php 
                                 if($_SESSION['IMAGEN'] != null){
                             ?>
-                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                            <img class="img-profile rounded-circle" src="/img/users/<?php echo $_SESSION['IMAGEN'];?>" alt="profile_image">
                             <?php 
                                 }
                             ?>
