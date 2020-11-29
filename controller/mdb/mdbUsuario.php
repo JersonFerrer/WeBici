@@ -42,6 +42,23 @@ function registrarUsuario(Usuario $usuario){
     return $usuario;
 }
 
+function verUsuarioPorCorreo($correo){
+    $dao = new UsuarioDAO();
+
+    $usuario = $dao->verUsuarioPorCorreo($correo);
+    
+    return $usuario;
+    
+}
+function verUsuarioPorToken($token){
+    $dao = new UsuarioDAO();
+
+    $usuario = $dao->verUsuarioPorToken($token);
+    
+    return $usuario;
+    
+}
+
 function verUsuarios(){
     $dao=new UsuarioDAO();
 
@@ -61,6 +78,12 @@ function verUsuarioPorId($idUsuario){
     return $usuario;
 }
 
+function guardarToken($usuario){
+    $dao=new UsuarioDAO();
+    $usuario = $dao->guardarToken($usuario);
+    return $usuario;
+}
+
 function editarUsuario($usuario){
     $dao=new UsuarioDAO();
     $dao->editarUsuario($usuario);
@@ -69,4 +92,9 @@ function editarUsuario($usuario){
 function editarImagen($usuario){
     $dao=new UsuarioDAO();
     $dao->editarImagen($usuario);
+}
+
+function cambiarPassword($usuario){
+    $dao=new UsuarioDAO();
+    $dao->cambiarPassword($usuario);
 }

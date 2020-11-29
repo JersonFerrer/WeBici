@@ -16,7 +16,7 @@
     }
 
     //Path of the destination folder on the server
-    $destinationFolder = $_SERVER['DOCUMENT_ROOT'] . '/img/';
+    $destinationFolder = $_SERVER['DOCUMENT_ROOT'] . '/img/users/';
 
     //Move image to selected path
     move_uploaded_file($_FILES['image']['tmp_name'], $destinationFolder.$imagen);

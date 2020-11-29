@@ -72,7 +72,7 @@
                             <?php 
                                 echo $usuario->getNombres();
                             ?>
-                            <img id="profileImgNavbar" class="img-profile rounded-circle" src="/img/<?php echo $usuario->getImagen();?>"
+                            <img id="profileImgNavbar" class="img-profile rounded-circle" src="/img/users/<?php echo $usuario->getImagen();?>"
                                 alt="">
                         </a>
 
@@ -80,7 +80,10 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="user-profile.php">
-                                Perfil
+                                <i class="fas fa-user fa-sm fa-fw mr-2"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="cambiar_password.php">
+                            <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
@@ -101,7 +104,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="mx-auto pt-4">
-                        <img id="profileImg" class="profile-img rounded-circle" src="/img/<?php echo $usuario->getImagen();?>"
+                        <img id="profileImg" class="profile-img rounded-circle" src="/img/users/<?php echo $usuario->getImagen();?>"
                             alt="">
                     </div>
                 </div>
@@ -203,6 +206,7 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <script src="js/regular_expresions.js"></script>
+    <script src="js/alert_messages.js"></script>
     <script src="js/user-profile.js"></script>
 </body>
 
