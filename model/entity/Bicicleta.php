@@ -11,8 +11,9 @@
         public $marca;
         public $descripcion;
         public $tamRueda;
+        public $imagenes;
 
-        public function __construct($id, $tipo, $modelo, $talla, $peso, $precio, $marca, $descripcion, $tamRueda){
+        public function __construct($id, $tipo, $modelo, $talla, $peso, $precio, $marca, $descripcion, $tamRueda, $imagenes){
 
             $this->id = $id;
             $this->tipo = $tipo;
@@ -23,6 +24,7 @@
             $this->marca = $marca;
             $this->descripcion = $descripcion;
             $this->tamRueda = $tamRueda;
+            $this->imagenes = array($imagenes);
         }
 
         public function getIdBicicleta(){
@@ -59,6 +61,10 @@
     
         public function getTamRueda(){
             return $this->tamRueda;
+        }
+
+        public function getImagenes(){
+            return $this->imagenes;
         }
     }
 ?>

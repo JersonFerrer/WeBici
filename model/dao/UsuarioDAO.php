@@ -110,6 +110,30 @@ class UsuarioDAO {
         return $usuario;
     }
 
+    public function verUsuarioPorCorreo($correo){
+        $data_source = new DataSource();
+        
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM usuario WHERE correo = :correo", array(':correo'=>$correo));
+
+        $usuario=null;
+        //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
+        if(count($data_table)==1){
+            $usuario = new Usuario(
+                    $data_table[0]["id"],
+                    $data_table[0]["nroCedula"],
+                    $data_table[0]["nombres"],
+                    $data_table[0]["apellidos"],
+                    $data_table[0]["correo"],
+                    $data_table[0]["password"],
+                    $data_table[0]["direccion"],
+                    $data_table[0]["telefono"]
+                    );
+                    $usuario->setImagen("");
+        }
+
+        return $usuario;
+    }
+    
     public function registrarUsuario(Usuario $usuario){
         $data_source = new DataSource();
         
@@ -203,8 +227,35 @@ class UsuarioDAO {
                     );
                     $usuario->setImagen($data_table[0]["imagen"]);
         }
-
         
+        return $usuario;
+    }
+
+    public function verUsuarioPorToken($token){
+        $data_source = new DataSource();
+        
+<<<<<<< HEAD
+=======
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM usuario WHERE token = :token", array(':token'=>$token));
+
+        $usuario=null;
+        //Si $data_table retornó una fila, quiere decir que se encontro el usuario en la base de datos
+        if(count($data_table)==1){
+            $usuario = new Usuario(
+                    $data_table[0]["id"],
+                    $data_table[0]["nroCedula"],
+                    $data_table[0]["nombres"],
+                    $data_table[0]["apellidos"],
+                    $data_table[0]["correo"],
+                    $data_table[0]["password"],
+                    $data_table[0]["direccion"],
+                    $data_table[0]["telefono"]
+                    );
+                    $usuario->setToken($data_table[0]["token"]);
+                    
+        }
+        
+>>>>>>> master
         return $usuario;
     }
 
@@ -240,6 +291,7 @@ class UsuarioDAO {
 
       return $resultado;
     }
+<<<<<<< HEAD
     function generaTokenPass($idUsuario){
         $data_source = new DataSource();
     
@@ -251,6 +303,34 @@ class UsuarioDAO {
         return $token;
     }
 }
+=======
+>>>>>>> master
 
+    public function guardarToken($usuario){
+        $data_source = new DataSource();
+        
+        $stmt1 = "UPDATE usuario SET token = :token WHERE id = :idUsuario"; 
+        
+        $resultado = $data_source->ejecutarActualizacion($stmt1, array(
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':token' => $usuario->getToken()
+            )
+        );
 
+      return $resultado;
+    }
 
+    public function cambiarPassword($usuario){
+        $data_source = new DataSource();
+        
+        $stmt1 = "UPDATE usuario SET password = :password WHERE id = :idUsuario"; 
+        
+        $resultado = $data_source->ejecutarActualizacion($stmt1, array(
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':password' => $usuario->getPassword()
+            )
+        ); 
+
+      return $resultado;
+    }
+}
