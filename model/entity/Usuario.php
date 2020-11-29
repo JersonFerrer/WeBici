@@ -16,6 +16,7 @@ class Usuario
     public $telefono;
     public $direccion;
     public $imagen;
+    public $token;
     
     public function __construct($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono){
 
@@ -63,6 +64,18 @@ class Usuario
 
     public function getImagen(){
         return $this->imagen;
+    }
+
+    public function getToken(){
+        return $this->token;
+    }
+
+    public function setPassword($password){
+        $this->password = $password;
+    }
+
+    public function setToken($token){
+        $this->token = $token;
     }
 
     public function setImagen($imagen){

@@ -81,7 +81,7 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                let ruta = '/img/'+response+'?'+ new Date().getTime();
+                let ruta = '/img/users/'+response+'?'+ new Date().getTime();
                 $('#profileImg').attr('src', ruta);
                 $('#profileImgNavbar').attr('src', ruta);
             }
@@ -114,12 +114,4 @@ function ValidateData() {
     }else {
         return true;
     }
-}
-
-function Mensaje(icon, title, text){
-    Swal.fire({
-        icon: icon,
-        title: title,
-        text: text
-    });
 }

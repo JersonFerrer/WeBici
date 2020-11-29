@@ -19,7 +19,7 @@ $(document).ready(function(){
                     }
                     else
                     {
-                        MensajeError(jsonData.message);
+                        Mensaje('error','Oops...',jsonData.message);
                     }
                }
             });
@@ -41,23 +41,11 @@ function ValidateLogin() {
         })
         return false;
     } else if (!EmailValidation(user.val())) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El correo no cumple con la estructura'
-        })
+        Mensaje('error','Oops...', 'El correo no cumple con la estructura')
         user.val('');
         password.val('');
         return false;
     }else{
         return true;
     }
-}
-
-function MensajeError($msg) {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: $msg
-    })
 }
