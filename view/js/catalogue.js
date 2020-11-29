@@ -11,7 +11,7 @@ $(document).ready(function () {
                 <div class="catalogue-hover">
                     <div class="catalogue-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                 </div>
-                <img class="img-fluid" src="assets/img/catalogo/imag1.jpg" alt="" />
+                <img class="img-fluid" src="/img/bicis/{{imagen}}" alt="" />
             </a>
             <div class="catalogue-caption">
                 <div class="catalogue-caption-heading">{{modelo}}</div>
@@ -63,6 +63,7 @@ $(document).ready(function () {
             success: function (response) {
 
                 if (response.success == "1") {
+                    console.log(response.bicis);
                     for (var i = 0; i < response.bicis.length; i++) {
                         var NewBici = templateBici;
                         var NewModal = templateModal;
@@ -70,6 +71,7 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagen[0]);
                         $op1.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);

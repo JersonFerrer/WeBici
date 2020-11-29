@@ -72,7 +72,7 @@
                             <?php 
                                 echo $usuario->getNombres();
                             ?>
-                            <img id="profileImgNavbar" class="img-profile rounded-circle" src="/img/<?php echo $usuario->getImagen();?>"
+                            <img id="profileImgNavbar" class="img-profile rounded-circle" src="/img/users/<?php echo $usuario->getImagen();?>"
                                 alt="">
                         </a>
 
@@ -104,7 +104,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="mx-auto pt-4">
-                        <img id="profileImg" class="profile-img rounded-circle" src="/img/<?php echo $usuario->getImagen();?>"
+                        <img id="profileImg" class="profile-img rounded-circle" src="/img/users/<?php echo $usuario->getImagen();?>"
                             alt="">
                     </div>
                 </div>
