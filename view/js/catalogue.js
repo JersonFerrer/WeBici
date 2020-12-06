@@ -71,7 +71,7 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
-                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagen[0]);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagen);
                         $op1.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
