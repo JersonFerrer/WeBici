@@ -55,6 +55,7 @@ $(document).ready(function () {
 
     $('.container .row .col-lg-3 .list-group #op1').on('click', function (evt) {
         evt.preventDefault();
+        $op1.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -71,7 +72,7 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
-                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagen[0]);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op1.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
@@ -84,7 +85,6 @@ $(document).ready(function () {
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
                         DivModals.append(NewModal);
                     }
-
                 }
                 else {
                     Mensaje('error', 'Oops...', jsonData.message);
@@ -102,6 +102,7 @@ $(document).ready(function () {
     });
     $('.container .row .col-lg-3 .list-group #op2').on('click', function (evt) {
         evt.preventDefault();
+        $op2.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -117,6 +118,7 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op2.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
@@ -146,6 +148,7 @@ $(document).ready(function () {
     });
     $('.container .row .col-lg-3 .list-group #op3').on('click', function (evt) {
         evt.preventDefault();
+        $op3.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -161,6 +164,7 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op3.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
@@ -190,6 +194,7 @@ $(document).ready(function () {
     });
     $('.container .row .col-lg-3 .list-group #op4').on('click', function (evt) {
         evt.preventDefault();
+        $op4.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -205,6 +210,7 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op4.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
