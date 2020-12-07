@@ -22,7 +22,7 @@
             $this->tiempoEstimado = $tiempoEstimado;
         }
 
-        public function getIdorigen(){
+        public function getIdRuta(){
             return $this->id;
         }
 

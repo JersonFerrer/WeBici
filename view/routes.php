@@ -84,7 +84,7 @@
     </div>
     <!-- Image Showcases -->
     <section class="showcase bg-light py-0">
-        <div class="container-fluid p-0">
+        <div class="container-fluid p-0" id = "rutas">
             <div class="row no-gutters">
 
                 <div class="col-lg-6 order-lg-2 text-white showcase-img"
@@ -164,7 +164,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     <!-- Core theme JS-->
-
+    <script src="js/ruta.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/main.js"></script>
 </body>
