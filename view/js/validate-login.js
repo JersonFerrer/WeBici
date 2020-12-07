@@ -15,7 +15,11 @@ $(document).ready(function(){
                     // let's redirect
                     if (jsonData.success == "1")
                     {
-                        location.href = 'index.php';
+                        if(jsonData.rol == "cli"){
+                            location.href = 'index.php';
+                        }else{
+                            location.href = 'catalogue.php';
+                        } 
                     }
                     else
                     {

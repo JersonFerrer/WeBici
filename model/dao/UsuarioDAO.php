@@ -40,7 +40,8 @@ class UsuarioDAO {
                         $data_table[$indice]["correo"],
                         $data_table[$indice]["password"],
                         $data_table[$indice]["direccion"],
-                        $data_table[$indice]["telefono"]
+                        $data_table[$indice]["telefono"],
+                        $data_table[$indice]["rol"]
                         );
                         $usuario->setImagen($data_table[0]["imagen"]);
             }
@@ -102,7 +103,8 @@ class UsuarioDAO {
                     $data_table[0]["correo"],
                     $data_table[0]["password"],
                     $data_table[0]["direccion"],
-                    $data_table[0]["telefono"]
+                    $data_table[0]["telefono"],
+                    $data_table[0]["rol"]
                     );
                     $usuario->setImagen("");
         }
@@ -113,7 +115,7 @@ class UsuarioDAO {
     public function registrarUsuario(Usuario $usuario){
         $data_source = new DataSource();
         
-        $stmt1 = "INSERT INTO usuario (id, nroCedula, nombres, apellidos, correo, password, direccion, telefono) VALUES (NULL, :nroCedula, :nombres, :apellidos, :correo, :password, :direccion, :telefono)"; 
+        $stmt1 = "INSERT INTO usuario (id, nroCedula, nombres, apellidos, correo, password, direccion, telefono, rol) VALUES (NULL, :nroCedula, :nombres, :apellidos, :correo, :password, :direccion, :telefono, :rol)"; 
         
         $resultado = $data_source->ejecutarActualizacion($stmt1, array(
             ':nroCedula' => $usuario->getNroCedula(),
@@ -122,7 +124,8 @@ class UsuarioDAO {
             ':correo' => $usuario->getCorreo(),
             ':password' => $usuario->getPassword(),
             ':direccion'=>$usuario->getDireccion(),
-            ':telefono'=>$usuario->getTelefono()
+            ':telefono'=>$usuario->getTelefono(),
+            ':rol'=>$usuario->getRol()
             )
         ); 
 
@@ -184,7 +187,8 @@ class UsuarioDAO {
                     $data_table[0]["correo"],
                     $data_table[0]["password"],
                     $data_table[0]["direccion"],
-                    $data_table[0]["telefono"]
+                    $data_table[0]["telefono"],
+                    $data_table[0]["rol"]
                     );
                     $usuario->setImagen($data_table[0]["imagen"]);
         }
@@ -208,7 +212,8 @@ class UsuarioDAO {
                     $data_table[0]["correo"],
                     $data_table[0]["password"],
                     $data_table[0]["direccion"],
-                    $data_table[0]["telefono"]
+                    $data_table[0]["telefono"],
+                    $data_table[0]["rol"]
                     );
                     $usuario->setToken($data_table[0]["token"]);
                     
@@ -229,7 +234,8 @@ class UsuarioDAO {
             ':correo' => $usuario->getCorreo(),
             ':direccion'=>$usuario->getDireccion(),
             ':telefono'=>$usuario->getTelefono(),
-            ':idUsuario' => $usuario->getIdUsuario()
+            ':idUsuario' => $usuario->getIdUsuario(),
+            ':rol'=> $usuario->getRol()
             )
         ); 
 

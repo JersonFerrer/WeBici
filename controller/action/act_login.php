@@ -19,9 +19,8 @@
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
             $_SESSION['IMAGEN'] = $user->getImagen();
-            
 
-            echo json_encode(array('success' => 1));
+            echo json_encode(array('success' => 1, "rol" => $user->getRol()));
 
             //header("Location: ../../view/index.php");
            /* if($user->esAdministrador() == 1){
