@@ -117,7 +117,6 @@
     <!-- Core theme JS-->
     <script src="js/ruta.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/main.js"></script>
 </body>
 
 </html>
