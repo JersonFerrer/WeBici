@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +26,7 @@
     <link rel="stylesheet" href="css/landing-page.min.css">
 
     <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/routes.css">
 </head>
 
@@ -46,10 +51,58 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="routes.html">Rutas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar Sesion</a>
-                    </li>
+                     <!--Validacion para mostrar el boton de Iniciar Sesion-->
+                     <?php
+                        if (!isset($_SESSION['ID_USUARIO'])){
+                    ?>
+                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar
+                            Sesion</a></li>
+                    <?php
+                        }
+                    ?>
                     </li>
                 </ul>
+
+                 <!--Validacion para mostrar el usuario-->
+                 <?php 
+                    if (isset($_SESSION['ID_USUARIO'])){
+                ?>
+                <ul class="navbar-nav">
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <?php 
+                                echo $_SESSION['NOMBRES_USUARIO'];
+                            ?>
+                            <?php 
+                                if($_SESSION['IMAGEN'] != null){
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/users/<?php echo $_SESSION['IMAGEN'];?>" alt="profile_image">
+                            <?php 
+                                }
+                            ?>
+                        </a>
+                        
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="user-profile.php">
+                                <i class="fas fa-user fa-sm fa-fw mr-2"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="cambiar_password.php">
+                            <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
+                            </a>
+                            <a class="dropdown-item" href="../controller/action/act_logout.php">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <?php 
+                    }//fin de la validacion para mostrar usuario
+                ?>
             </div>
         </div>
     </nav>
