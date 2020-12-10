@@ -249,17 +249,19 @@ function ReservarBici(id){
         evt.preventDefault();
         var horasContratada = parseInt($('#horaC').val());
         var horaEntregada = $('#horaE').val();
+        var horaDevolucion = "";
+        
         if(horasContratada > 0){
             $.ajax({
                 type: "POST",
                 url: '../controller/action/act_ReservarBici.php',
-                data: { bici : id, horasContratada : horasContratada, horaEntrega : horaEntregada, horaDevolucion : "03:00:00" },
+                data: { bici : id, horasContratada : horasContratada, horaEntrega : horaEntregada},
                 dataType: "json",
                 success: function (response){
                     if(response.success == "1"){
-                        Mensaje('succes', 'Reserva guardada', jsonData.message);
+                        Mensaje('succes', 'Reserva guardada', response.message);
                     }else {
-                        Mensaje('error', 'Oops...', jsonData.message);
+                        Mensaje('error', 'Oops...', response.message);
                     }
     
                 }
