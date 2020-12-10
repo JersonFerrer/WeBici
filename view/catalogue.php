@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,20 +79,23 @@
                             <?php 
                                 if($_SESSION['IMAGEN'] != null){
                             ?>
-                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                            <img class="img-profile rounded-circle" src="/img/users/<?php echo $_SESSION['IMAGEN'];?>" alt="profile_image">
                             <?php 
                                 }
                             ?>
                         </a>
-
+                        
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="user-profile.php">
-                                Perfil
+                                <i class="fas fa-user fa-sm fa-fw mr-2"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="cambiar_password.php">
+                            <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
                             </a>
                         </div>
                     </li>
@@ -188,7 +195,7 @@
                                                 <!-- Project Details Go Here-->
                                                 <h2 class="text-uppercase">Reservar Bicicleta</h2>
                                                                                              
-                                                <form>
+                                                <form method = "POST">
                                                     <div class="mb-3">
                                                         <label for="horaC" class="form-label">Horas a contratratar:</label>
                                                         <input type="number" name="horaC" value="11:45" max="20:00:00" min="07:00:00" step="1" id = "horaC">

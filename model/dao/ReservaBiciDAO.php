@@ -23,7 +23,7 @@ class ReservaBiciDAO {
         $ultimoIdInsertado = $data_source->ejecutarActualizacion($stmt1, array(
             ':fecha' => $reserva->getFecha(),
             ':horasContratadas' => $reserva->getHorasContratadas(),
-            ':horaEntregada' => $reserva->getHoraEntregada(),
+            ':horaEntrega' => $reserva->getHoraEntrega(),
             ':horaDevolucion'=> $reserva->getHoraDevolucion(),
             ':idUsuario'=> $reserva->getIdUsuario(),
             ':idBicicleta'=> $reserva->getIdBicicleta(),
