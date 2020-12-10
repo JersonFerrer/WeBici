@@ -268,8 +268,10 @@ function ReservarBici(id){
                 }
 
             })
+            horasContratada="";
         }else{
             Mensaje('error', 'Valor invalido', 'Ingrese una hora mayor a cero (0)');
+            horasContratada.val("");
         }
     })
 
