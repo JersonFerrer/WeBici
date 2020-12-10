@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +24,7 @@
     <!-- Bootstrap-->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/shop-homepage.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
@@ -75,20 +80,23 @@
                             <?php 
                                 if($_SESSION['IMAGEN'] != null){
                             ?>
-                            <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['IMAGEN'];?>" alt="">
+                            <img class="img-profile rounded-circle" src="/img/users/<?php echo $_SESSION['IMAGEN'];?>" alt="profile_image">
                             <?php 
                                 }
                             ?>
                         </a>
-
+                        
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="user-profile.php">
-                                Perfil
+                                <i class="fas fa-user fa-sm fa-fw mr-2"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="cambiar_password.php">
+                            <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar Sesion
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
                             </a>
                         </div>
                     </li>
@@ -176,6 +184,41 @@
     <!-- /.container -->
 
     <div id="modals">
+                    <div class="catalogue-modal modal fade" id="forReserva" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase">Reservar Bicicleta</h2>
+                                                                                             
+                                                <form method = "POST">
+                                                    <div class="mb-3">
+                                                        <label for="horaC" class="form-label">Horas a contratratar:</label>
+                                                        <input type="number" name="horaC" step="1" id = "horaC">
+                                                        <div id="emailHelp" class="form-text">Ingrese el dato en horas</div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="horaE" class="form-label">Hora de Entrega:</label>
+                                                        <input type="time" name="horaE" value="19:40" max="20:00:00" min="07:00:00" step="60" id="horaE">
+                                                    </div>
+                                                    
+                                                    <button class="btn btn-primary" data-dismiss="modal" type="button" id="forreser">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                        Alquilar
+                                                    </button>
+                                                </form>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </div>
     <!-- Footer-->
     <footer class="footer py-5 mt-5 bg-light">
@@ -203,9 +246,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     <!-- Core theme JS-->
-
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/alert_messages.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/catalogue.js"></script>
+    
 </body>
 
 </html>

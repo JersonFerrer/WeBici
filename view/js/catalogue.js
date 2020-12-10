@@ -31,7 +31,7 @@ $(document).ready(function () {
                                                 <!-- Project Details Go Here-->
                                                 <h2 class="text-uppercase">{{modelo}}</h2>
 
-                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/image1.jpg" alt="" />
+                                                <img class="img-fluid d-block mx-auto" src="/img/bicis/{{imagen}}" alt="" />
                                                 
                                                 <ul class="list-inline">
                                                     <li>Marca: {{marca}}</li>
@@ -41,7 +41,7 @@ $(document).ready(function () {
                                                     <li>ID: {{ID}}</li>
                                                 </ul>
                                                 <p>{{descripcion}}</p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                <button class="btn btn-primary" data-dismiss="modal" type="button" data-toggle="modal" href="#forReserva" onclick = "ReservarBici({{ID}})">
                                                     <i class="fas fa-check mr-1"></i>
                                                     Alquilar
                                                 </button>
@@ -76,13 +76,14 @@ $(document).ready(function () {
                         $op1.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
                     }
                 }
@@ -122,13 +123,14 @@ $(document).ready(function () {
                         $op2.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
                     }
 
@@ -168,13 +170,14 @@ $(document).ready(function () {
                         $op3.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
                     }
 
@@ -201,7 +204,6 @@ $(document).ready(function () {
             data: { tipo: 5 },
             dataType: "json",
             success: function (response) {
-
                 if (response.success == "1") {
                     for (var i = 0; i < response.bicis.length; i++) {
                         var NewBici = templateBici;
@@ -214,13 +216,14 @@ $(document).ready(function () {
                         $op4.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
                     }
 
@@ -239,3 +242,36 @@ $(document).ready(function () {
         });
     });
 });
+
+function ReservarBici(id){
+
+    $('#forreser').on('click', function (evt){
+        evt.preventDefault();
+        var horasContratada = parseInt($('#horaC').val());
+        var horaEntregada = $('#horaE').val();
+        
+        if(horasContratada > 0){
+            $.ajax({
+                type: "POST",
+                url: '../controller/action/act_ReservarBici.php',
+                data: { bici : id, horasContratada : horasContratada, horaEntrega : horaEntregada},
+                dataType: "json",
+                success: function (response){
+                    if(response.success == "1"){
+                        Mensaje('succes', 'Reserva guardada', response.message);
+                    }else {
+                        Mensaje('error', 'Oops...', response.message);
+                    }
+    
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+
+            })
+        }else{
+            Mensaje('error', 'Valor invalido', 'Ingrese una hora mayor a cero (0)');
+        }
+    })
+
+}

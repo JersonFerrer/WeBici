@@ -51,5 +51,9 @@
         public function getIdBicicleta(){
             return $this->idBicicleta;
         }
+
+        public function getEstado(){
+            return $this->estado;
+        }
     }
 ?>
