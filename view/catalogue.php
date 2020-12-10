@@ -176,6 +176,41 @@
     <!-- /.container -->
 
     <div id="modals">
+                    <div class="catalogue-modal modal fade" id="forReserva" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" />
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <div class="modal-body">
+                                                <!-- Project Details Go Here-->
+                                                <h2 class="text-uppercase">Reservar Bicicleta</h2>
+                                                                                             
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="horaC" class="form-label">Horas a contratratar:</label>
+                                                        <input type="number" name="horaC" value="11:45" max="20:00:00" min="07:00:00" step="1" id = "horaC">
+                                                        <div id="emailHelp" class="form-text">Ingrese el dato en horas</div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="horaE" class="form-label">Hora de Entrega</label>
+                                                        <input type="time" name="horaE" value="23:40:00" max="07:00:00" min="07:00:00" step="1" id="horaE">
+                                                    </div>
+                                                    
+                                                    <button class="btn btn-primary" data-dismiss="modal" type="button" id="forreser">
+                                                    <i class="fas fa-check mr-1"></i>
+                                                        Alquilar
+                                                    </button>
+                                                </form>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </div>
     <!-- Footer-->
     <footer class="footer py-5 mt-5 bg-light">
