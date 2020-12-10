@@ -4,5 +4,5 @@
     
 
     $usuarios = verUsuarios();
-    
+
     echo json_encode(array('data'=>$usuarios));
