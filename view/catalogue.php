@@ -24,6 +24,7 @@
     <!-- Bootstrap-->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/shop-homepage.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
@@ -198,12 +199,12 @@
                                                 <form method = "POST">
                                                     <div class="mb-3">
                                                         <label for="horaC" class="form-label">Horas a contratratar:</label>
-                                                        <input type="number" name="horaC" value="11:45" max="20:00:00" min="07:00:00" step="1" id = "horaC">
+                                                        <input type="number" name="horaC" step="1" id = "horaC">
                                                         <div id="emailHelp" class="form-text">Ingrese el dato en horas</div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="horaE" class="form-label">Hora de Entrega</label>
-                                                        <input type="time" name="horaE" value="23:40:00" max="07:00:00" min="07:00:00" step="1" id="horaE">
+                                                        <label for="horaE" class="form-label">Hora de Entrega:</label>
+                                                        <input type="time" name="horaE" value="19:40" max="20:00:00" min="07:00:00" step="60" id="horaE">
                                                     </div>
                                                     
                                                     <button class="btn btn-primary" data-dismiss="modal" type="button" id="forreser">
@@ -245,9 +246,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     <!-- Core theme JS-->
-
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/alert_messages.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/catalogue.js"></script>
+    
 </body>
 
 </html>

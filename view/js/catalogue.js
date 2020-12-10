@@ -204,7 +204,6 @@ $(document).ready(function () {
             data: { tipo: 5 },
             dataType: "json",
             success: function (response) {
-
                 if (response.success == "1") {
                     for (var i = 0; i < response.bicis.length; i++) {
                         var NewBici = templateBici;
@@ -245,27 +244,29 @@ $(document).ready(function () {
 });
 
 function ReservarBici(id){
-    var horasContratada = $('horaC').val();
-    var horaEntregadas = $('horaE').val();
+    
     $('#forreser').on('click', function (evt){
         evt.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: '../controller/action/act_ReservarBici.php',
-            data: { bici : id, horasContratadas : horasContratada, horaEntregada : horaEntregadas, horaDevolucion : "03:00" },
-            dataType: "json",
-            success: function (response){
-                console.log(response);
-                console.log("entro al succes");
-                if(response.success == "1"){
-
-                    Mensaje('succes', 'Reserva guardada', jsonData.message);
-                }else {
-                    Mensaje('error', 'Oops...', jsonData.message);
+        var horasContratada = parseInt($('#horaC').val());
+        var horaEntregada = $('#horaE').val();
+        if(horasContratada > 0){
+            $.ajax({
+                type: "POST",
+                url: '../controller/action/act_ReservarBici.php',
+                data: { bici : id, horasContratada : horasContratada, horaEntrega : horaEntregada, horaDevolucion : "03:00:00" },
+                dataType: "json",
+                success: function (response){
+                    if(response.success == "1"){
+                        Mensaje('succes', 'Reserva guardada', jsonData.message);
+                    }else {
+                        Mensaje('error', 'Oops...', jsonData.message);
+                    }
+    
                 }
-
-            }
-        })
+            })
+        }else{
+            Mensaje('error', 'Valor invalido', 'Ingrese una hora mayor a cero (0)');
+        }
     })
 
 }
