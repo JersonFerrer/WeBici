@@ -64,7 +64,6 @@ $(document).ready(function () {
             success: function (response) {
 
                 if (response.success == "1") {
-                    console.log(response.bicis);
                     for (var i = 0; i < response.bicis.length; i++) {
                         var NewBici = templateBici;
                         var NewModal = templateModal;
@@ -258,7 +257,7 @@ function ReservarBici(id){
                 dataType: "json",
                 success: function (response){
                     if(response.success == "1"){
-                        Mensaje('succes', 'Reserva guardada', response.message);
+                        Mensaje('success', 'Reserva guardada', response.message);
                     }else {
                         Mensaje('error', 'Oops...', response.message);
                     }
