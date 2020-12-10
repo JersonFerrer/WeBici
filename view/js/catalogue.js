@@ -249,7 +249,6 @@ function ReservarBici(id){
         evt.preventDefault();
         var horasContratada = parseInt($('#horaC').val());
         var horaEntregada = $('#horaE').val();
-        var horaDevolucion = "";
         
         if(horasContratada > 0){
             $.ajax({
@@ -264,7 +263,11 @@ function ReservarBici(id){
                         Mensaje('error', 'Oops...', response.message);
                     }
     
+                },
+                error: function (response) {
+                    console.log(response);
                 }
+
             })
         }else{
             Mensaje('error', 'Valor invalido', 'Ingrese una hora mayor a cero (0)');
