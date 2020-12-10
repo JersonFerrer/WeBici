@@ -244,7 +244,7 @@ $(document).ready(function () {
 });
 
 function ReservarBici(id){
-    
+
     $('#forreser').on('click', function (evt){
         evt.preventDefault();
         var horasContratada = parseInt($('#horaC').val());
