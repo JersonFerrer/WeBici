@@ -11,12 +11,20 @@
     $direccion = strtoupper($_POST['address']);
     $telefono = $_POST['cellphone'];
     $password = NULL;
+    //$rol = $_SESSION['rol'];
+    if($_SESSION['rol'] == "adm"){
+        $rol = "adm";
+        $rol2 = $_POST['rol'];
+    }else{
+        $rol2 = "cli";
+    }
+    
     
     if($nroCedula != '' && $nombres != '' && $apellidos != '' && $correo != '' && $direccion != '' && $direccion != ''){
         $idUsuario = $_SESSION['ID_USUARIO'];
         $_SESSION['NOMBRES_USUARIO'] = $nombres;
         
-        $usuario = new Usuario($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono);
+        $usuario = new Usuario($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, $rol);
     
         editarUsuario($usuario);
         echo json_encode(array('success'=>1, 'userData'=>$usuario));
