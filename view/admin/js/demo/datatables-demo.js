@@ -16,6 +16,7 @@ $(document).ready(function() {
   });
   obtener_data_editar("#dataTable tbody", table);
   obtener_cedula_eliminar("#dataTable tbody", table);
+  
 });
 var obtener_data_editar = function(tbody, table){
   $(tbody).on("click", "button.editar", function(){
@@ -27,6 +28,7 @@ var obtener_data_editar = function(tbody, table){
         direccion = $("#direccion").val( data.direccion),
         telefono = $("#telefono").val( data.telefono),
         rol = $("#rol").val( data.rol);
+      editarAdminUser(cedula.val(), nombre.val(), apellido.val(), correo.val(), direccion.val(), telefono.val(), rol.val());
   })
 }
 var obtener_cedula_eliminar = function(tbody, table){
@@ -35,4 +37,33 @@ var obtener_cedula_eliminar = function(tbody, table){
     var cedula = $("#cedula").val( data.nroCedula);
 
   })
+}
+
+var editarAdminUser = function(cedula, nombre, apellido, correo, direccion, telefono, rol){
+    var miData = { nroCedula : cedula, names: nombre, last_names : apellido, email : correo, address : direccion, cellphone : telefono, aux : 1, rol : rol};
+    console.log(miData);
+    $('#gordo').on("click", function(){
+      $.ajax({
+        type : "POST",
+        url : '../../controller/action/act_editarUsuario.php',
+        data: JSON.stringify(miData),
+        dataType : 'json',
+        success : function(response){
+
+          let JsonData = JSON.parse(response);
+    
+            if(JsonData.success == 1){
+             console.log(JsonData);
+                        
+            }else{
+              alert('error');
+
+            }
+        },
+          error: function (response) {
+           console.log(response);
+       }
+      })
+    })
+
 }

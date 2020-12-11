@@ -13,10 +13,13 @@
     $password = NULL;
     //$rol = $_SESSION['rol'];
     if($_SESSION['rol'] == "adm"){
-        $rol = "adm";
-        $rol2 = $_POST['rol'];
+        if($_POST['aux'] == 0){
+            $rol = "adm";
+        }else{
+            $rol = $_POST['rol'];
+        } 
     }else{
-        $rol2 = "cli";
+        $rol = "cli";
     }
     
     

@@ -19,6 +19,7 @@
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
             $_SESSION['IMAGEN'] = $user->getImagen();
+            $_SESSION['rol'] = $user->getRol();
 
             echo json_encode(array('success' => 1, 'rol' => $user->getRol()));
 
