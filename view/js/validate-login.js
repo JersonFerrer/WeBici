@@ -17,9 +17,9 @@ $(document).ready(function(){
                     {
                         if(jsonData.rol == "cli"){
                             location.href = 'index.php';
-                        }else{
-                            location.href = 'catalogue.php';
-                        } 
+                        }else if(jsonData.rol == "adm"){
+                            location.href = 'admin/index.php';
+                        }
                     }
                     else
                     {

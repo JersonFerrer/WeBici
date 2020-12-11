@@ -199,7 +199,7 @@
                                                 <form method = "POST">
                                                     <div class="mb-3">
                                                         <label for="horaC" class="form-label">Horas a contratratar:</label>
-                                                        <input type="number" name="horaC" step="1" id = "horaC">
+                                                        <input type="number" name="horaC" step="1" min="0" max="48" id = "horaC">
                                                         <div id="emailHelp" class="form-text">Ingrese el dato en horas</div>
                                                     </div>
                                                     <div class="mb-3">
