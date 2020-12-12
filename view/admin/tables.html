@@ -391,10 +391,13 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Modificar usuario</h5>
-              <button type="button" class="close-modal" data-bs-dismiss="modal" aria-label="Close" alt="Close modal"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
               <form>
+                <div class="mb-3">
+                  <label for="idUsuario" class="form-label">IdUsuario</label>
+                  <input type="text"  id="idUsuario" class="form-control" readonly="readonly">
+                </div>
                 <div class="mb-3">
                   <label for="cedula" class="form-label">Cedula</label>
                   <input type="number" class="form-control" id="cedula">
@@ -422,13 +425,13 @@
                 <div class="mb-3">
                   <label for="rol" class="form-label">Rol</label>
                   <input type="text" class="form-control" id="rol">
-                </div>
+                </div> 
                 
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-toggle="modal" href = '#modalconfi'>Guardar</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" href = "#modalconfi">Guardar</button>
             </div>
           </div>
         </div>
@@ -438,14 +441,14 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">¡Advertencia!</h5>
-              <button type="button" class="close-modal" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+              
             </div>
             <div class="modal-body">
-              <p>¿Seguro que quieres editar este usuario?</p>
+              <p>¿Seguro que quieres modificar este usuario?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" id="gordo" >Confirmar</button>
+              <button type="button" class="btn btn-primary" id="guardar">Confirmar</button>
 
             </div>
           </div>
@@ -456,7 +459,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">¡Advertencia!</h5>
-              <button type="button" class="close-modal" data-bs-dismiss="modalelim" aria-label="Close"><i class="fas fa-times"></i></button>
+              
             </div>
             <div class="modal-body">
               <p>¿Seguro que quieres eliminar este usuario?</p>

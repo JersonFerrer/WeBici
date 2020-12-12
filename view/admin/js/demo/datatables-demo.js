@@ -16,19 +16,21 @@ $(document).ready(function() {
   });
   obtener_data_editar("#dataTable tbody", table);
   obtener_cedula_eliminar("#dataTable tbody", table);
+  editarAdminUser();
   
 });
 var obtener_data_editar = function(tbody, table){
   $(tbody).on("click", "button.editar", function(){
     var data = table.row($(this).parents("tr")).data();
-    var cedula = $("#cedula").val( data.nroCedula),
+    var idUsuario = $('#idUsuario').val(data.idUsuario),
+        cedula = $("#cedula").val( data.nroCedula),
         nombre = $("#nombres").val( data.nombres),
         apellido = $("#apellidos").val( data.apellidos),
         correo = $("#correo").val( data.correo),
         direccion = $("#direccion").val( data.direccion),
         telefono = $("#telefono").val( data.telefono),
         rol = $("#rol").val( data.rol);
-      editarAdminUser(cedula.val(), nombre.val(), apellido.val(), correo.val(), direccion.val(), telefono.val(), rol.val());
+      //editarAdminUser(cedula.val(), nombre.val(), apellido.val(), correo.val(), direccion.val(), telefono.val(), rol.val());
   })
 }
 var obtener_cedula_eliminar = function(tbody, table){
@@ -39,24 +41,28 @@ var obtener_cedula_eliminar = function(tbody, table){
   })
 }
 
-var editarAdminUser = function(cedula, nombre, apellido, correo, direccion, telefono, rol){
-    var miData = { nroCedula : cedula,
-                   names: nombre, 
-                   last_names : apellido, 
-                   email : correo, 
-                   address : direccion, 
-                   cellphone : telefono, 
-                   aux : 1, 
-                   rol : rol};
-    $('#gordo').on("click", function(){
+function editarAdminUser(){
+    
+    $('#guardar').on('click', function(evt){
+      evt.preventDefault();
+      var id = $('#idUsuario').val();
+          cedula = $('#cedula').val(),
+          nombre = $('#nombres').val(),
+          apellido = $('#apellidos').val(),
+          correo = $('#correo').val(),
+          direccion = $('#direccion').val(),
+          telefono = $('#telefono').val(),
+          rol = $('#rol').val();
       $.ajax({
         type : "POST",
-        url : '../../controller/action/act_editarUsuario.php',
-        data: JSON.stringify(miData),
+        url : '../../controller/action/act_admPorUser.php',
+        data: {idUsuario: id , nroCedula : cedula, names: nombre, last_names : apellido, email : correo, address : direccion, cellphone : telefono, aux : 1, rol : rol},
         dataType : 'json',
         success : function(response){
           if(response.success == "1"){
             Mensaje('success', 'Usuario modificado', response.message);
+            $('#modalconfi').modal('hide');
+            $('#modal').modal('hide');
           }else {
             Mensaje('error', 'Oops...', response.message);
           }
@@ -68,3 +74,4 @@ var editarAdminUser = function(cedula, nombre, apellido, correo, direccion, tele
     })
 
 }
+
