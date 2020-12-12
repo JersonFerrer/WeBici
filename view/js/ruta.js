@@ -8,7 +8,7 @@ $(document).ready(function (){
                     <h3></h3>
                     <p>Tiempo: {{tiempoEstimado}}</p>
                     <p class="lead mb-0">{{descripcion}}</p>
-                    <button cla >
+                    <button type="button" class="btn btn-block btn-md btn-primary">Ver horarios</button>
                 </div>
             </div>`
     $.ajax({

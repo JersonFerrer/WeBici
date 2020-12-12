@@ -1,6 +1,15 @@
 // Call the dataTables jQuery plugin
+var table = null;
 $(document).ready(function() {
-  var table = $('#dataTable').DataTable({
+  table = mostrarTabla();
+  obtener_data_editar("#dataTable tbody", table);
+  obtener_cedula_eliminar("#dataTable tbody", table);
+  editarAdminUser();
+
+});
+
+function mostrarTabla(){
+  return $('#dataTable').DataTable({
     ajax: "../../controller/action/act_verUsuarios.php",
     columns: [
             { data: "idUsuario" },
@@ -14,11 +23,8 @@ $(document).ready(function() {
             {"defaultContent": "<button type='button' class='editar btn btn-primary' data-toggle='modal' href = '#modal'><i class='fas fa-edit'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal'  ><i class='far fa-trash-alt'></i></button>"}
     ]
   });
-  obtener_data_editar("#dataTable tbody", table);
-  obtener_cedula_eliminar("#dataTable tbody", table);
-  editarAdminUser();
   
-});
+}
 var obtener_data_editar = function(tbody, table){
   $(tbody).on("click", "button.editar", function(){
     var data = table.row($(this).parents("tr")).data();
@@ -45,7 +51,7 @@ var obtener_cedula_eliminar = function(tbody, table){
           dataType : 'json',
           success : function(response){
             if(response.success == "1"){
-              Mensaje('success', 'Usuario eliminado', response.message);
+              Mensaje('success', 'Usuario eliminado', response.message); 
             }else {
               Mensaje('error', 'Oops...', response.message);
             }
@@ -88,6 +94,5 @@ function editarAdminUser(){
        }
       })
     })
-
 }
 
