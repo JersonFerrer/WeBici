@@ -11,7 +11,7 @@ $(document).ready(function() {
             { data: "direccion" },
             { data: "telefono" },
             { data: "rol" },
-            {"defaultContent": "<button type='button' class='editar btn btn-primary' data-toggle='modal' href = '#modal'><i class='fas fa-edit'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' href='#modalelim' ><i class='far fa-trash-alt'></i></button>"}
+            {"defaultContent": "<button type='button' class='editar btn btn-primary' data-toggle='modal' href = '#modal'><i class='fas fa-edit'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal'  ><i class='far fa-trash-alt'></i></button>"}
     ]
   });
   obtener_data_editar("#dataTable tbody", table);
@@ -30,14 +30,30 @@ var obtener_data_editar = function(tbody, table){
         direccion = $("#direccion").val( data.direccion),
         telefono = $("#telefono").val( data.telefono),
         rol = $("#rol").val( data.rol);
-      //editarAdminUser(cedula.val(), nombre.val(), apellido.val(), correo.val(), direccion.val(), telefono.val(), rol.val());
   })
 }
 var obtener_cedula_eliminar = function(tbody, table){
-  $(tbody).on("click", "button.eliminar", function(){
-    var data = table.row($(this).parents("tr")).data();
-    var cedula = $("#cedula").val( data.nroCedula);
-
+  $(tbody).on("click","button.eliminar", function(evt){
+    evt.preventDefault();
+    var data1 = table.row($(this).parents("tr")).data();
+    //var id = data1.idUsuario, cedula = data1.nroCedula , nombre = data1.nombres ,apellido = data1.apellidos, correo = data1.correo ,direccion = data1.direccion , telefono = data1.telefono ,rol = data1.rol ;
+    console.log(data1.idUsuario);  
+    $.ajax({
+          type : "POST",
+          url : '../../controller/action/act_eliminaAdmAUser.php',
+          data: {idUsuario: data1.idUsuario, nroCedula : data1.nroCedula, names: data1.nombres, last_names : data1.apellidos, email : data1.correo, address : data1.direccion, cellphone : data1.telefono, rol : data1.rol},
+          dataType : 'json',
+          success : function(response){
+            if(response.success == "1"){
+              Mensaje('success', 'Usuario eliminado', response.message);
+            }else {
+              Mensaje('error', 'Oops...', response.message);
+            }
+          },
+            error: function (response) {
+             console.log(response);
+         }
+        })
   })
 }
 
@@ -64,7 +80,7 @@ function editarAdminUser(){
             $('#modalconfi').modal('hide');
             $('#modal').modal('hide');
           }else {
-            Mensaje('error', 'Oops...', response.message);
+            Mensaje('error', 'No puede quedar espacion en blanco', response.message);
           }
         },
           error: function (response) {

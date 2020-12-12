@@ -8,9 +8,11 @@ $(document).ready(function (){
                     <h3></h3>
                     <p>Tiempo: {{tiempoEstimado}}</p>
                     <p class="lead mb-0">{{descripcion}}</p>
+                    <button cla >
                 </div>
             </div>`
     $.ajax({
+        type: "POST",
         url: '../controller/action/act_verRutas.php',
         success: function(response)
         {
