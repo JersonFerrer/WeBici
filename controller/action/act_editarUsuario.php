@@ -23,7 +23,7 @@
     }
     
     
-    if($nroCedula != '' && $nombres != '' && $apellidos != '' && $correo != '' && $direccion != '' && $direccion != ''){
+    if($nroCedula != '' && $nombres != '' && $apellidos != '' && $correo != '' && $direccion != '' && $telefono != ''){
         $idUsuario = $_SESSION['ID_USUARIO'];
         $_SESSION['NOMBRES_USUARIO'] = $nombres;
         

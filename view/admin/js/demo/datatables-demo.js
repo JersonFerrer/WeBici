@@ -40,8 +40,14 @@ var obtener_cedula_eliminar = function(tbody, table){
 }
 
 var editarAdminUser = function(cedula, nombre, apellido, correo, direccion, telefono, rol){
-    var miData = { nroCedula : cedula, names: nombre, last_names : apellido, email : correo, address : direccion, cellphone : telefono, aux : 1, rol : rol};
-    console.log(miData);
+    var miData = { nroCedula : cedula,
+                   names: nombre, 
+                   last_names : apellido, 
+                   email : correo, 
+                   address : direccion, 
+                   cellphone : telefono, 
+                   aux : 1, 
+                   rol : rol};
     $('#gordo').on("click", function(){
       $.ajax({
         type : "POST",
@@ -49,16 +55,11 @@ var editarAdminUser = function(cedula, nombre, apellido, correo, direccion, tele
         data: JSON.stringify(miData),
         dataType : 'json',
         success : function(response){
-
-          let JsonData = JSON.parse(response);
-    
-            if(JsonData.success == 1){
-             console.log(JsonData);
-                        
-            }else{
-              alert('error');
-
-            }
+          if(response.success == "1"){
+            Mensaje('success', 'Usuario modificado', response.message);
+          }else {
+            Mensaje('error', 'Oops...', response.message);
+          }
         },
           error: function (response) {
            console.log(response);
