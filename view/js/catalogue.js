@@ -258,7 +258,6 @@ function ReservarBici(){
         var horasContratada = parseInt($('#horaC').val());
         var horaEntregada = $('#horaE').val();
         var id = $('#idBiCi').val();
-        console.log(id);
         if(horasContratada > 0){
             $.ajax({
                 type: "POST",
@@ -288,5 +287,4 @@ function ReservarBici(){
 
 function colocarId(id){
     $('#idBiCi').val(id);
-
 }

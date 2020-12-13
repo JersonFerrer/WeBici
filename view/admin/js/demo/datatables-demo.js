@@ -42,8 +42,6 @@ var obtener_cedula_eliminar = function(tbody, table){
   $(tbody).on("click","button.eliminar", function(evt){
     evt.preventDefault();
     var data1 = table.row($(this).parents("tr")).data();
-    //var id = data1.idUsuario, cedula = data1.nroCedula , nombre = data1.nombres ,apellido = data1.apellidos, correo = data1.correo ,direccion = data1.direccion , telefono = data1.telefono ,rol = data1.rol ;
-    console.log(data1.idUsuario);  
     $.ajax({
           type : "POST",
           url : '../../controller/action/act_eliminaAdmAUser.php',
