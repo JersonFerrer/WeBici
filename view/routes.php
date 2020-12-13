@@ -146,14 +146,30 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Horario de ruta</h5>
                     </div>
-                    <form action="">
+                    <form id="horariosRuta" method="POST">
                         <div class="modal-body">
-                            
-                                
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Hora Salida</th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Hora Salida</th>
+                                <th></th>
+                                </tr>
+                            </tfoot>
+                            </table>    
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Incribise</button>
                         </div>
                     </form>
                 </div>
@@ -185,6 +201,8 @@
 
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Core theme JS-->
     <script src="js/ruta.js"></script>

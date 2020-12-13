@@ -12,16 +12,7 @@
     $telefono = $_POST['cellphone'];
     $password = NULL;
     $rol = $_POST['rol'];
-    //$rol = $_SESSION['rol'];
-    /*if($_SESSION['rol'] == "adm"){
-        if($_POST['aux'] == 0){
-            $rol = "adm";
-        }else{
-            $rol = $_POST['rol'];
-        } 
-    }else{
-        $rol = "cli";
-    }*/
+    
     
     
     if($nroCedula != '' && $nombres != '' && $apellidos != '' && $correo != '' && $direccion != '' && $telefono != ''){

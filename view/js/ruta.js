@@ -44,42 +44,69 @@ $(document).ready(function (){
 
 })
 
-function verHorarioRuta(id){
-    var $op2 = $('#verHorario .modal-body');
-    var mostrarHorario = `  <input type="radio" name = "horario"  >
-                            <h4>Fecha: {{fecha}}</h4>
-                            <h4>Hora: {{horaSalida}}</h4>
-                            `;
-    console.log(id);
+/*function verHorarioRuta(id){
     $.ajax({
         type: "POST",
-        url: '../controller/action/act_verHorarioRuta.php',
-        data : {idRuta : id},
-        dataType : 'json',
+        url : '../controller/action/act_verHorarioRuta.php',
+        dataType: "json",
+        data : {idRuta: id},
+
         success : function(response){
-            console.log(response);
-            //var jsonData = JSON.parse(response);
-            if (response.success == "1"){
-                $op2.html("");
-                for (var i = 0; i < response.horario.length; i++){
-                    var NewHorario = mostrarHorario;
-                    NewHorario = NewHorario.replaceAll('{{id}}', response.horario[i].id);
-                    NewHorario = NewHorario.replace('{{fecha}}', response.horario[i].fecha);
-                    NewHorario = NewHorario.replace('{{horaSalida}}', response.horario[i].horaSalida);
-                    $op2.append(NewHorario);
-                }
-            }else{
-                Mensaje('error','Oops...',response.message);
-            }
-        },
-        error: function (response) {
-            console.log(response);
+            $('#dataTable').DataTable({
+                data : response,
+                columns: [
+                    { data: "response.id" },
+                    { data: "response.fecha" },
+                    { data: "response.horaSalida" },
+                    {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
+              ]
+            })
         }
-
-
-
     })
+    $('#dataTable').DataTable({
+            'ajax' : {​​​​​
+                url: "../controller/action/act_verHorarioRuta.php",
+                type: "POST",
+                data:{​​​​​ idRuta : id }​​​​​
+            }​​​​​,
+            'columns': [
+                { data: "id" },
+                { data: "fecha" },
+                { data: "horaSalida" },
+                {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
+            ]
+    })
+}*/
 
+function verHorarioRuta(id){
+    console.log(id);
+    /*return $('#dataTable').DataTable({
+        ajax: "../controller/action/act_verHorarioRuta.php",
+        type: "POST",
+        data:{​​​​​ idRuta : id }​​​​​,
+        columns: [
+            { data1: "id" },
+            { data1: "fecha" },
+            { data1: "horaSalida" },
+            {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
+        ]
+      });*/
+      $.ajax({
+        type: "POST",
+        url : '../controller/action/act_verHorarioRuta.php',
+        dataType: "json",
+        data : {idRuta: id},
 
-
+        success : function(response){
+            $('#dataTable').DataTable({
+                data : response,
+                columns: [
+                    { data: "response.id" },
+                    { data: "response.fecha" },
+                    { data: "response.horaSalida" },
+                    {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
+              ]
+            })
+        }
+    })
 }

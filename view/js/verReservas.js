@@ -23,7 +23,6 @@ var cancelarReserva = function(tbody, table){
     $(tbody).on("click","button.eliminar", function(evt){
       evt.preventDefault();
       var data1 = table.row($(this).parents("tr")).data();
-      console.log(data1);
       $.ajax({
             type : "POST",
             url : '../controller/action/act_cancelarReserva.php',
