@@ -98,12 +98,15 @@ function verHorarioRuta(id){
         data : {idRuta: id},
 
         success : function(response){
+
+            console.log(response.data1[0]);
+
             $('#dataTable').DataTable({
                 data : response,
                 columns: [
-                    { data: "response.id" },
-                    { data: "response.fecha" },
-                    { data: "response.horaSalida" },
+                    { data1: "response.id" },
+                    { data1: "response.fecha" },
+                    { data1: "response.horaSalida" },
                     {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
               ]
             })

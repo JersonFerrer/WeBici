@@ -2,7 +2,7 @@
     session_start();
     require_once (__DIR__.'/../mdb/mdbHorarioRuta.php');
 
-    $id = $_POST['idRuta'];
+    $id = 1;
 
 
     $horario = verhorariosPorIdRuta($id);
