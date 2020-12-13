@@ -2,7 +2,21 @@
 var table = null;
 $(document).ready(function() {
   table = mostrarTabla();
-  obtener_data_editar("#dataTable tbody", table);
+
+  $("#dataTable tbody").on("click", "button.editar", function(){
+    var data = table.row($(this).parents("tr")).data();
+    console.log(data);
+    var idUsuario = $('#idUsuario').val(data.idUsuario),
+        cedula = $("#cedula").val( data.nroCedula),
+        nombre = $("#nombres").val( data.nombres),
+        apellido = $("#apellidos").val( data.apellidos),
+        correo = $("#correo").val( data.correo),
+        direccion = $("#direccion").val( data.direccion),
+        telefono = $("#telefono").val( data.telefono),
+        rol = $("#rol").val( data.rol);
+  });
+
+  //obtener_data_editar("#dataTable tbody", table);
   obtener_id_eliminar("#dataTable tbody", table);
   editarAdminUser();
 });
@@ -25,7 +39,7 @@ function mostrarTabla(){
   });
   
 }
-var obtener_data_editar = function(tbody, table){
+/*var obtener_data_editar = function(tbody, table){
   $(tbody).on("click", "button.editar", function(){
     var data = table.row($(this).parents("tr")).data();
     console.log(data);
@@ -38,7 +52,7 @@ var obtener_data_editar = function(tbody, table){
         telefono = $("#telefono").val( data.telefono),
         rol = $("#rol").val( data.rol);
   })
-}
+}*/
 var obtener_id_eliminar = function(tbody, table){
   $(tbody).on("click","button.eliminar", function(evt){
     evt.preventDefault();
@@ -87,7 +101,7 @@ function editarAdminUser(){
           if(response.success == "1"){
             Mensaje('success', 'Usuario modificado', response.message);
             table = mostrarTabla();
-            obtener_data_editar("#dataTable tbody", table);
+            //obtener_data_editar("#dataTable tbody", table);
             $('#modalconfi').modal('hide');
             $('#modal').modal('hide');
           }else {
