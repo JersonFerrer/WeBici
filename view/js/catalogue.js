@@ -31,7 +31,7 @@ $(document).ready(function () {
                                                 <!-- Project Details Go Here-->
                                                 <h2 class="text-uppercase">{{modelo}}</h2>
 
-                                                <img class="img-fluid d-block mx-auto" src="assets/img/catalogo/image1.jpg" alt="" />
+                                                <img class="img-fluid d-block mx-auto" src="/img/bicis/{{imagen}}" alt="" />
                                                 
                                                 <ul class="list-inline">
                                                     <li>Marca: {{marca}}</li>
@@ -39,9 +39,10 @@ $(document).ready(function () {
                                                     <li>Peso: {{peso}}</li>
                                                     <li>Tamaño Rueda: {{tamRueda}}</li>
                                                     <li>ID: {{ID}}</li>
+                                                    <input type = "hidden" id ="idbicicleta" value = "{{ID}}"> 
                                                 </ul>
                                                 <p>{{descripcion}}</p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                                <button class="btn btn-primary alquilar" data-dismiss="modal" type="button" data-toggle="modal" href="#forReserva" id="{{ID}}" onclick = "colocarId({{ID}})" >
                                                     <i class="fas fa-check mr-1"></i>
                                                     Alquilar
                                                 </button>
@@ -55,6 +56,7 @@ $(document).ready(function () {
 
     $('.container .row .col-lg-3 .list-group #op1').on('click', function (evt) {
         evt.preventDefault();
+        $op1.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -63,7 +65,6 @@ $(document).ready(function () {
             success: function (response) {
 
                 if (response.success == "1") {
-                    console.log(response.bicis);
                     for (var i = 0; i < response.bicis.length; i++) {
                         var NewBici = templateBici;
                         var NewModal = templateModal;
@@ -71,20 +72,26 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+<<<<<<< HEAD
                         NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagen);
+=======
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
+>>>>>>> master
                         $op1.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
-
+                   
                 }
                 else {
                     Mensaje('error', 'Oops...', jsonData.message);
@@ -102,6 +109,7 @@ $(document).ready(function () {
     });
     $('.container .row .col-lg-3 .list-group #op2').on('click', function (evt) {
         evt.preventDefault();
+        $op2.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -117,18 +125,22 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op2.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
+                    
 
                 }
                 else {
@@ -146,6 +158,7 @@ $(document).ready(function () {
     });
     $('.container .row .col-lg-3 .list-group #op3').on('click', function (evt) {
         evt.preventDefault();
+        $op3.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
@@ -161,19 +174,22 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op3.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
-
+                    
                 }
                 else {
                     Mensaje('error', 'Oops...', jsonData.message);
@@ -190,13 +206,13 @@ $(document).ready(function () {
     });
     $('.container .row .col-lg-3 .list-group #op4').on('click', function (evt) {
         evt.preventDefault();
+        $op4.html("");
         $.ajax({
             type: "POST",
             url: '../controller/action/act_verBicicletasPorTipo.php',
             data: { tipo: 5 },
             dataType: "json",
             success: function (response) {
-
                 if (response.success == "1") {
                     for (var i = 0; i < response.bicis.length; i++) {
                         var NewBici = templateBici;
@@ -205,18 +221,22 @@ $(document).ready(function () {
                         NewBici = NewBici.replace('{{id}}', 'ruta' + response.bicis[i].id);
                         NewBici = NewBici.replace('{{modelo}}', response.bicis[i].modelo);
                         NewBici = NewBici.replace('{{precio}}', response.bicis[i].precio);
+                        NewBici = NewBici.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         $op4.append(NewBici);
 
                         NewModal = NewModal.replace('{{id}}', 'ruta' + response.bicis[i].id);
-                        NewModal = NewModal.replace('{{ID}}', response.bicis[i].id);
+                        NewModal = NewModal.replaceAll('{{ID}}', response.bicis[i].id);
                         NewModal = NewModal.replace('{{modelo}}', response.bicis[i].modelo);
                         NewModal = NewModal.replace('{{marca}}', response.bicis[i].marca);
                         NewModal = NewModal.replace('{{talla}}', response.bicis[i].talla);
                         NewModal = NewModal.replace('{{peso}}', response.bicis[i].peso);
                         NewModal = NewModal.replace('{{tamRueda}}', response.bicis[i].tamRueda);
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
+                        NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
+                    
 
                 }
                 else {
@@ -232,4 +252,43 @@ $(document).ready(function () {
             'display': 'flex',
         });
     });
+    ReservarBici();
 });
+
+
+function ReservarBici(){
+    $('#forreser').on('click', function (evt){
+        evt.preventDefault();
+        var horasContratada = parseInt($('#horaC').val());
+        var horaEntregada = $('#horaE').val();
+        var id = $('#idBiCi').val();
+        if(horasContratada > 0){
+            $.ajax({
+                type: "POST",
+                url: '../controller/action/act_ReservarBici.php',
+                data: { bici : id, horasContratada : horasContratada, horaEntrega : horaEntregada},
+                dataType: "json",
+                success: function (response){
+                    if(response.success == "1"){
+                        Mensaje('success', 'Reserva guardada', response.message);
+                    }else {
+                        Mensaje('error', 'Oops...', response.message);
+                    }
+    
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+
+            })
+            
+        }else{
+            Mensaje('error', 'Valor invalido', 'Ingrese una hora mayor a cero (0)');
+           
+        }
+    })
+}
+
+function colocarId(id){
+    $('#idBiCi').val(id);
+}

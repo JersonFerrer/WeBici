@@ -83,6 +83,9 @@ session_start();
                             <a class="dropdown-item" href="cambiar_password.php">
                             <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
                             </a>
+                            <a class="dropdown-item" href="verBici.php">
+                            <i class="fas fa-bicycle"></i> Ver Reservas
+                            </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
                             </a>

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +26,7 @@
     <link rel="stylesheet" href="css/landing-page.min.css">
 
     <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/routes.css">
 </head>
 
@@ -46,10 +51,58 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="routes.html">Rutas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Iniciar Sesion</a>
-                    </li>
+                     <!--Validacion para mostrar el boton de Iniciar Sesion-->
+                     <?php
+                        if (!isset($_SESSION['ID_USUARIO'])){
+                    ?>
+                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar
+                            Sesion</a></li>
+                    <?php
+                        }
+                    ?>
                     </li>
                 </ul>
+
+                 <!--Validacion para mostrar el usuario-->
+                 <?php 
+                    if (isset($_SESSION['ID_USUARIO'])){
+                ?>
+                <ul class="navbar-nav">
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <?php 
+                                echo $_SESSION['NOMBRES_USUARIO'];
+                            ?>
+                            <?php 
+                                if($_SESSION['IMAGEN'] != null){
+                            ?>
+                            <img class="img-profile rounded-circle" src="/img/users/<?php echo $_SESSION['IMAGEN'];?>" alt="profile_image">
+                            <?php 
+                                }
+                            ?>
+                        </a>
+                        
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="user-profile.php">
+                                <i class="fas fa-user fa-sm fa-fw mr-2"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="cambiar_password.php">
+                            <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
+                            </a>
+                            <a class="dropdown-item" href="../controller/action/act_logout.php">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <?php 
+                    }//fin de la validacion para mostrar usuario
+                ?>
             </div>
         </div>
     </nav>
@@ -84,55 +137,41 @@
     </div>
     <!-- Image Showcases -->
     <section class="showcase bg-light py-0">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
-
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                    style="background-image: url('assets/img/routes/routes-banner.jpg');"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Ziruma-Areopuerto</h2>
-                    <h3>34.84 kilómetros</h3>
-                    <p>
-                        Tipo de Ruta: Carretera
-                    </p>
-                    <p>Tiempo: 2 horas 8 minutos</p>
-                    <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will
-                        look great on any device, whether it's a phone, tablet, or desktop the page will behave
-                        responsively!</p>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6 text-white showcase-img" style="background-image: url('assets/img/routes/routes-banner.jpg');">
-                </div>
-                <div class="col-lg-6 my-auto showcase-text">
-                    <h2>Santa Marta-La Pedrera</h2>
-                    <h3>33.45 kilómetros</h3>
-                    <p>
-                       Tipo de Ruta: Carretera 
-                    </p>
-                    <p>
-                        Tiempo: 1 hora 52 minutos
-                    </p>
-                    <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the
-                        way in mobile responsive web development! All of the themes on Start Bootstrap are now using
-                        Bootstrap 4!</p>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                    style="background-image: url('assets/img/routes/routes-banner.jpg');"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Santa Marta-Minca</h2>
-                    <h3>18.53 kilómetros</h3>
-                    <p>
-                        Tipo de Ruta: Cicloturismo
-                    </p>
-                    <p>
-                        Tiempo: 57 minutos
-                    </p>
-                    <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand
-                        some deeper customization options. Out of the box, just add your content and images, and your
-                        new landing page will be ready to go!</p>
+        <div class="container-fluid p-0" id = "rutas">
+            
+        </div>
+        <div class="modal fade" id="verHorario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Horario de ruta</h5>
+                    </div>
+                    <form id="horariosRuta" method="POST">
+                        <div class="modal-body">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Hora Salida</th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Hora Salida</th>
+                                <th></th>
+                                </tr>
+                            </tfoot>
+                            </table>    
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Incribise</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -162,11 +201,12 @@
 
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Core theme JS-->
-
+    <script src="js/ruta.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/main.js"></script>
 </body>
 
 </html>

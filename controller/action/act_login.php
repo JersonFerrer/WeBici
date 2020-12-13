@@ -19,22 +19,10 @@
             $_SESSION['ID_USUARIO'] = $user->getIdUsuario();
             $_SESSION['NOMBRES_USUARIO'] = $user->getNombres();
             $_SESSION['IMAGEN'] = $user->getImagen();
-            
+            $_SESSION['rol'] = $user->getRol();
 
-            echo json_encode(array('success' => 1));
-
-            //header("Location: ../../view/index.php");
-           /* if($user->esAdministrador() == 1){
-                header("Location: ../../vista/administradorUsuarios.php");                
-            }else{
-                header("Location: ../../vista/tabata.php");
-            }*/
+            echo json_encode(array('success' => 1, 'rol' => $user->getRol()));
 
         }else{
             echo json_encode(array('success' => 0, 'message'=> 'Usuario y/o contraseña invalidos'));
-
-            //echo "Usuario y/o contraseña invalidos";
-            //$_SESSION['ERROR_LOGIN'] = "Usuario y/o contraseña invalidos";
-            //Si el usuario no existe se vuelve a mostrar el login
-            //header("Location: ../../view/login.php");
         }
