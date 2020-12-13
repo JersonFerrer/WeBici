@@ -3,13 +3,13 @@ var table = null;
 $(document).ready(function() {
   table = mostrarTabla();
   obtener_data_editar("#dataTable tbody", table);
-  obtener_cedula_eliminar("#dataTable tbody", table);
+  obtener_id_eliminar("#dataTable tbody", table);
   editarAdminUser();
-
 });
 
 function mostrarTabla(){
   return $('#dataTable').DataTable({
+    destroy: "true",
     ajax: "../../controller/action/act_verUsuarios.php",
     columns: [
             { data: "idUsuario" },
@@ -28,6 +28,7 @@ function mostrarTabla(){
 var obtener_data_editar = function(tbody, table){
   $(tbody).on("click", "button.editar", function(){
     var data = table.row($(this).parents("tr")).data();
+    console.log(data);
     var idUsuario = $('#idUsuario').val(data.idUsuario),
         cedula = $("#cedula").val( data.nroCedula),
         nombre = $("#nombres").val( data.nombres),
@@ -38,18 +39,22 @@ var obtener_data_editar = function(tbody, table){
         rol = $("#rol").val( data.rol);
   })
 }
-var obtener_cedula_eliminar = function(tbody, table){
+var obtener_id_eliminar = function(tbody, table){
   $(tbody).on("click","button.eliminar", function(evt){
     evt.preventDefault();
     var data1 = table.row($(this).parents("tr")).data();
+    console.log(data1.idUsuario);
     $.ajax({
           type : "POST",
           url : '../../controller/action/act_eliminaAdmAUser.php',
-          data: {idUsuario: data1.idUsuario, nroCedula : data1.nroCedula, names: data1.nombres, last_names : data1.apellidos, email : data1.correo, address : data1.direccion, cellphone : data1.telefono, rol : data1.rol},
+          data: {idUsuario: data1.idUsuario},
           dataType : 'json',
           success : function(response){
-            if(response.success == "1"){
-              Mensaje('success', 'Usuario eliminado', response.message); 
+            console.log(response);
+            if(response.success == 1){
+              Mensaje('success', 'Usuario eliminado', response.message);
+              mostrarTabla();
+              obtener_data_editar("#dataTable tbody", table);
             }else {
               Mensaje('error', 'Oops...', response.message);
             }
@@ -81,6 +86,8 @@ function editarAdminUser(){
         success : function(response){
           if(response.success == "1"){
             Mensaje('success', 'Usuario modificado', response.message);
+            table = mostrarTabla();
+            obtener_data_editar("#dataTable tbody", table);
             $('#modalconfi').modal('hide');
             $('#modal').modal('hide');
           }else {
