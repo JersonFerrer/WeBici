@@ -79,37 +79,14 @@ $(document).ready(function (){
 }*/
 
 function verHorarioRuta(id){
-    console.log(id);
-    /*return $('#dataTable').DataTable({
-        ajax: "../controller/action/act_verHorarioRuta.php",
-        type: "POST",
-        data:{​​​​​ idRuta : id }​​​​​,
+    return $('#dataTable').DataTable({
+        destroy: "true",
+        ajax: "../controller/action/act_verHorarioRuta.php?idRuta="+id,
         columns: [
-            { data1: "id" },
-            { data1: "fecha" },
-            { data1: "horaSalida" },
-            {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
+                { data: "id" },
+                { data: "fecha" },
+                { data: "horaSalida" },
+                {"defaultContent": "<button type='button' class='btn btn-success'>Inscibirse</button>"}
         ]
-      });*/
-      $.ajax({
-        type: "POST",
-        url : '../controller/action/act_verHorarioRuta.php',
-        dataType: "json",
-        data : {idRuta: id},
-
-        success : function(response){
-
-            console.log(response.data1[0]);
-
-            $('#dataTable').DataTable({
-                data : response,
-                columns: [
-                    { data1: "response.id" },
-                    { data1: "response.fecha" },
-                    { data1: "response.horaSalida" },
-                    {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
-              ]
-            })
-        }
-    })
+      });
 }
