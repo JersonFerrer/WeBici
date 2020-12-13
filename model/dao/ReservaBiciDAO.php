@@ -47,7 +47,7 @@ class ReservaBiciDAO {
                     $data_table[$indice]["id"],
                     $data_table[$indice]["fecha"], 
                     $data_table[$indice]["horasContratadas"],
-                    $data_table[$indice]["horaEntregada"],
+                    $data_table[$indice]["horaEntrega"],
                     $data_table[$indice]["horaDevolucion"],
                     $data_table[$indice]["idUsuario"],
                     $data_table[$indice]["idBicicleta"],
@@ -58,5 +58,40 @@ class ReservaBiciDAO {
 
         
         return $reservas;
+    }
+
+    public function modificarEstado($reserva){
+        $data_source = new DataSource();
+        
+        $stmt1 = "UPDATE reservabici SET estado = :estado WHERE id = :idReserva"; 
+        
+        $resultado = $data_source->ejecutarActualizacion($stmt1, array(
+            ':idReserva' => $reserva->getIdReserva(),
+            ':estado' => $reserva->getEstado()
+            )
+        ); 
+
+      return $resultado;
+    }
+    public function verReservaPorId($IdReserva){
+        $data_source = new DataSource();
+        
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM reservabici WHERE id=:idReserva", array(":idReserva"=>$IdReserva));
+
+        $reserva=null;
+        if(count($data_table)==1){
+            $reserva = new ReservaBici(
+                $data_table[0]["id"],
+                $data_table[0]["fecha"], 
+                $data_table[0]["horasContratadas"],
+                $data_table[0]["horaEntrega"],
+                $data_table[0]["horaDevolucion"],
+                $data_table[0]["idUsuario"],
+                $data_table[0]["idBicicleta"],
+                $data_table[0]["estado"]
+                );
+        }
+        
+        return $reserva;
     }
 }

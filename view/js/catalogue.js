@@ -39,9 +39,10 @@ $(document).ready(function () {
                                                     <li>Peso: {{peso}}</li>
                                                     <li>Tamaño Rueda: {{tamRueda}}</li>
                                                     <li>ID: {{ID}}</li>
+                                                    <input type = "hidden" id ="idbicicleta" value = "{{ID}}"> 
                                                 </ul>
                                                 <p>{{descripcion}}</p>
-                                                <button class="btn btn-primary" data-dismiss="modal" type="button" data-toggle="modal" href="#forReserva" onclick = "ReservarBici({{ID}})">
+                                                <button class="btn btn-primary alquilar" data-dismiss="modal" type="button" data-toggle="modal" href="#forReserva" id="{{ID}}" onclick = "colocarId({{ID}})" >
                                                     <i class="fas fa-check mr-1"></i>
                                                     Alquilar
                                                 </button>
@@ -84,7 +85,9 @@ $(document).ready(function () {
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
                         NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
+                   
                 }
                 else {
                     Mensaje('error', 'Oops...', jsonData.message);
@@ -131,7 +134,9 @@ $(document).ready(function () {
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
                         NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
+                    
 
                 }
                 else {
@@ -178,8 +183,9 @@ $(document).ready(function () {
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
                         NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
-
+                    
                 }
                 else {
                     Mensaje('error', 'Oops...', jsonData.message);
@@ -224,7 +230,9 @@ $(document).ready(function () {
                         NewModal = NewModal.replace('{{descripcion}}', response.bicis[i].descripcion);
                         NewModal = NewModal.replace('{{imagen}}', response.bicis[i].imagenes[0].imagen);
                         DivModals.append(NewModal);
+                        
                     }
+                    
 
                 }
                 else {
@@ -240,15 +248,16 @@ $(document).ready(function () {
             'display': 'flex',
         });
     });
+    ReservarBici();
 });
 
-function ReservarBici(id){
 
+function ReservarBici(){
     $('#forreser').on('click', function (evt){
         evt.preventDefault();
         var horasContratada = parseInt($('#horaC').val());
         var horaEntregada = $('#horaE').val();
-        
+        var id = $('#idBiCi').val();
         if(horasContratada > 0){
             $.ajax({
                 type: "POST",
@@ -268,11 +277,14 @@ function ReservarBici(id){
                 }
 
             })
-            horasContratada="";
+            
         }else{
             Mensaje('error', 'Valor invalido', 'Ingrese una hora mayor a cero (0)');
-            horasContratada.val("");
+           
         }
     })
+}
 
+function colocarId(id){
+    $('#idBiCi').val(id);
 }

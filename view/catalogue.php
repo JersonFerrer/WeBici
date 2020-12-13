@@ -206,6 +206,9 @@
                                                         <label for="horaE" class="form-label">Hora de Entrega:</label>
                                                         <input type="time" name="horaE" value="19:40" max="20:00:00" min="07:00:00" step="60" id="horaE">
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <input type="hidden" id= "idBiCi" readonly="readonly">
+                                                    </div>
                                                     
                                                     <button class="btn btn-primary" data-dismiss="modal" type="button" id="forreser">
                                                     <i class="fas fa-check mr-1"></i>

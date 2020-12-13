@@ -1,9 +1,7 @@
 <?php
-    
-    session_start();
-    
     require_once (__DIR__.'/../mdb/mdbUsuario.php');
 
+    $idUsuario = $_POST['idUsuario'];
     $nroCedula = $_POST['nroCedula'];
     $nombres = strtoupper($_POST['names']);
     $apellidos = strtoupper($_POST['last_names']);
@@ -16,8 +14,6 @@
     
     
     if($nroCedula != '' && $nombres != '' && $apellidos != '' && $correo != '' && $direccion != '' && $telefono != ''){
-        $idUsuario = $_SESSION['ID_USUARIO'];
-        $_SESSION['NOMBRES_USUARIO'] = $nombres;
         
         $usuario = new Usuario($idUsuario, $nroCedula, $nombres, $apellidos, $correo, $password, $direccion, $telefono, $rol);
     

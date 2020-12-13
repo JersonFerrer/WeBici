@@ -1,7 +1,11 @@
 <?php
     session_start();
+    if(!isset($_SESSION['ID_USUARIO'])){
+        header("location: login.php");
+    }
+    require_once (__DIR__.'/../controller/mdb/mdbUsuario.php');
+    $usuario = verUsuarioPorId($_SESSION['ID_USUARIO']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WeBici Rutas </title>
+    <title>WeBici - Perfil</title>
 
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -22,19 +26,22 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap-->
+    <link rel="stylesheet" href="css/sb-admin-2.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/landing-page.min.css">
+
+    <!-- sweetaleert2 css-->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="css/profile-styles.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/routes.css">
 </head>
 
-<body id="catalogue" class="bg-light-blue">
+<body id="user-profile" class="bg-dark">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top mb-5" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger ml-5" href="index.php">
+            <a class="navbar-brand js-scroll-trigger" href="index.php">
                 <img src="assets/img/WeBici.png" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -48,23 +55,12 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#services">Servicios</a>
                     </li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="catalogue.php">Catálogo</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger active2" href="routes.html">Rutas</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#routes">Rutas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#team">Nuestros Guías</a>
                     </li>
-                     <!--Validacion para mostrar el boton de Iniciar Sesion-->
-                     <?php
-                        if (!isset($_SESSION['ID_USUARIO'])){
-                    ?>
-                    <li class="nav-item"><a class="btn btn-primary js-scroll-trigger" href="login.php">Iniciar
-                            Sesion</a></li>
-                    <?php
-                        }
-                    ?>
-                    </li>
                 </ul>
-
-                 <!--Validacion para mostrar el usuario-->
-                 <?php 
+                <!--Validacion para mostrar el usuario-->
+                <?php 
                     if (isset($_SESSION['ID_USUARIO'])){
                 ?>
                 <ul class="navbar-nav">
@@ -74,17 +70,12 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                             <?php 
-                                echo $_SESSION['NOMBRES_USUARIO'];
+                                echo $usuario->getNombres();
                             ?>
-                            <?php 
-                                if($_SESSION['IMAGEN'] != null){
-                            ?>
-                            <img class="img-profile rounded-circle" src="/img/users/<?php echo $_SESSION['IMAGEN'];?>" alt="profile_image">
-                            <?php 
-                                }
-                            ?>
+                            <img id="profileImgNavbar" class="img-profile rounded-circle" src="/img/users/<?php echo $usuario->getImagen();?>"
+                                alt="">
                         </a>
-                        
+
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
@@ -93,6 +84,9 @@
                             </a>
                             <a class="dropdown-item" href="cambiar_password.php">
                             <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
+                            </a>
+                            <a class="dropdown-item" href="verBici.php">
+                            <i class="fas fa-bicycle"></i> Ver Reservas
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
@@ -107,81 +101,52 @@
         </div>
     </nav>
 
-    <!-- Masthead -->
-    <header class="masthead text-white text-center">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <h1 class="mb-5">Encuentra la ruta ideal para ti!</h1>
-                </div>
-                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                    <form>
-                        <div class="form-row">
-                            <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                <input type="text" class="form-control form-control-lg"
-                                    placeholder="Busca la ruta que quieras...">
+    <div class="container pt-3 mt-5">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <hr>
+                <div class="row">
+                    <div class="mx-auto col-lg-10">
+                        <div class="p-3">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Todas tus bicicletas reservada</h1>
                             </div>
-                            <div class="col-12 col-md-3">
-                                <button type="submit" class="btn btn-block btn-lg btn-primary">Buscar</button>
-                            </div>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                    <th>ID</th>
+                                    <th>Fecha</th>
+                                    <th>Horas Contratadas</th>
+                                    <th>Hora Entrega</th>
+                                    <th>Hora Devolucion</th>
+                                    <th>Estado</th>
+                                    <th></th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                    <th>ID</th>
+                                    <th>Fecha</th>
+                                    <th>Horas Contratadas</th>
+                                    <th>Hora Entrega</th>
+                                    <th>Hora Devolucion</th>
+                                    <th>Estado</th>
+                                    <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="p-5 mt-5 text-center">
-        <h2>Aqui estan todas nuestras rutas</h2>
-    </div>
-    <!-- Image Showcases -->
-    <section class="showcase bg-light py-0">
-        <div class="container-fluid p-0" id = "rutas">
-            
-        </div>
-        <div class="modal fade" id="verHorario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Horario de ruta</h5>
                     </div>
-                    <form id="horariosRuta" method="POST">
-                        <div class="modal-body">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                <th>ID</th>
-                                <th>Fecha</th>
-                                <th>Hora Salida</th>
-                                <th></th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                <th>ID</th>
-                                <th>Fecha</th>
-                                <th>Hora Salida</th>
-                                <th></th>
-                                </tr>
-                            </tfoot>
-                            </table>    
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Incribise</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer-->
-    <footer class="footer py-5 mt-5 bg-light">
+    <footer class="footer py-4 bg-light">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-left text-dark">Copyright © WeBici 2020</div>
+                <div class="col-lg-4 text-lg-left">Copyright © WeBici 2020</div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
@@ -194,19 +159,27 @@
             </div>
         </div>
     </footer>
+    
 
     <!-- Bootstrap core JS-->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- sweetalert2-->
+    <script src="js/sweetalert2.all.min.js"></script>
     <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Core theme JS-->
-    <script src="js/ruta.js"></script>
     <script src="js/bootstrap.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/regular_expresions.js"></script>
+    <script src="js/alert_messages.js"></script>
+    <script src="js/verReservas.js"></script>
+    
 </body>
 
 </html>

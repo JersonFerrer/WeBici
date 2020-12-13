@@ -18,3 +18,13 @@ function guardarReserva(ReservaBici $reserva){
 
     return $reserva;
 }
+function modificarEstado(ReservaBici $reserva){
+    $dao=new ReservaBiciDAO();
+    $dao->modificarEstado($reserva);
+}
+
+function verReservaPorId($idReserva){
+    $dao = new ReservaBiciDAO();
+    $reserva =$dao-> verReservaPorId($idReserva);
+    return $reserva;
+}

@@ -12,11 +12,13 @@
   <title>SB Admin 2 - Tables</title>
 
   <!-- Custom fonts for this template -->
+  <link rel="stylesheet" href="css/style.css">
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/sweetalert2.min.css">
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -358,6 +360,7 @@
                       <th>Direccion</th>
                       <th>Telefono</th>
                       <th>Rol</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -370,6 +373,7 @@
                       <th>Direccion</th>
                       <th>Telefono</th>
                       <th>Rol</th>
+                      <th></th>
                     </tr>
                   </tfoot>
                 </table>
@@ -382,7 +386,91 @@
 
       </div>
       <!-- End of Main Content -->
+      <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modificar usuario</h5>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="idUsuario" class="form-label">IdUsuario</label>
+                  <input type="text"  id="idUsuario" class="form-control" readonly="readonly">
+                </div>
+                <div class="mb-3">
+                  <label for="cedula" class="form-label">Cedula</label>
+                  <input type="number" class="form-control" id="cedula" readonly="readonly">
+                </div>
+                <div class="mb-3">
+                  <label for="nombres" class="form-label">Nombres</label>
+                  <input type="text" class="form-control" id="nombres">
+                </div>
+                <div class="mb-3">
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos">
+                </div>
+                <div class="mb-3">
+                  <label for="correo" class="form-label">Correo</label>
+                  <input type="text" class="form-control" id="correo">
+                </div>
+                <div class="mb-3">
+                  <label for="direccion" class="form-label">Direccion</label>
+                  <input type="text" class="form-control" id="direccion">
+                </div>
+                <div class="mb-3">
+                  <label for="telefono" class="form-label">Telefono</label>
+                  <input type="text" class="form-control" id="telefono">
+                </div>
+                <div class="mb-3">
+                  <label for="rol" class="form-label">Rol</label>
+                  <input type="text" class="form-control" id="rol">
+                </div> 
+                
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" href = "#modalconfi">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" tabindex="-1" id= "modalconfi">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">¡Advertencia!</h5>
+              
+            </div>
+            <div class="modal-body">
+              <p>¿Seguro que quieres modificar este usuario?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="guardar">Confirmar</button>
 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" tabindex="-1" id= "modalelim">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">¡Advertencia!</h5>
+              
+            </div>
+            <div class="modal-body">
+              <p>¿Seguro que quieres eliminar este usuario?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="eliminar">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -439,6 +527,8 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+  <script src="../js/sweetalert2.all.min.js"></script>
+  <script src="../js/alert_messages.js"></script>
 
 </body>
 
