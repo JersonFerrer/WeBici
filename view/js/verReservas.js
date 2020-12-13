@@ -6,6 +6,7 @@ $(document).ready(function() {
 
 function mostrarTabla(){
     return $('#dataTable').DataTable({
+      destroy: "true",
       ajax: "../controller/action/act_verReserva.php",
       columns: [
               { data: "id" },
@@ -30,7 +31,8 @@ var cancelarReserva = function(tbody, table){
             dataType : 'json',
             success : function(response){
               if(response.success == "1"){
-                Mensaje('success', 'Su reserva fue cancelada', response.message); 
+                Mensaje('success', 'Su reserva fue cancelada', response.message);
+                mostrarTabla();
               }else {
                 Mensaje('error', 'Su reserva no pudo ser cancelada', response.message);
               }
