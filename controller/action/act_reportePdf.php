@@ -20,11 +20,11 @@
             // Salto de línea
             $this->Ln(20);
             $this->Cell(30,10,'Fecha',1,0,'C');
-            $this->Cell(30,10,'Origen',1,0,'C');
+            $this->Cell(50,10,'Origen',1,0,'C');
             $this->Cell(40,10,'Destino',1,0,'C');
             $this->Cell(15,10,'T.E',1,0,'C');
             $this->Cell(40,10,'H. salida',1,0,'C');
-            $this->Cell(30,10,'Estado',1,1,'C');
+            $this->Cell(20,10,'Estado',1,1,'C');
             
         }
 
@@ -48,11 +48,11 @@
     $pdf->SetFont('Times','',12);
     foreach($inscripciones as $indice => $valor){
         $pdf->Cell(30,10,$inscripciones[$indice]->fecha,1,0,'C');
-        $pdf->Cell(30,10,$inscripciones[$indice]->origen,1,0,'C');
+        $pdf->Cell(50,10,$inscripciones[$indice]->origen,1,0,'C');
         $pdf->Cell(40,10,$inscripciones[$indice]->destino,1,0,'C');
         $pdf->Cell(15,10,$inscripciones[$indice]->horaSalida,1,0,'C');
         $pdf->Cell(40,10,$inscripciones[$indice]->tiempoEstimado,1,0,'C');
-        $pdf->Cell(30,10,$inscripciones[$indice]->estado,1,1,'C');
+        $pdf->Cell(20,10,$inscripciones[$indice]->estado,1,1,'C');
     }
     $pdf->Output();
         

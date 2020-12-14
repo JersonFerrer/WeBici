@@ -41,6 +41,7 @@ $(document).ready(function (){
                     $('#dataTable tbody').one('click', "button.inscribirse", function(evt){
                         evt.preventDefault();
                         var data1 = table.row($(this).parents("tr")).data();
+                        console.log(data1);
                         $.ajax({
                             type : "POST",
                             url : '../controller/action/act_inscribirseRutas.php',
