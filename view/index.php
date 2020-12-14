@@ -83,6 +83,9 @@ session_start();
                             <a class="dropdown-item" href="cambiar_password.php">
                             <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
                             </a>
+                            <a class="dropdown-item" href="verRutasInscrita.php">
+                            <i class="fas fa-route"></i> Ver Rutas
+                            </a>
                             <a class="dropdown-item" href="verBici.php">
                             <i class="fas fa-bicycle"></i> Ver Reservas
                             </a>

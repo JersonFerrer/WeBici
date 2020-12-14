@@ -53,7 +53,7 @@ $(document).ready(function (){
                                     Mensaje('success', 'Su inscripcion fue exitosa', response.message);
                                     $('#verHorario').modal('hide');
                                 }else{
-                                    Mensaje('success', 'Su inscripcion no fue exitosa', response.message);
+                                    Mensaje('error', 'Su inscripcion no fue exitosa', response.message);
                                     $('#verHorario').modal('hide');
                                 }
                                 
