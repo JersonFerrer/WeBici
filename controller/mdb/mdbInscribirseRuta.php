@@ -18,3 +18,20 @@ function consultarInscripcionesPorIdUsuario($idUsuario){
 
     return $inscripciones;
 }
+
+function verInscripcionPorId($idInscripcion){
+    $dao = new InscripcionRutaDAO();
+
+    $inscripcion = $dao->verInscripcionPorId($idInscripcion);
+
+    return $inscripcion;
+    
+}
+
+function modificarEstadoInscripcion($inscripcion){
+    $dao = new InscripcionRutaDAO();
+
+    $inscripcion = $dao->modificarEstadoInscripcion($inscripcion);
+
+    return $inscripcion;
+}

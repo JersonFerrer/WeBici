@@ -8,7 +8,8 @@ $(document).ready(function() {
     console.log(data1.id);
     $.ajax({
           type : "POST",
-          url : '../controller/action/act_verInscripcionesRutas.php',
+          url : '../controller/action/act_cancelarReservaRuta.php',
+          data : { idInscripcion : data1.id},
           dataType : 'json',
           success : function(response){
             if(response.success == "1"){

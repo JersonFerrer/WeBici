@@ -54,4 +54,33 @@ class InscripcionRutaDAO {
         
         return $inscripciones;
     }
+    function verInscripcionPorId($idInscripcion){
+        $data_source = new DataSource();
+        
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM inscripcionruta WHERE id = :idInscripcion", array(":idInscripcion"=>$idInscripcion));
+
+        $inscripcion=null;
+
+    
+        $inscripcion = new InscripcionRuta(
+                $data_table[0]["id"],
+                $data_table[0]["idUsuario"], 
+                $data_table[0]["idHorarioRuta"],
+                $data_table[0]["estado"]
+                );
+        return $inscripcion;
+    }
+    function modificarEstadoInscripcion($inscripcion){
+        $data_source = new DataSource();
+        
+        $stmt1 = "UPDATE inscripcionruta SET estado = :estado WHERE id = :idInscripcion"; 
+        
+        $resultado = $data_source->ejecutarActualizacion($stmt1, array(
+            ':idInscripcion' => $inscripcion->getIdInscripcion(),
+            ':estado' => $inscripcion->getEstado()
+            )
+        ); 
+
+      return $resultado;
+    }
 }
