@@ -35,13 +35,12 @@ $(document).ready(function (){
                     $op1.append(NewRuta);
                     
                 }
-                $('.verHorario').on('click', function(evt){
+                $('.verHorario').one('click', function(evt){
                     evt.preventDefault();
                     verHorarioRuta($(this).attr('id'));
                     $('#dataTable tbody').one('click', "button.inscribirse", function(evt){
                         evt.preventDefault();
                         var data1 = table.row($(this).parents("tr")).data();
-                        console.log(data1.id);
                         $.ajax({
                             type : "POST",
                             url : '../controller/action/act_inscribirseRutas.php',

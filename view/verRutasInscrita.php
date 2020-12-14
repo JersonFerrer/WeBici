@@ -108,8 +108,9 @@
                 <div class="row">
                     <div class="mx-auto col-lg-10">
                         <div class="p-3">
-                            <div class="text-center">
+                            <div class="text-center d-flex">
                                 <h1 class="h4 text-gray-900 mb-4">Todas tus rutas reservada</h1>
+                                <div class="ml-auto"><a class ="btn btn-primary" href="../controller/action/act_reportePdf.php"><i class="far fa-file-pdf"></i></a></div>
                             </div>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -118,7 +119,7 @@
                                     <th>Fecha</th>
                                     <th>Origen</th>
                                     <th>Destino</th>
-                                    <th>Descripcion</th>
+                                    <th>Hora salida</th>
                                     <th>Tiempo Estimado</th>
                                     <th>Estado</th>
                                     <th></th>
@@ -130,8 +131,8 @@
                                     <th>Fecha</th>
                                     <th>Origen</th>
                                     <th>Destino</th>
-                                    <th>Tiempo estimado</th>
                                     <th>Hora salida</th>
+                                    <th>Tiempo estimado</th>
                                     <th>Estado</th>
                                     <th></th>
                                     </tr>
