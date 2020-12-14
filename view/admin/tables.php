@@ -36,9 +36,10 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <img src="../assets/img/WeBici.png" alt="" />
+            </a>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
       </a>
 
       <!-- Divider -->
@@ -396,30 +397,30 @@
               <h5 class="modal-title" id="exampleModalLabel">Agregar usuario</h5>
             </div>
             <div class="modal-body">
-              <form id = "nuevoUserform">
+              <form id = "nuevoUserform" method="POST">
                 <div class="mb-3">
                   <label for="nuevacedula" class="form-label">Cedula</label>
-                  <input type="number" class="form-control" id="nuevacedula" placeholder = "Cedula">
+                  <input type="number" name="nroCedula" class="form-control" id="nuevacedula" placeholder = "Cedula">
                 </div>
                 <div class="mb-3">
                   <label for="nuevanombres" class="form-label">Nombres</label>
-                  <input type="text" class="form-control" id="nuevanombres" placeholder = "Nombres">
+                  <input type="text" name="names" class="form-control" id="nuevanombres" placeholder = "Nombres">
                 </div>
                 <div class="mb-3">
                   <label for="nuevaapellidos" class="form-label">Apellidos</label>
-                  <input type="text" class="form-control" id="nuevaapellidos" placeholder = "Apellidos">
+                  <input type="text" name="last_names" class="form-control" id="nuevaapellidos" placeholder = "Apellidos">
                 </div>
                 <div class="mb-3">
                   <label for="nuevacorreo" class="form-label">Correo</label>
-                  <input type="text" class="form-control" id="nuevacorreo" placeholder = "Correo">
+                  <input type="text" name="email" class="form-control" id="nuevacorreo" placeholder = "Correo">
                 </div>
                 <div class="mb-3">
                   <label for="nuevacontrasena" class="form-label">Contraseña</label>
-                  <input type="text" class="form-control" id="nuevacontrasena" placeholder = "Contraseña">
+                  <input type="password" name="password" class="form-control" id="nuevacontrasena" placeholder = "Contraseña">
                 </div>
                 <div class="mb-3">
                   <label for="nuevarol" class="form-label">Rol</label>
-                  <input type="text" class="form-control" id="nuevarol" placeholder = "Rol">
+                  <input type="text" name="rol" class="form-control" id="nuevarol" placeholder = "Rol">
                 </div> 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

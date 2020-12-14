@@ -16,11 +16,12 @@ $(document).ready(function() {
         rol = $("#rol").val( data.rol);
   });
   $('#nuevoUserform').submit(function(e) {
+    console.log($(this).serialize());
     e.preventDefault();
     if(ValidateForm()){
           $.ajax({
               type: "POST",
-              url: '../../controller/action/act_registrarUsuario.php',
+              url: '../../controller/action/act_registrarUsuarioAdm.php',
               data: $(this).serialize(),
               success: function(response)
               {
@@ -29,7 +30,8 @@ $(document).ready(function() {
                   // user is successfully register in the back-end
                   if (jsonData.success == "1")
                   {
-                      MensajeConfirm('success','Registro exitoso!',jsonData.message,'login.php');
+                      Mensaje('success','Registro exitoso!',jsonData.message);
+                      $('#nuevoUser').modal('hide');
                   }
                   else
                   {
@@ -147,7 +149,7 @@ function editarAdminUser(){
     })
 }
 
-function ValidateForm() {
+function ValidateForm(){
   var cedula = $('#nuevacedula').val(),
       nombres = $('#nuevanombres').val(),
       apellidos = $('#nuevaapellidos').val(),
@@ -163,5 +165,5 @@ function ValidateForm() {
             return false;
         }
     }
-  
+  return true;
 }
