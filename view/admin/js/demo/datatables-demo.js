@@ -16,7 +16,7 @@ $(document).ready(function() {
         rol = $("#rol").val( data.rol);
   });
 
-  //obtener_data_editar("#dataTable tbody", table);
+  
   obtener_id_eliminar("#dataTable tbody", table);
   editarAdminUser();
 });
@@ -39,20 +39,7 @@ function mostrarTabla(){
   });
   
 }
-/*var obtener_data_editar = function(tbody, table){
-  $(tbody).on("click", "button.editar", function(){
-    var data = table.row($(this).parents("tr")).data();
-    console.log(data);
-    var idUsuario = $('#idUsuario').val(data.idUsuario),
-        cedula = $("#cedula").val( data.nroCedula),
-        nombre = $("#nombres").val( data.nombres),
-        apellido = $("#apellidos").val( data.apellidos),
-        correo = $("#correo").val( data.correo),
-        direccion = $("#direccion").val( data.direccion),
-        telefono = $("#telefono").val( data.telefono),
-        rol = $("#rol").val( data.rol);
-  })
-}*/
+
 var obtener_id_eliminar = function(tbody, table){
   $(tbody).on("click","button.eliminar", function(evt){
     evt.preventDefault();
@@ -67,8 +54,8 @@ var obtener_id_eliminar = function(tbody, table){
             console.log(response);
             if(response.success == 1){
               Mensaje('success', 'Usuario eliminado', response.message);
-              mostrarTabla();
-              obtener_data_editar("#dataTable tbody", table);
+              table=mostrarTabla();
+              
             }else {
               Mensaje('error', 'Oops...', response.message);
             }

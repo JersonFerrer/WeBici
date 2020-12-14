@@ -24,6 +24,7 @@
     <!-- Bootstrap-->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/landing-page.min.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/estilos.css">
@@ -169,7 +170,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Incribise</button>
                         </div>
                     </form>
                 </div>
@@ -198,7 +198,8 @@
     <!-- Bootstrap core JS-->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/alert_messages.js"></script>
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>

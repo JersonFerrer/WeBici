@@ -1,3 +1,4 @@
+var table = null;
 $(document).ready(function (){
     var $op1 = $('#rutas');
     var templateRuta =`<div class="row no-gutters">
@@ -41,52 +42,46 @@ $(document).ready(function (){
        }
     });
 
-
 })
 
-/*function verHorarioRuta(id){
-    $.ajax({
-        type: "POST",
-        url : '../controller/action/act_verHorarioRuta.php',
-        dataType: "json",
-        data : {idRuta: id},
-
-        success : function(response){
-            $('#dataTable').DataTable({
-                data : response,
-                columns: [
-                    { data: "response.id" },
-                    { data: "response.fecha" },
-                    { data: "response.horaSalida" },
-                    {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
-              ]
-            })
-        }
-    })
-    $('#dataTable').DataTable({
-            'ajax' : {​​​​​
-                url: "../controller/action/act_verHorarioRuta.php",
-                type: "POST",
-                data:{​​​​​ idRuta : id }​​​​​
-            }​​​​​,
-            'columns': [
-                { data: "id" },
-                { data: "fecha" },
-                { data: "horaSalida" },
-                {"defaultContent": "<button type='button' class='eliminar btn btn-success' data-toggle='modal' >Inscribirse</button>"}
-            ]
-    })
-}*/
-
 function verHorarioRuta(id){
-    return $('#dataTable').DataTable({
+    table = $('#dataTable').DataTable({
         destroy: "true",
         ajax: "../controller/action/act_verHorarioRuta.php?idRuta="+id,
         columns: [
                 { data: "id" },
                 { data: "fecha" },
                 { data: "horaSalida" },
-                {"defaultContent": "<button type='button' class='btn btn-success'>Inscibirse</button>"}
+                {"defaultContent": "<button type='button' class='btn btn-success inscribirse' onclick = 'registarHorario()' >Inscibirse</button>"}
         ]
       });
+    //return table;
+}
+
+function registarHorario(){
+    $('#dataTable tbody').on('click', "button.inscribirse", function(evt){
+        evt.preventDefault();
+        var data1 = table.row($(this).parents("tr")).data();
+        console.log(data1.id);
+        $.ajax({
+            type : "POST",
+            url : '../controller/action/act_inscribirseRutas.php',
+            data : { idHorario : data1.id},
+            dataType: "json",
+            success : function(response){
+                console.log(response);
+                if(response.success == '1'){
+                    Mensaje('success', 'Su inscripcion fue exitosa', response.message);
+                    $('#verHorario').modal('hide');
+                }else{
+                    Mensaje('success', 'Su inscripcion no fue exitosa', response.message);
+                    $('#verHorario').modal('hide');
+                }
+                
+            },
+                error: function (response) {
+                console.log(response);
+            }
+        })
+    })
 }
