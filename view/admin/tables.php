@@ -34,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -46,96 +46,18 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-
       <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-
+      <hr class="sidebar-divider d-none d-md-block">
       <!-- Nav Item - Tables -->
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="tables.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -337,15 +259,11 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <div class="card-header py-3 d-flex">
+              <h6 class="m-0 font-weight-bold text-primary">Tabla de usuario</h6>
+              <div class = "ml-auto"><button class = "btn btn-primary" id="agregarUser" data-toggle= "modal" href = "#nuevoUser"><i class="fas fa-user-plus"></i></button></div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -471,6 +389,47 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="nuevoUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agregar usuario</h5>
+            </div>
+            <div class="modal-body">
+              <form id = "nuevoUserform">
+                <div class="mb-3">
+                  <label for="nuevacedula" class="form-label">Cedula</label>
+                  <input type="number" class="form-control" id="nuevacedula" placeholder = "Cedula">
+                </div>
+                <div class="mb-3">
+                  <label for="nuevanombres" class="form-label">Nombres</label>
+                  <input type="text" class="form-control" id="nuevanombres" placeholder = "Nombres">
+                </div>
+                <div class="mb-3">
+                  <label for="nuevaapellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="nuevaapellidos" placeholder = "Apellidos">
+                </div>
+                <div class="mb-3">
+                  <label for="nuevacorreo" class="form-label">Correo</label>
+                  <input type="text" class="form-control" id="nuevacorreo" placeholder = "Correo">
+                </div>
+                <div class="mb-3">
+                  <label for="nuevacontrasena" class="form-label">Contraseña</label>
+                  <input type="text" class="form-control" id="nuevacontrasena" placeholder = "Contraseña">
+                </div>
+                <div class="mb-3">
+                  <label for="nuevarol" class="form-label">Rol</label>
+                  <input type="text" class="form-control" id="nuevarol" placeholder = "Rol">
+                </div> 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-primary" data-toggle="modal">Guardar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -526,9 +485,11 @@
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+  
   <script src="../js/sweetalert2.all.min.js"></script>
+  <script src="../js/regular_expresions.js"></script>
   <script src="../js/alert_messages.js"></script>
+  <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 

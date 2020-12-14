@@ -15,6 +15,51 @@ $(document).ready(function() {
         telefono = $("#telefono").val( data.telefono),
         rol = $("#rol").val( data.rol);
   });
+  $('#nuevoUserform').submit(function(e) {
+    e.preventDefault();
+    if(ValidateForm()){
+          $.ajax({
+              type: "POST",
+              url: '../../controller/action/act_registrarUsuario.php',
+              data: $(this).serialize(),
+              success: function(response)
+              {
+                  var jsonData = JSON.parse(response);
+  
+                  // user is successfully register in the back-end
+                  if (jsonData.success == "1")
+                  {
+                      MensajeConfirm('success','Registro exitoso!',jsonData.message,'login.php');
+                  }
+                  else
+                  {
+                      Mensaje('error','Oops...',jsonData.message);
+                  }
+            }
+          });
+      }
+    });
+
+    $('#nuevanombres').keyup(function(){
+        if(!LettersValidation($(this).val()) && $(this).val() != ''){
+            Mensaje('error','Oops...','Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
+            $(this).val('');
+        }
+    });
+
+    $('#nuevaapellidos').keyup(function(){
+        if(!LettersValidation($(this).val()) && $(this).val() != ''){
+            Mensaje('error','Oops...','Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
+            $(this).val('');
+        }
+    });
+
+    $('#nuevacedula').keyup(function(){
+        if(!CedulaValidation($(this).val()) && $(this).val() != ''){
+            Mensaje('error','Oops...','Ingresó un caracter invalido en el campo '+ $(this).attr('placeholder'));
+            $(this).val('');
+        }
+    });
 
   
   obtener_id_eliminar("#dataTable tbody", table);
@@ -102,3 +147,21 @@ function editarAdminUser(){
     })
 }
 
+function ValidateForm() {
+  var cedula = $('#nuevacedula').val(),
+      nombres = $('#nuevanombres').val(),
+      apellidos = $('#nuevaapellidos').val(),
+      correo = $('#nuevacorreo').val(),
+      contrasena = $('#nuevacontrasena').val(),
+      rol = $('#nuevarol').val();
+  if(cedula == '' || nombres == '' || apellidos == '' || correo == '' || rol == '' || contrasena == '' ){
+        Mensaje('error','Oops...','Hay campos vacios. LLene todos los campos',);
+        return false;
+    }else{
+        if(!EmailValidation(correo)){
+            Mensaje('error','Oops...','El email no cumple con la estructura');
+            return false;
+        }
+    }
+  
+}
