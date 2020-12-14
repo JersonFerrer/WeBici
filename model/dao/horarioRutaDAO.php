@@ -48,4 +48,24 @@ class HorarioRutaDAO {
         } 
         return $horarios;
     }
+
+    public function verhorariosPorIdInscripcion($idHorarioRuta){
+        $data_source = new DataSource();
+        
+        $data_table = $data_source->ejecutarConsulta("SELECT * FROM horarioruta WHERE id = :idHorarioRuta", array(":idHorarioRuta"=>$idHorarioRuta));
+
+        $horario=null;
+        $horarios=array();
+
+        foreach($data_table as $indice => $valor){
+            $horario = new HorarioRuta(
+                    $data_table[$indice]["id"],
+                    $data_table[$indice]["fecha"], 
+                    $data_table[$indice]["horaSalida"],
+                    $data_table[$indice]["idRuta"]
+                    );
+            array_push($horarios,$horario);
+        } 
+        return $horarios;
+    }
 }

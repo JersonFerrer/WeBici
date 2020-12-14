@@ -10,6 +10,7 @@
 //Bicicleta.php
 require_once ("DataSource.php");
 require_once (__DIR__."/../entity/InscripcionRuta.php");
+require_once (__DIR__.'/../entity/VistaInscripcionRuta.php');
 
 class InscripcionRutaDAO {
 
@@ -29,28 +30,28 @@ class InscripcionRutaDAO {
         return $ultimoIdInsertado;
     }
 
-    /*public function verRutas(){
+    public function consultarInscripcionesPorIdUsuario($idUsuario){
         $data_source = new DataSource();
         
-        $data_table = $data_source->ejecutarConsulta("SELECT * FROM ruta");
+        $data_table = $data_source->ejecutarConsulta("SELECT inscripcionruta.id, horarioruta.fecha, ruta.origen, ruta.destino, ruta.tiempoEstimado, horarioruta.horaSalida, inscripcionruta.estado FROM inscripcionruta INNER JOIN horarioruta ON horarioruta.id = inscripcionruta.idHorarioRuta INNER JOIN ruta ON ruta.id = horarioruta.idRuta INNER JOIN usuario ON usuario.id = inscripcionruta.idUsuario WHERE usuario.id = :idUsuario", array(":idUsuario"=>$idUsuario));
 
-        $ruta=null;
-        $rutas=array();
+        $inscripcion=null;
+        $inscripciones=array();
 
         foreach($data_table as $indice => $valor){
-            $ruta = new Ruta(
+            $inscripcion = new VistaInscripcionRuta(
                     $data_table[$indice]["id"],
-                    $data_table[$indice]["nombre"], 
+                    $data_table[$indice]["fecha"], 
                     $data_table[$indice]["origen"],
                     $data_table[$indice]["destino"],
-                    $data_table[$indice]["descripcion"],
-                    $data_table[$indice]["iframeMapa"],
-                    $data_table[$indice]["tiempoEstimado"]
+                    $data_table[$indice]["tiempoEstimado"],
+                    $data_table[$indice]["horaSalida"],
+                    $data_table[$indice]["estado"]
                     );
-            array_push($rutas,$ruta);
+            array_push($inscripciones,$inscripcion);
         }
 
         
-        return $rutas;
-    }*/
+        return $inscripciones;
+    }
 }

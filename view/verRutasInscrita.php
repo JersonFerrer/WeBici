@@ -85,8 +85,8 @@
                             <a class="dropdown-item" href="cambiar_password.php">
                             <i class="fas fa-key fa-sm fa-fw mr-2"></i> Cambiar Contraseña
                             </a>
-                            <a class="dropdown-item" href="verRutasInscrita.php">
-                            <i class="fas fa-route"></i> Ver Rutas
+                            <a class="dropdown-item" href="verBici.php">
+                            <i class="fas fa-bicycle"></i> Ver Reservas
                             </a>
                             <a class="dropdown-item" href="../controller/action/act_logout.php">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Cerrar Sesion
@@ -109,16 +109,17 @@
                     <div class="mx-auto col-lg-10">
                         <div class="p-3">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Todas tus bicicletas reservada</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Todas tus rutas reservada</h1>
                             </div>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                     <th>ID</th>
                                     <th>Fecha</th>
-                                    <th>Horas Contratadas</th>
-                                    <th>Hora Entrega</th>
-                                    <th>Hora Devolucion</th>
+                                    <th>Origen</th>
+                                    <th>Destino</th>
+                                    <th>Descripcion</th>
+                                    <th>Tiempo Estimado</th>
                                     <th>Estado</th>
                                     <th></th>
                                     </tr>
@@ -127,9 +128,10 @@
                                     <tr>
                                     <th>ID</th>
                                     <th>Fecha</th>
-                                    <th>Horas Contratadas</th>
-                                    <th>Hora Entrega</th>
-                                    <th>Hora Devolucion</th>
+                                    <th>Origen</th>
+                                    <th>Destino</th>
+                                    <th>Tiempo estimado</th>
+                                    <th>Hora salida</th>
                                     <th>Estado</th>
                                     <th></th>
                                     </tr>
@@ -178,7 +180,7 @@
     <script src="js/sb-admin-2.min.js"></script>
     <script src="js/regular_expresions.js"></script>
     <script src="js/alert_messages.js"></script>
-    <script src="js/verReservas.js"></script>
+    <script src="js/verReservaRuta.js"></script>
     
 </body>
 

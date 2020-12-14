@@ -80,40 +80,10 @@ function verHorarioRuta(id){
         destroy: "true",
         ajax: "../controller/action/act_verHorarioRuta.php?idRuta="+id,
         columns: [
-                { data: "id" },
+                { data: "id","visible" : false },
                 { data: "fecha" },
                 { data: "horaSalida" },
                 {"defaultContent": "<button type='button' class='btn btn-success inscribirse'> Inscibirse </button>"}
         ]
     });
-    
-    //return table;
 }
-
-/*function registarHorario(){
-    $('#dataTable tbody').on('click', "button.inscribirse", function(evt){
-        evt.preventDefault();
-        var data1 = table.row($(this).parents("tr")).data();
-        console.log(data1.id);
-        $.ajax({
-            type : "POST",
-            url : '../controller/action/act_inscribirseRutas.php',
-            data : { idHorario : data1.id},
-            dataType: "json",
-            success : function(response){
-                console.log(response);
-                if(response.success == '1'){
-                    Mensaje('success', 'Su inscripcion fue exitosa', response.message);
-                    $('#verHorario').modal('hide');
-                }else{
-                    Mensaje('success', 'Su inscripcion no fue exitosa', response.message);
-                    $('#verHorario').modal('hide');
-                }
-                
-            },
-                error: function (response) {
-                console.log(response);
-            }
-        })
-    })
-}*/

@@ -9,3 +9,12 @@ function verhorariosPorIdRuta($idRuta){
 
     return $horarios;
 }
+ function verhorariosPorIdInscripcion($idHorarioRuta){
+
+    $horario = new HorarioRutaDAO();
+
+    $horarios = $horario->verhorariosPorIdInscripcion($idHorarioRuta);
+
+    return $horarios;
+
+ }

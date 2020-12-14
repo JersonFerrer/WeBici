@@ -26,7 +26,7 @@ function mostrarTabla(){
     destroy: "true",
     ajax: "../../controller/action/act_verUsuarios.php",
     columns: [
-            { data: "idUsuario" },
+            { data: "idUsuario", "visible" : false },
             { data: "nroCedula" },
             { data: "nombres" },
             { data: "apellidos" },

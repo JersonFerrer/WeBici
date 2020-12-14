@@ -9,3 +9,12 @@ function guardarInscripcionRuta(InscripcionRuta $inscripcion){
 
     return $inscripcion;
 }
+
+function consultarInscripcionesPorIdUsuario($idUsuario){
+
+    $dao = new InscripcionRutaDAO();
+
+    $inscripciones = $dao->consultarInscripcionesPorIdUsuario($idUsuario);
+
+    return $inscripciones;
+}
